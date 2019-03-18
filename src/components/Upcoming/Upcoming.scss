@@ -1,0 +1,35 @@
+.upcoming {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5rem;
+  &__image {
+    width: 20rem;
+    height: auto;
+  }
+  &__item {
+    // margin-right: 5rem;
+    position: relative;
+  }
+
+  &__text-box {
+    color: white;
+    position: absolute;
+  }
+
+  &__heading-tertiary {
+    font-size: 2.2rem;
+    font-weight: 400;
+  }
+
+  & .swiper-container {
+    display: flex;
+    max-width: 136rem;
+  }
+  & .swiper-slide {
+    width: 20%;
+  }
+}
+
+// .upcoming {
+
+// }
