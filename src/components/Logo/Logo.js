@@ -7,7 +7,7 @@ const Logo = () => {
   // const img =
 
   return (
-    <div>
+    <div className="searchbar__logo">
       <img className="logo" src={mainLogo} alt="Logo" />
     </div>
   );

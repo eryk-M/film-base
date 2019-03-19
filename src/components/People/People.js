@@ -22,11 +22,7 @@ class People extends Component {
   }
 
   render() {
-    return (
-      <>
-        <Person people={this.state.topPeople} />
-      </>
-    );
+    return <>{/* <Person people={this.state.topPeople} /> */}</>;
   }
 }
 

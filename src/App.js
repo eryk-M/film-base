@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import "./main.scss";
+import "./styles/main.scss";
+import { BrowserRouter } from "react-router-dom";
 
-import NavBar from "./components/NavBar/NavBar";
+import SearchBar from "./components/SearchBar/SearchBar";
 // import Search from "./components/Search/Search";
-import Upcoming from "./components/Upcoming/Upcoming";
-import People from "./components/People/People";
+// import Upcoming from "./pages/Upcoming/Upcoming";
+// import People from "./components/People/People";
+import Navigation from "./components/Navigation/Navigation";
+import Page from "./components/Page/Page";
 const API = "2a5d7298a94408e98274cd600f658034";
 
 class App extends Component {
@@ -27,11 +30,20 @@ class App extends Component {
   render() {
     console.log("render");
     return (
-      <div className="App">
-        <NavBar />
-        <Upcoming />
-        <People />
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <SearchBar />
+          <main>
+            <aside>
+              <Navigation />
+            </aside>
+            <Page />
+            {/* 
+            <Upcoming />
+            <People /> */}
+          </main>
+        </div>
+      </BrowserRouter>
     );
   }
 }

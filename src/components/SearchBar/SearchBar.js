@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import Search from "../Search/Search";
 import Logo from "../Logo/Logo";
 
-import "./NavBar.scss";
+import "./SearchBar.scss";
 
 class NavBar extends Component {
   state = {
@@ -11,7 +11,7 @@ class NavBar extends Component {
   };
   render() {
     return (
-      <div className="navBar">
+      <div className="searchbar">
         <Logo />
         <Search />
       </div>

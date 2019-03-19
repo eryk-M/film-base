@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Search.scss";
 
 class Search extends Component {
   state = {
@@ -9,8 +10,8 @@ class Search extends Component {
     return (
       <div className="search">
         <form>
-          <input type="text" placeholder="Szukaj filmu..." />
-          <button>Szukaj</button>
+          <input type="text" placeholder="Search movies..." />
+          {/* <button>Szukaj</button> */}
         </form>
       </div>
     );

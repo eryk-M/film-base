@@ -1,0 +1,39 @@
+.navigation {
+  width: 100%;
+  background-color: var(--color-primary-2);
+  height: 100%;
+  display: inline-block;
+
+  &__list {
+    list-style: none;
+    margin-top: 3rem;
+  }
+
+  &__item {
+    // text-decoration: none;
+    // background-color: orangered;
+    // width: 100%;
+    // height: 100%;
+    height: 7rem;
+    // &:not(:first-child) {
+    //   margin-top: 1rem;
+    // }
+  }
+
+  &__link,
+  &__link:visited,
+  &__link:link {
+    line-height: 7rem;
+    // width: 100%;
+    display: block;
+    text-decoration: none;
+    // text-transform: uppercase;
+    font-size: 2.4rem;
+    color: #ccc;
+    margin-left: 3rem;
+    // background-color: white;
+  }
+  &__link:hover {
+    background-color: white;
+  }
+}

@@ -1,0 +1,31 @@
+@import "./variables";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: var(--color-primary); /* fallback for old browsers */
+
+  font-family: "Open Sans", sans-serif;
+
+  //TEMPORARY
+  height: 200vh;
+  background-repeat: no-repeat;
+}
+
+aside {
+  width: 17%;
+  // flex-grow: 1;
+  // flex-basis: 0 0 50%;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+}
