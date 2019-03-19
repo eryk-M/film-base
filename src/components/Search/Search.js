@@ -10,8 +10,11 @@ class Search extends Component {
     return (
       <div className="search">
         <form>
+          <i className="fas fa-search" />
           <input type="text" placeholder="Search movies..." />
+          {/* <span /> */}
           {/* <button>Szukaj</button> */}
+          {/* <i class="fas fa-search" /> */}
         </form>
       </div>
     );

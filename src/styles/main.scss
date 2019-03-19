@@ -15,12 +15,11 @@ body {
   font-family: "Open Sans", sans-serif;
 
   //TEMPORARY
-  height: 200vh;
-  background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 aside {
-  width: 17%;
+  // width: 50rem;
   // flex-grow: 1;
   // flex-basis: 0 0 50%;
 }
