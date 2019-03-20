@@ -1,7 +1,7 @@
 import React from "react";
 import mainLogo from "../../assets/images/logo.png";
 
-import "./Logo.scss";
+// import "./Logo.scss";
 
 const Logo = () => {
   // const img =

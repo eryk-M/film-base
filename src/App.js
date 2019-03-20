@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./styles/main.scss";
-import { BrowserRouter } from "react-router-dom";
 
 import SearchBar from "./components/SearchBar/SearchBar";
 
@@ -17,20 +16,18 @@ class App extends Component {
   render() {
     // console.log("render");
     return (
-      <BrowserRouter>
-        <div className="App">
-          <SearchBar />
-          <main>
-            <aside>
-              <Navigation />
-            </aside>
-            <Page />
-            {/* 
+      <div className="App">
+        <SearchBar />
+        <main>
+          <aside>
+            <Navigation />
+          </aside>
+          <Page />
+          {/* 
             <Upcoming />
             <People /> */}
-          </main>
-        </div>
-      </BrowserRouter>
+        </main>
+      </div>
     );
   }
 }

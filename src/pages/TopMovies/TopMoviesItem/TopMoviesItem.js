@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 
-// import "./UpcomingItem.scss";
-
-class UpcomingItem extends Component {
-  // console.log(movies.results);
-
+class TopMoviesItem extends Component {
   genresHandler = genres => {
     //sprawdzam id gatunku, porownuje je do listy id gatunkow i zwracam nazwe gatunku
     if (this.props.genres) {
@@ -59,4 +55,4 @@ class UpcomingItem extends Component {
   }
 }
 
-export default UpcomingItem;
+export default TopMoviesItem;

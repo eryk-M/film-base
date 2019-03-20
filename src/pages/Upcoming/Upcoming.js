@@ -1,38 +1,23 @@
 import React, { Component } from "react";
 import UpcomingItem from "./UpcomingItem/UpcomingItem";
-import "./Upcoming.scss";
-
-// import { fetchMovies } from "../../actions/moviesActions";
+import "../MainStyling.scss";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import moviesActions from "../../actions/moviesActions";
-import postMoviesUpcoming from "../../actions/moviesActions";
-
-const api = "2a5d7298a94408e98274cd600f658034";
+import { getUpcoming } from "../../actions/upcoming.actions";
+import { getGenres } from "../../actions/genres.actions";
+import Loader from "../../components/Loader/Loader";
+import LoadMore from "../../components/LoadMore/LoadMore";
 
 class Upcoming extends Component {
   state = {
-    items: [],
     visible: 10
   };
 
   componentDidMount() {
-    // this.props.postMoviesUpcoming(
-    //   `https://api.themoviedb.org/3/movie/upcoming?api_key=${
-    //     this.props.apiKey
-    //   }&language=en-US&page=1`
-    // );
-    fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${api}&language=en-US&page=1`
-    )
-      .then(res => res.json())
-      .then(data => {
-        this.setState({
-          items: data.results
-        });
-        console.log(data.results);
-      })
-      .catch(error => console.log(error));
+    this.props.getUpcoming();
+    this.props.getGenres();
+    // console.log(this.props.movies.loaded);
   }
 
   loadMore = () => {
@@ -42,23 +27,31 @@ class Upcoming extends Component {
   };
 
   render() {
-    // console.log(this.props.postMoviesUpcoming());
+    const movies = this.props.movies.results;
     return (
-      <div className="upcoming">
-        <h1 className="upcoming__heading">Upcoming</h1>
-        <div className="upcoming__container">
-          <UpcomingItem items={this.state.items} visible={this.state.visible} />
-          {this.state.visible < this.state.items.length && (
-            <button
-              style={{
-                padding: "1rem 1rem",
-                color: "black",
-                margin: "0 auto"
-              }}
-              onClick={this.loadMore}
-            >
-              Load more
-            </button>
+      <div className="main">
+        <h1 className="main__heading">Upcoming movies</h1>
+        <div className="main__container">
+          {this.props.movies.loaded ? null : <Loader />}
+
+          <UpcomingItem
+            genres={this.props.genres.genres}
+            movies={movies}
+            visible={this.state.visible}
+          />
+
+          {this.state.visible < movies.length && (
+            <LoadMore click={this.loadMore} />
+            // <button
+            //   style={{
+            //     padding: "1rem 1rem",
+            //     color: "black",
+            //     margin: "0 auto"
+            //   }}
+            //   onClick={this.loadMore}
+            // >
+            //   Load more
+            // </button>
           )}
         </div>
       </div>
@@ -66,20 +59,22 @@ class Upcoming extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   apiKey: state.PostMDBConfig.apiKey,
-//   moviesUpcoming: state.postMoviesUpcoming
-// });
+function mapStateToProps(state) {
+  return {
+    movies: state.movies,
+    loaded: state.loaded,
+    genres: state.genres
+  };
+}
 
-// const mapDispatchToProps = dispatch => ({
-//   moviesActions: url => dispatch(moviesActions(url)),
-//   postMoviesUpcoming: url => dispatch(postMoviesUpcoming(url))
-// });
+function mapDispatchToProps(dispatch) {
+  return {
+    getUpcoming: bindActionCreators(getUpcoming, dispatch),
+    getGenres: bindActionCreators(getGenres, dispatch)
+  };
+}
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-//   // { fetchMovies }
-// )(Upcoming);
-
-export default Upcoming;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Upcoming);

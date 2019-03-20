@@ -1,5 +1,5 @@
 @import "./variables";
-
+@import "./mixins";
 * {
   margin: 0;
   padding: 0;
@@ -15,7 +15,7 @@ body {
   font-family: "Open Sans", sans-serif;
 
   //TEMPORARY
-  min-height: 100vh;
+  // min-height: 100vh;
 }
 
 aside {
