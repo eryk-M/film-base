@@ -21,7 +21,9 @@ body {
 aside {
   // width: 50rem;
   // flex-grow: 1;
-  // flex-basis: 0 0 50%;
+  // flex-basis: 0 0 100%;
+  // align-self: stretch;
+  // height: 100%;
 }
 
 main {

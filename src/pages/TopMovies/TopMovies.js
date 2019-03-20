@@ -27,6 +27,7 @@ class TopMovies extends Component {
 
   render() {
     const topMovies = this.props.topMovies.results;
+    console.log(topMovies);
     return (
       <div className="main">
         <h1 className="main__heading">Top rated movies</h1>

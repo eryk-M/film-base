@@ -28,6 +28,7 @@ class Upcoming extends Component {
 
   render() {
     const movies = this.props.movies.results;
+    console.log(movies);
     return (
       <div className="main">
         <h1 className="main__heading">Upcoming movies</h1>
@@ -42,16 +43,6 @@ class Upcoming extends Component {
 
           {this.state.visible < movies.length && (
             <LoadMore click={this.loadMore} />
-            // <button
-            //   style={{
-            //     padding: "1rem 1rem",
-            //     color: "black",
-            //     margin: "0 auto"
-            //   }}
-            //   onClick={this.loadMore}
-            // >
-            //   Load more
-            // </button>
           )}
         </div>
       </div>

@@ -20,9 +20,10 @@ const Navigation = props => {
   ));
 
   return (
-    <nav className="navigation">
-      <ul className="navigation__list">
-        {/* <li className="navigation__item">
+    <>
+      <nav className="navigation">
+        <ul className="navigation__list">
+          {/* <li className="navigation__item">
           <a href="/" className="navigation__link">
             Upcoming movies
           </a>
@@ -42,9 +43,13 @@ const Navigation = props => {
             Top rated TV shows
           </a>
         </li> */}
-        {menu}
-      </ul>
-    </nav>
+          {menu}
+        </ul>
+        <div className="navigation__greeting">
+          <h3>dksaldsakdsa</h3>
+        </div>
+      </nav>
+    </>
   );
 };
 

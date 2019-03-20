@@ -1,11 +1,65 @@
-import React from "react";
+import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import Loader from "../../components/Loader/Loader";
 
-const TopPeople = props => {
-  return (
-    <div>
-      <h1>Top People</h1>
-    </div>
-  );
-};
+import { getTopPeople } from "../../actions/topPeople.actions";
+import TopPeopleItem from "./TopPeopleItem/TopPeopleItem.js";
+import LoadMore from "../../components/LoadMore/LoadMore";
+import "../MainStyling.scss";
 
-export default TopPeople;
+class TopPeople extends Component {
+  state = {
+    visible: 10
+  };
+  componentDidMount() {
+    this.props.getTopPeople();
+  }
+
+  //DO PRZEMYSLENIA, PO CHUK DWA RAZY TO SAMO DEBILU
+
+  loadMore = () => {
+    this.setState(prev => {
+      return { visible: prev.visible + 10 };
+    });
+  };
+
+  render() {
+    console.log(this.props);
+
+    const topPeople = this.props.topPeople.results;
+    return (
+      <div className="main">
+        <h1 className="main__heading">top rated people</h1>
+        <div className="main__container">
+          {this.props.topPeople.loaded ? null : <Loader />}
+
+          <TopPeopleItem people={topPeople} visible={this.state.visible} />
+
+          {this.state.visible < topPeople.length && (
+            <LoadMore click={this.loadMore} /> /* < I TO */
+          )}
+        </div>
+      </div>
+    );
+  }
+}
+
+function mapStateToProps(state) {
+  return {
+    // genres: state.genres,
+    topPeople: state.topPeople,
+    loaded: state.loaded
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getTopPeople: bindActionCreators(getTopPeople, dispatch)
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TopPeople);

@@ -1,7 +1,7 @@
 .navigation {
   width: 100%;
   background-color: var(--color-primary-2);
-  height: 100%;
+  height: 70rem;
   display: inline-block;
 
   &__list {
@@ -74,5 +74,8 @@
       margin-left: 1.2rem;
       font-size: 1.4rem;
     }
+  }
+
+  &__greeting {
   }
 }
