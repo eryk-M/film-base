@@ -1,8 +1,6 @@
 export const FETCH_MOVIES_DETAILS = "FETCH_MOVIES_DETAILS";
 
-const api = "2a5d7298a94408e98274cd600f658034";
-
-export const getMovieDetails = movie_id => {
+export const getMovieDetails = (movie_id, api) => {
   return dispatch => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${api}&language=en-US`

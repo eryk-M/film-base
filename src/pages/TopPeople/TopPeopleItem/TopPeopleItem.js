@@ -2,8 +2,8 @@ import React from "react";
 
 const TopMoviesItem = props => {
   const people = props.people.map(item => (
-    <div key={item.id} className="main__item">
-      <figure className="main__image wow fadeIn">
+    <div key={item.id} className="main__item wow fadeIn">
+      <figure className="main__image">
         <img
           className="main__img"
           src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${

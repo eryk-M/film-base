@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader/Loader";
 
 import { getTopPeople } from "../../actions/topPeople.actions";
+import { getApi } from "../../actions/api.actions";
 import TopPeopleItem from "./TopPeopleItem/TopPeopleItem.js";
 import LoadMore from "../../components/LoadMore/LoadMore";
 import "../MainStyling.scss";
@@ -14,12 +15,14 @@ class TopPeople extends Component {
     visible: 10
   };
   componentDidMount() {
-    this.props.getTopPeople();
+    this.props.getApi();
+    this.props.getTopPeople(this.props.api);
     if (typeof window !== "undefined") {
       const wow = new WOW.WOW({
         live: false
       });
       wow.init();
+      wow.sync();
     }
 
     // setTimeout(() => {
@@ -48,7 +51,11 @@ class TopPeople extends Component {
           <TopPeopleItem people={topPeople} visible={this.state.visible} />
 
           {this.state.visible < topPeople.length && (
-            <LoadMore click={this.loadMore} /> /* < I TO */
+            <LoadMore
+              className="wow fadeIn"
+              data-wow-delay="2s"
+              click={this.loadMore}
+            /> /* < I TO */
           )}
         </div>
       </div>
@@ -60,13 +67,15 @@ function mapStateToProps(state) {
   return {
     // genres: state.genres,
     topPeople: state.topPeople,
-    loaded: state.loaded
+    loaded: state.loaded,
+    api: state.api.api
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getTopPeople: bindActionCreators(getTopPeople, dispatch)
+    getTopPeople: bindActionCreators(getTopPeople, dispatch),
+    getApi: bindActionCreators(getApi, dispatch)
   };
 }
 

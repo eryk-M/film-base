@@ -7,8 +7,13 @@ class UpcomingItem extends Component {
   // console.log(movies.results);
 
   componentDidMount() {
-    const wow = new WOW.WOW();
-    wow.init();
+    if (typeof window !== "undefined") {
+      const wow = new WOW.WOW({
+        live: false
+      });
+      wow.init();
+      wow.sync();
+    }
   }
 
   genresHandler = genres => {
@@ -39,7 +44,7 @@ class UpcomingItem extends Component {
     const upcomings = this.props.movies.map(item => (
       // <Link to={`/movies/${item.id}`}>
       <div key={item.id} className="main__item">
-        <figure className="main__image wow fadeIn">
+        <figure className="main__image wow fadeIn" data-wow-duration="1.5s">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}
             className="main__average"

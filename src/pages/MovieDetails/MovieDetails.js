@@ -7,7 +7,9 @@ import "./MovieDetails.scss";
 
 import { connect } from "react-redux";
 import { getMovieDetails } from "../../actions/moviesDetails.actions";
-import { getGenres } from "../../actions/genres.actions";
+import { getApi } from "../../actions/api.actions";
+import { getVideos } from "../../actions/videos.actions";
+
 import Loader from "../../components/Loader/Loader";
 import WOW from "wowjs";
 
@@ -15,24 +17,24 @@ class MovieDetails extends Component {
   state = {};
 
   componentDidMount() {
-    this.props.getMovieDetails(this.props.match.params.id);
+    this.props.getApi();
+    this.props.getMovieDetails(this.props.match.params.id, this.props.api);
+    this.props.getVideos(this.props.match.params.id, this.props.api);
     if (typeof window !== "undefined") {
       const wow = new WOW.WOW({
         live: false
       });
       wow.init();
     }
-    // this.clearState();
   }
 
   render() {
     const { moviesDetails } = this.props;
-    // console.log(this.match.params.id);
-    // console.log(this.props.moviesDetails);
-    console.log(moviesDetails);
     const backdrop = `https://image.tmdb.org/t/p/w1280/${
       moviesDetails.backdrop_path
     }`;
+    // console.log(moviesDetails.backdrop_path);
+
     const image = `https://image.tmdb.org/t/p/w370_and_h556_bestv2${
       moviesDetails.poster_path
     }`;
@@ -40,9 +42,19 @@ class MovieDetails extends Component {
     const superFilm = {
       color: "rgba(46, 204, 113, 1)"
     };
-    // const iframe = `<iframe id="ytplayer" type="text/html" width="640" height="360"
-    // src="https://www.youtube.com/embed/${dsa}"
-    // frameborder="0"/>`
+    const videos = this.props.videos.results;
+    const filteredVideos = videos.filter(video => video.type === "Trailer");
+    const just = filteredVideos.splice(0, 3);
+
+    // console.log(this.props.videos.results);
+
+    // console.log(genres);
+
+    // const genres = { ...this.props.moviesDetails.genres };
+    // const co = genres.map(genre => ({
+    //   genre: genre.name
+    // }));
+    // console.log(co);
 
     return (
       <>
@@ -55,6 +67,25 @@ class MovieDetails extends Component {
             }}
           >
             <img className="movie__image" src={image} alt="" />
+            <p className="movie__genres">
+              {this.props.moviesDetails.genres
+                ? `${
+                    this.props.moviesDetails.genres[0]
+                      ? this.props.moviesDetails.genres[0].name
+                      : ""
+                  }` +
+                  `${
+                    this.props.moviesDetails.genres[1]
+                      ? " | " + this.props.moviesDetails.genres[1].name
+                      : ""
+                  }` +
+                  `${
+                    this.props.moviesDetails.genres[2]
+                      ? " | " + this.props.moviesDetails.genres[2].name
+                      : ""
+                  }`
+                : ""}
+            </p>
             <div className="movie__info">
               <h3 className="movie__heading">{moviesDetails.original_title}</h3>
               <p className="movie__rating">
@@ -82,6 +113,23 @@ class MovieDetails extends Component {
               {moviesDetails.overview}
             </p>
           </div>
+          <div className="movie__trailer wow fadeIn" data-wow-delay="0.5s">
+            <p className="movie__trailer-heading">Trailers</p>
+            {/* <div></div> */}
+            {just.map((tr, i) => (
+              <iframe
+                allowFullScreen="allowfullscreen"
+                key={i}
+                title="1"
+                width="420"
+                height="315"
+                src={`https://www.youtube.com/embed/${tr.key}`}
+              />
+            ))}
+            <p className="movie__trailer-paragraph">
+              {just.length === 0 ? "No info about trailers..." : null}
+            </p>
+          </div>
         </div>
       </>
     );
@@ -92,14 +140,17 @@ function mapStateToProps(state) {
   return {
     moviesDetails: state.moviesDetails,
     genres: state.genres,
-    loaded: state.loaded
+    loaded: state.loaded,
+    api: state.api.api,
+    videos: state.videos
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getMovieDetails: bindActionCreators(getMovieDetails, dispatch),
-    getGenres: bindActionCreators(getGenres, dispatch)
+    getApi: bindActionCreators(getApi, dispatch),
+    getVideos: bindActionCreators(getVideos, dispatch)
   };
 }
 

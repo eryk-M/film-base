@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 import { getUpcoming } from "../../actions/upcoming.actions";
 import { getGenres } from "../../actions/genres.actions";
+import { getApi } from "../../actions/api.actions";
 import Loader from "../../components/Loader/Loader";
 import LoadMore from "../../components/LoadMore/LoadMore";
 
@@ -15,9 +16,12 @@ class Upcoming extends Component {
   };
 
   componentDidMount() {
-    this.props.getUpcoming();
-    this.props.getGenres();
+    this.props.getApi();
+    this.props.getUpcoming(this.props.api);
+    this.props.getGenres(this.props.api);
+
     // console.log(this.props.movies.loaded);
+    // console.log(this.props.api.api);
   }
 
   loadMore = () => {
@@ -27,9 +31,10 @@ class Upcoming extends Component {
   };
 
   render() {
+    // console.log(this.props.api);
     const movies = this.props.movies.results;
     // console.log(movies);
-    console.log(this);
+    // console.log(this);
     return (
       <div className="main">
         <h1 className="main__heading">Upcoming movies</h1>
@@ -43,7 +48,11 @@ class Upcoming extends Component {
           />
 
           {this.state.visible < movies.length && (
-            <LoadMore click={this.loadMore} />
+            <LoadMore
+              className="wow fadeIn"
+              data-wow-delay="2s"
+              click={this.loadMore}
+            />
           )}
         </div>
       </div>
@@ -55,14 +64,16 @@ function mapStateToProps(state) {
   return {
     movies: state.movies,
     loaded: state.loaded,
-    genres: state.genres
+    genres: state.genres,
+    api: state.api.api
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getUpcoming: bindActionCreators(getUpcoming, dispatch),
-    getGenres: bindActionCreators(getGenres, dispatch)
+    getGenres: bindActionCreators(getGenres, dispatch),
+    getApi: bindActionCreators(getApi, dispatch)
   };
 }
 

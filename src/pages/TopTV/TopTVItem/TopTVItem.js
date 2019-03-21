@@ -9,6 +9,7 @@ class TopTVItem extends Component {
         live: false
       });
       wow.init();
+      wow.sync();
     }
   }
 
@@ -38,8 +39,8 @@ class TopTVItem extends Component {
     };
 
     const topTV = this.props.topTV.map(item => (
-      <div key={item.id} className="main__item">
-        <figure className="main__image wow fadeIn">
+      <div key={item.id} className="main__item wow fadeIn">
+        <figure className="main__image">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}
             className="main__average"

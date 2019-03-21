@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader/Loader";
 import { getGenres } from "../../actions/genres.actions";
 import { getTopTV } from "../../actions/topTV.actions";
+import { getApi } from "../../actions/api.actions";
 import TopTVItem from "./TopTVItem/TopTVItem";
 import LoadMore from "../../components/LoadMore/LoadMore";
 import "../MainStyling.scss";
@@ -13,8 +14,9 @@ class TopTV extends Component {
     visible: 10
   };
   componentDidMount() {
-    this.props.getTopTV();
-    this.props.getGenres();
+    this.props.getApi();
+    this.props.getTopTV(this.props.api);
+    this.props.getGenres(this.props.api);
   }
 
   //DO PRZEMYSLENIA, PO CHUK DWA RAZY TO SAMO DEBILU
@@ -41,7 +43,11 @@ class TopTV extends Component {
           />
 
           {this.state.visible < topTV.length && (
-            <LoadMore click={this.loadMore} />
+            <LoadMore
+              className="wow fadeIn"
+              data-wow-delay="2s"
+              click={this.loadMore}
+            />
           )}
         </div>
       </div>
@@ -53,14 +59,16 @@ function mapStateToProps(state) {
   return {
     genres: state.genres,
     topTV: state.topTV,
-    loaded: state.loaded
+    loaded: state.loaded,
+    api: state.api.api
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getGenres: bindActionCreators(getGenres, dispatch),
-    getTopTV: bindActionCreators(getTopTV, dispatch)
+    getTopTV: bindActionCreators(getTopTV, dispatch),
+    getApi: bindActionCreators(getApi, dispatch)
   };
 }
 
