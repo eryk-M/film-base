@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import "./styles/main.scss";
 
 import SearchBar from "./components/SearchBar/SearchBar";

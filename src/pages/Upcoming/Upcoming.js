@@ -28,7 +28,8 @@ class Upcoming extends Component {
 
   render() {
     const movies = this.props.movies.results;
-    console.log(movies);
+    // console.log(movies);
+    console.log(this);
     return (
       <div className="main">
         <h1 className="main__heading">Upcoming movies</h1>

@@ -1,14 +1,14 @@
-import React from "react";
+// import React from "react";
 
-import UpcomingItem from "../Upcoming/UpcomingItem/UpcomingItem";
+// import UpcomingItem from "../Upcoming/UpcomingItem/UpcomingItem";
 
-const MoviePage = ({ match }) => {
-  return (
-    <div>
-      <h1>This is movie page hahaha</h1>
-      <UpcomingItem id={match.params.id} />
-    </div>
-  );
-};
+// const MoviePage = ({ match }) => {
+//   return (
+//     <div>
+//       <h1>This is movie page hahaha</h1>
+//       <UpcomingItem id={match.params.id} />
+//     </div>
+//   );
+// };
 
-export default MoviePage;
+// export default MoviePage;

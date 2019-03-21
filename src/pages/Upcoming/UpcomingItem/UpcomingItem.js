@@ -1,9 +1,15 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
+import WOW from "wowjs";
 // import "./UpcomingItem.scss";
 
 class UpcomingItem extends Component {
   // console.log(movies.results);
+
+  componentDidMount() {
+    const wow = new WOW.WOW();
+    wow.init();
+  }
 
   genresHandler = genres => {
     //sprawdzam id gatunku, porownuje je do listy id gatunkow i zwracam nazwe gatunku
@@ -29,24 +35,26 @@ class UpcomingItem extends Component {
     const superFilm = {
       backgroundColor: "rgba(35, 160, 82, 0.7)"
     };
-
+    // console.log(this);
     const upcomings = this.props.movies.map(item => (
+      // <Link to={`/movies/${item.id}`}>
       <div key={item.id} className="main__item">
-        <figure className="main__image">
+        <figure className="main__image wow fadeIn">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}
             className="main__average"
           >
             <span>{item.vote_average}</span>
           </div>
-          <img
-            className="main__img"
-            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
-              item.poster_path
-            }`}
-            alt=""
-          />
-
+          <Link to={`/movies/${item.id}`}>
+            <img
+              className="main__img"
+              src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
+                item.poster_path
+              }`}
+              alt=""
+            />
+          </Link>
           <h2 className="main__heading-tertiary">{item.title}</h2>
           {this.genresHandler(item.genre_ids)}
         </figure>

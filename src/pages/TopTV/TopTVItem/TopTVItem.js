@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 
+import WOW from "wowjs";
+
 class TopTVItem extends Component {
+  componentDidMount() {
+    if (typeof window !== "undefined") {
+      const wow = new WOW.WOW({
+        live: false
+      });
+      wow.init();
+    }
+  }
+
   genresHandler = genres => {
     //sprawdzam id gatunku, porownuje je do listy id gatunkow i zwracam nazwe gatunku
     if (this.props.genres) {
@@ -28,7 +39,7 @@ class TopTVItem extends Component {
 
     const topTV = this.props.topTV.map(item => (
       <div key={item.id} className="main__item">
-        <figure className="main__image">
+        <figure className="main__image wow fadeIn">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}
             className="main__average"

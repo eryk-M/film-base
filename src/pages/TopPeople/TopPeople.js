@@ -8,12 +8,23 @@ import TopPeopleItem from "./TopPeopleItem/TopPeopleItem.js";
 import LoadMore from "../../components/LoadMore/LoadMore";
 import "../MainStyling.scss";
 
+import WOW from "wowjs";
 class TopPeople extends Component {
   state = {
     visible: 10
   };
   componentDidMount() {
     this.props.getTopPeople();
+    if (typeof window !== "undefined") {
+      const wow = new WOW.WOW({
+        live: false
+      });
+      wow.init();
+    }
+
+    // setTimeout(() => {
+    //   document.querySelector(".main__image").classList.add("fadeIn");
+    // }, 2000);
   }
 
   //DO PRZEMYSLENIA, PO CHUK DWA RAZY TO SAMO DEBILU

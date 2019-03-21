@@ -10,8 +10,8 @@ const list = [
 ];
 
 const Navigation = props => {
-  const menu = list.map(item => (
-    <li className="navigation__item" key={item.id}>
+  const menu = list.map((item, i) => (
+    <li className="navigation__item" key={i}>
       <NavLink className="navigation__link" to={item.path} exact>
         <i className={item.icon} />
         {item.name}

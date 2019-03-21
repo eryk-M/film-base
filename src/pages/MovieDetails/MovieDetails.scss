@@ -1,0 +1,118 @@
+.movie {
+  margin-left: 6rem;
+  margin-top: 5rem;
+  &__backdrop {
+    height: 43rem;
+    width: 136rem;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      //   background-color: rgba(0, 0, 0, 0.7);
+      background: linear-gradient(
+        rgba(0, 0, 0, 0.6) 50%,
+        rgba(0, 0, 0, 0.5) 85%
+      );
+    }
+  }
+
+  &__image {
+    position: absolute;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    top: 41%;
+    left: 5%;
+    width: 25rem;
+    height: auto;
+  }
+  &__info {
+    position: absolute;
+    top: 40%;
+    left: 25%;
+  }
+
+  &__heading {
+    font-size: 4rem;
+    text-shadow: 0 3px 4px rgba(0, 0, 0, 0.5);
+    color: var(--color-nav);
+    // text-shadow: 0 0.2rem 0.1rem rgba(0,0,0,);
+    // color: var(--color-white-2);
+  }
+
+  &__rating {
+    font-size: 2rem;
+    color: var(--color-nav);
+    margin-top: 2rem;
+    // display: inline-block;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 3px 3px;
+    display: block;
+    width: 18rem;
+    & span {
+      color: var(--color-white-2);
+      font-size: 1.6rem;
+      display: block;
+      margin-top: 1rem;
+      //   margin-left: 0.3rem;
+      & i {
+        font-size: 1.4rem;
+        // padding-bottom: 1rem;
+        // margin-bottom: 3rem;
+        vertical-align: 0.2rem;
+        margin-right: 1rem;
+        color: rgba(252, 185, 65, 1);
+      }
+    }
+  }
+  &__release {
+    width: 18rem;
+    margin-top: 3rem;
+    font-size: 2rem;
+    color: var(--color-nav);
+    // font-weight: 400;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    padding: 3px 3px;
+    & span {
+      //   background: none;
+      display: block;
+      font-size: 1.6rem;
+      margin-top: 1rem;
+      color: var(--color-white-2);
+    }
+  }
+
+  &__overview {
+    border-left: 0.2rem solid var(--color-nav);
+    height: 25%;
+    padding: 1rem 0.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    margin-top: 2rem;
+    margin-left: 34rem;
+    color: var(--color-nav);
+    width: 102rem;
+    &-heading {
+      font-size: 2rem;
+      position: relative;
+      &:after {
+        content: "";
+        width: 10rem;
+        height: 1px;
+        position: absolute;
+        top: 140%;
+        left: 0;
+        background-color: var(--color-nav);
+      }
+    }
+    &-paragraph {
+      margin-top: 3rem;
+      font-size: 1.6rem;
+      color: var(--color-white-2);
+    }
+  }
+}
