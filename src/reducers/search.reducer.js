@@ -1,13 +1,13 @@
 import { SEARCH_RESULTS } from "../actions/search.actions";
 
 let initialState = {
-  //   film: ''
+  results: []
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_RESULTS:
-      return { ...state, ...action.payload };
+      return { ...state, ...action.payload, loaded: true };
     default:
       return state;
   }

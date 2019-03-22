@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import "./Search.scss";
 
 import { withRouter } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
 
-import { getResult } from "../../actions/search.actions";
 class Search extends Component {
   state = {
     film: "",
@@ -14,11 +11,17 @@ class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.film);
+    // console.log(this.state.film);
     this.setState({
-      redirect: true
+      redirect: true,
+      film: this.state.film
     });
-    this.props.history.push("/results");
+    this.props.history.push({
+      pathname: "/results",
+      state: {
+        film: this.state.film
+      }
+    });
   };
 
   handleChange = e => {
@@ -49,19 +52,4 @@ class Search extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    results: state.results
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    getResult: bindActionCreators(getResult, dispatch)
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(Search));
+export default withRouter(Search);

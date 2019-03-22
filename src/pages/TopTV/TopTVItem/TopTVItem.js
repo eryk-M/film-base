@@ -38,8 +38,8 @@ class TopTVItem extends Component {
       backgroundColor: "rgba(35, 160, 82, 0.7)"
     };
 
-    const topTV = this.props.topTV.map(item => (
-      <div key={item.id} className="main__item wow fadeIn">
+    const topTV = this.props.topTV.map((item, i) => (
+      <div key={i} className="main__item wow fadeIn">
         <figure className="main__image">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}
@@ -49,9 +49,7 @@ class TopTVItem extends Component {
           </div>
           <img
             className="main__img"
-            src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
-              item.poster_path
-            }`}
+            src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
             alt=""
           />
 
@@ -60,8 +58,6 @@ class TopTVItem extends Component {
         </figure>
       </div>
     ));
-
-    topTV.splice(this.props.visible);
 
     return <>{topTV}</>;
   }

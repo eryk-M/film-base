@@ -6,17 +6,18 @@ import Loader from "../../components/Loader/Loader";
 import { getTopPeople } from "../../actions/topPeople.actions";
 import { getApi } from "../../actions/api.actions";
 import TopPeopleItem from "./TopPeopleItem/TopPeopleItem.js";
-import LoadMore from "../../components/LoadMore/LoadMore";
+import InfiniteScroll from "react-infinite-scroller";
 import "../MainStyling.scss";
 
 import WOW from "wowjs";
 class TopPeople extends Component {
   state = {
-    visible: 10
+    totalPages: 1,
+    page: 1,
+    results: []
   };
   componentDidMount() {
-    this.props.getApi();
-    this.props.getTopPeople(this.props.api);
+    window.scrollTo(0, 0);
     if (typeof window !== "undefined") {
       const wow = new WOW.WOW({
         live: false
@@ -24,41 +25,54 @@ class TopPeople extends Component {
       wow.init();
       wow.sync();
     }
-
-    // setTimeout(() => {
-    //   document.querySelector(".main__image").classList.add("fadeIn");
-    // }, 2000);
+    this.props.getApi();
+    this.props.getTopPeople(this.props.api, this.state.page);
   }
 
-  //DO PRZEMYSLENIA, PO CHUK DWA RAZY TO SAMO DEBILU
-
-  loadMore = () => {
-    this.setState(prev => {
-      return { visible: prev.visible + 10 };
+  componentWillReceiveProps(newProps) {
+    if (newProps.topPeople.total_pages !== this.state.totalPages) {
+      this.setState({
+        totalPages: newProps.topPeople.total_pages,
+        page: newProps.topPeople.page,
+        results: newProps.topPeople.results
+      });
+    }
+  }
+  componentWillUnmount() {
+    this.setState({
+      totalPages: 1,
+      page: 1,
+      results: []
     });
+  }
+  getMore = () => {
+    if (this.state.page !== this.state.totalPages) {
+      this.setState(prevState => ({
+        page: prevState.page + 1,
+        results: this.state.results.concat(this.props.topPeople.results)
+      }));
+
+      this.props.getTopPeople(this.props.api, this.state.page);
+    }
   };
-
   render() {
-    console.log(this.props);
-
-    const topPeople = this.props.topPeople.results;
+    const topPeople = this.state.results;
     return (
-      <div className="main">
-        <h1 className="main__heading">top rated people</h1>
-        <div className="main__container">
-          {this.props.topPeople.loaded ? null : <Loader />}
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.getMore}
+        hasMore={true}
+        loader={this.state.page < 12 ? <Loader /> : null}
+      >
+        <div className="main">
+          <h1 className="main__heading">top rated people</h1>
+          <div className="main__container">
+            {this.props.topPeople.loaded ? null : <Loader />}
 
-          <TopPeopleItem people={topPeople} visible={this.state.visible} />
-
-          {this.state.visible < topPeople.length && (
-            <LoadMore
-              className="wow fadeIn"
-              data-wow-delay="2s"
-              click={this.loadMore}
-            /> /* < I TO */
-          )}
+            <TopPeopleItem people={topPeople} visible={this.state.visible} />
+          </div>
         </div>
-      </div>
+      </InfiniteScroll>
     );
   }
 }

@@ -1,14 +1,12 @@
 import React from "react";
 
 const TopMoviesItem = props => {
-  const people = props.people.map(item => (
-    <div key={item.id} className="main__item wow fadeIn">
+  const people = props.people.map((item, i) => (
+    <div key={i} className="main__item wow fadeIn">
       <figure className="main__image">
         <img
           className="main__img"
-          src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
-            item.profile_path
-          }`}
+          src={`https://image.tmdb.org/t/p/w185${item.profile_path}`}
           alt=""
         />
 
@@ -16,8 +14,6 @@ const TopMoviesItem = props => {
       </figure>
     </div>
   ));
-
-  people.splice(props.visible);
 
   return <>{people}</>;
 };

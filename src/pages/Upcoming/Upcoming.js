@@ -8,54 +8,70 @@ import { getUpcoming } from "../../actions/upcoming.actions";
 import { getGenres } from "../../actions/genres.actions";
 import { getApi } from "../../actions/api.actions";
 import Loader from "../../components/Loader/Loader";
-import LoadMore from "../../components/LoadMore/LoadMore";
+import InfiniteScroll from "react-infinite-scroller";
 
 class Upcoming extends Component {
   state = {
-    visible: 10
+    totalPages: 1,
+    page: 1,
+    results: []
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.getApi();
-    this.props.getUpcoming(this.props.api);
+    this.props.getUpcoming(this.props.api, this.state.page);
     this.props.getGenres(this.props.api);
-
-    // console.log(this.props.movies.loaded);
-    // console.log(this.props.api.api);
   }
 
-  loadMore = () => {
-    this.setState(prev => {
-      return { visible: prev.visible + 10 };
+  componentWillReceiveProps(newProps) {
+    if (newProps.movies.total_pages !== this.state.totalPages) {
+      this.setState({
+        totalPages: newProps.movies.total_pages,
+        page: newProps.movies.page,
+        results: newProps.movies.results
+      });
+    }
+  }
+  componentWillUnmount() {
+    this.setState({
+      totalPages: 1,
+      page: 1,
+      results: []
     });
+  }
+
+  getMore = () => {
+    if (this.state.page !== this.state.totalPages) {
+      this.setState(prevState => ({
+        page: prevState.page + 1,
+        results: this.state.results.concat(this.props.movies.results)
+      }));
+
+      console.log(this.state.results);
+
+      this.props.getUpcoming(this.props.api, this.state.page);
+    }
   };
 
   render() {
-    // console.log(this.props.api);
-    const movies = this.props.movies.results;
-    // console.log(movies);
-    // console.log(this);
+    console.log(this.props.movies.results);
+    const movies = this.state.results;
+
     return (
-      <div className="main">
-        <h1 className="main__heading">Upcoming movies</h1>
-        <div className="main__container">
-          {this.props.movies.loaded ? null : <Loader />}
-
-          <UpcomingItem
-            genres={this.props.genres.genres}
-            movies={movies}
-            visible={this.state.visible}
-          />
-
-          {this.state.visible < movies.length && (
-            <LoadMore
-              className="wow fadeIn"
-              data-wow-delay="2s"
-              click={this.loadMore}
-            />
-          )}
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.getMore}
+        hasMore={true}
+        loader={this.state.page < 12 ? <Loader /> : null}
+      >
+        <div className="main">
+          <h1 className="main__heading">Upcoming movies</h1>
+          <div className="main__container">
+            <UpcomingItem genres={this.props.genres.genres} movies={movies} />
+          </div>
         </div>
-      </div>
+      </InfiniteScroll>
     );
   }
 }

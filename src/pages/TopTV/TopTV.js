@@ -6,51 +6,67 @@ import { getGenres } from "../../actions/genres.actions";
 import { getTopTV } from "../../actions/topTV.actions";
 import { getApi } from "../../actions/api.actions";
 import TopTVItem from "./TopTVItem/TopTVItem";
-import LoadMore from "../../components/LoadMore/LoadMore";
 import "../MainStyling.scss";
+import InfiniteScroll from "react-infinite-scroller";
 
 class TopTV extends Component {
   state = {
-    visible: 10
+    totalPages: 1,
+    results: [],
+    page: 1
   };
   componentDidMount() {
+    window.scrollTo(0, 0);
     this.props.getApi();
     this.props.getTopTV(this.props.api);
     this.props.getGenres(this.props.api);
   }
 
-  //DO PRZEMYSLENIA, PO CHUK DWA RAZY TO SAMO DEBILU
-
-  loadMore = () => {
-    this.setState(prev => {
-      return { visible: prev.visible + 10 };
+  componentWillReceiveProps(newProps) {
+    if (newProps.topTV.total_pages !== this.state.totalPages) {
+      this.setState({
+        totalPages: newProps.topTV.total_pages,
+        page: newProps.topTV.page,
+        results: newProps.topTV.results
+      });
+    }
+  }
+  componentWillUnmount() {
+    this.setState({
+      totalPages: 1,
+      page: 1,
+      results: []
     });
+  }
+  getMore = () => {
+    if (this.state.page !== this.state.totalPages) {
+      this.setState(prevState => ({
+        page: prevState.page + 1,
+        results: this.state.results.concat(this.props.topTV.results)
+      }));
+
+      this.props.getTopTV(this.props.api, this.state.page);
+    }
   };
 
   render() {
-    const topTV = this.props.topTV.results;
-    console.log(topTV);
+    const topTV = this.state.results;
     return (
-      <div className="main">
-        <h1 className="main__heading">Top rated tv shows</h1>
-        <div className="main__container">
-          {this.props.topTV.loaded ? null : <Loader />}
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.getMore}
+        hasMore={true}
+        loader={this.state.page < 12 ? <Loader /> : null}
+      >
+        <div className="main">
+          <h1 className="main__heading">Top rated tv shows</h1>
+          <div className="main__container">
+            {this.props.topTV.loaded ? null : <Loader />}
 
-          <TopTVItem
-            genres={this.props.genres.genres}
-            topTV={topTV}
-            visible={this.state.visible}
-          />
-
-          {this.state.visible < topTV.length && (
-            <LoadMore
-              className="wow fadeIn"
-              data-wow-delay="2s"
-              click={this.loadMore}
-            />
-          )}
+            <TopTVItem genres={this.props.genres.genres} topTV={topTV} />
+          </div>
         </div>
-      </div>
+      </InfiniteScroll>
     );
   }
 }

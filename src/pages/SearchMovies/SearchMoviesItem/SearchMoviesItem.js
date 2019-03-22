@@ -1,11 +1,10 @@
 import React, { Component } from "react";
+
 import { Link } from "react-router-dom";
+
 import WOW from "wowjs";
-// import "./UpcomingItem.scss";
 
-class UpcomingItem extends Component {
-  // console.log(movies.results);
-
+class SearchMoviesItem extends Component {
   componentDidMount() {
     if (typeof window !== "undefined") {
       const wow = new WOW.WOW({
@@ -40,11 +39,10 @@ class UpcomingItem extends Component {
     const superFilm = {
       backgroundColor: "rgba(35, 160, 82, 0.7)"
     };
-    // console.log(this);
-    const upcomings = this.props.movies.map((item, i) => (
-      // <Link to={`/movies/${item.id}`}>
-      <div key={i} className="main__item">
-        <figure className="main__image wow fadeIn" data-wow-duration="1.5s">
+
+    const upcomings = this.props.results.map((item, i) => (
+      <div key={i} className="main__item wow fadeIn">
+        <figure className="main__image">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}
             className="main__average"
@@ -54,7 +52,9 @@ class UpcomingItem extends Component {
           <Link to={`/movies/${item.id}`}>
             <img
               className="main__img"
-              src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
+                item.poster_path
+              }`}
               alt=""
             />
           </Link>
@@ -64,10 +64,8 @@ class UpcomingItem extends Component {
       </div>
     ));
 
-    // upcomings.splice(this.props.visible);
-
     return <>{upcomings}</>;
   }
 }
 
-export default UpcomingItem;
+export default SearchMoviesItem;

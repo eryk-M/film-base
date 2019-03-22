@@ -40,8 +40,8 @@ class TopMoviesItem extends Component {
       backgroundColor: "rgba(35, 160, 82, 0.7)"
     };
 
-    const upcomings = this.props.movies.map(item => (
-      <div key={item.id} className="main__item wow fadeIn">
+    const upcomings = this.props.movies.map((item, i) => (
+      <div key={i} className="main__item wow fadeIn">
         <figure className="main__image">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}
@@ -52,9 +52,7 @@ class TopMoviesItem extends Component {
           <Link to={`/movies/${item.id}`}>
             <img
               className="main__img"
-              src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
-                item.poster_path
-              }`}
+              src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
               alt=""
             />
           </Link>
@@ -63,8 +61,6 @@ class TopMoviesItem extends Component {
         </figure>
       </div>
     ));
-
-    upcomings.splice(this.props.visible);
 
     return <>{upcomings}</>;
   }

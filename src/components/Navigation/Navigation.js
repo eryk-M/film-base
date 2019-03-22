@@ -45,9 +45,9 @@ const Navigation = props => {
         </li> */}
           {menu}
         </ul>
-        <div className="navigation__greeting">
+        {/* <div className="navigation__greeting">
           <h3>dksaldsakdsa</h3>
-        </div>
+        </div> */}
       </nav>
     </>
   );
