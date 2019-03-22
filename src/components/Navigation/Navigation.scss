@@ -1,12 +1,13 @@
 .navigation {
-  width: 100%;
+  // width: 100%;
   background-color: var(--color-primary-2);
   height: 100%;
   display: inline-block;
-
+  position: fixed;
+  top: 0;
   &__list {
     list-style: none;
-    margin-top: 4.7rem;
+    margin-top: 13rem;
   }
 
   &__item {

@@ -2,7 +2,7 @@ import React from "react";
 
 const TopMoviesItem = props => {
   const people = props.people.map((item, i) => (
-    <div key={i} className="main__item wow fadeIn">
+    <div key={i} className="main__item">
       <figure className="main__image">
         <img
           className="main__img"

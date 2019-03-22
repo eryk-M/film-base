@@ -1,6 +1,6 @@
 .main {
   height: 100%;
-  margin-left: 6rem;
+  margin-left: 30rem;
   margin-top: 5rem;
   &__container {
     display: flex;
@@ -17,7 +17,7 @@
     width: 70%;
     height: auto;
     display: block;
-
+    animation: appear 1s ease-in-out;
     & img {
       border-radius: 5px;
       display: block;
@@ -98,4 +98,13 @@
   font-size: 2rem;
   font-weight: 100;
   color: var(--color-white-2);
+  font-style: italic;
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

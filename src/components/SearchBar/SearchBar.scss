@@ -1,11 +1,11 @@
 .searchbar {
   display: flex;
-
   width: 100%;
   align-items: center;
   background-color: var(--color-nav);
 
   &__logo {
+    z-index: 1;
     width: 25rem;
     text-align: center;
     background-color: var(--color-nav-2);

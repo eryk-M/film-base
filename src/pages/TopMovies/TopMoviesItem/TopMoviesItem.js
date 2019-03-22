@@ -2,19 +2,7 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 
-import WOW from "wowjs";
-
 class TopMoviesItem extends Component {
-  componentDidMount() {
-    if (typeof window !== "undefined") {
-      const wow = new WOW.WOW({
-        live: false
-      });
-      wow.init();
-      wow.sync();
-    }
-  }
-
   genresHandler = genres => {
     //sprawdzam id gatunku, porownuje je do listy id gatunkow i zwracam nazwe gatunku
     if (this.props.genres) {

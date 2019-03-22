@@ -1,20 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import WOW from "wowjs";
+
 // import "./UpcomingItem.scss";
 
 class UpcomingItem extends Component {
   // console.log(movies.results);
-
-  componentDidMount() {
-    if (typeof window !== "undefined") {
-      const wow = new WOW.WOW({
-        live: false
-      });
-      wow.init();
-      wow.sync();
-    }
-  }
 
   genresHandler = genres => {
     //sprawdzam id gatunku, porownuje je do listy id gatunkow i zwracam nazwe gatunku
@@ -44,7 +34,7 @@ class UpcomingItem extends Component {
     const upcomings = this.props.movies.map((item, i) => (
       // <Link to={`/movies/${item.id}`}>
       <div key={i} className="main__item">
-        <figure className="main__image wow fadeIn" data-wow-duration="1.5s">
+        <figure className="main__image">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}
             className="main__average"

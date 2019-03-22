@@ -63,7 +63,7 @@ class Upcoming extends Component {
         pageStart={0}
         loadMore={this.getMore}
         hasMore={true}
-        loader={this.state.page < 12 ? <Loader /> : null}
+        // loader={this.state.page < 12 ? <Loader /> : null}
       >
         <div className="main">
           <h1 className="main__heading">Upcoming movies</h1>

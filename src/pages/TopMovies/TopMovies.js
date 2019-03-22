@@ -55,7 +55,7 @@ class TopMovies extends Component {
         pageStart={1}
         loadMore={this.getMore}
         hasMore={true}
-        loader={this.state.page < 12 ? <Loader /> : null}
+        // loader={this.state.page < 12 ? <Loader /> : null}
       >
         <div className="main">
           <h1 className="main__heading">Top rated movies</h1>

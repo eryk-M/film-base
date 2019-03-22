@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Search.scss";
-
 import { withRouter } from "react-router-dom";
 
 class Search extends Component {
@@ -9,19 +8,21 @@ class Search extends Component {
     redirect: false
   };
 
+
   handleSubmit = e => {
     e.preventDefault();
     // console.log(this.state.film);
     this.setState({
       redirect: true,
       film: this.state.film
-    });
+    }); 
     this.props.history.push({
       pathname: "/results",
       state: {
         film: this.state.film
       }
     });
+    window.scrollTo(0, 0);
   };
 
   handleChange = e => {
@@ -44,7 +45,7 @@ class Search extends Component {
             onChange={this.handleChange}
           />
           {/* <span /> */}
-          <button>Szukaj</button>
+          {/* <button>Szukaj</button> */}
           {/* <i class="fas fa-search" /> */}
         </form>
       </div>

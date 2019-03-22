@@ -1,6 +1,8 @@
 .search {
   margin-left: 4rem;
   position: relative;
+  // transition: .3s transform;
+  // transform: scale(1.2);
   & input {
     background-color: transparent;
     border: none;
@@ -19,7 +21,7 @@
       transition: opacity 0.5s;
     }
     &:focus {
-      width: 25rem;
+      // width: 25rem;
       outline: none;
       border-bottom: 1px solid white;
       &::placeholder {
@@ -33,4 +35,18 @@
     vertical-align: -3px;
     color: rgba(255, 255, 255, 0.5);
   }
+}
+
+.search-active {
+  position: fixed;
+  z-index: 1;
+  top: 5rem;
+  left: 0;
+  margin: 0;
+  transform: scale(1)
+  // margin-left: 0;
+  
+}
+.search-active:focus{
+  width: 0;
 }

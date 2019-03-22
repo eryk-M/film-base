@@ -2,18 +2,7 @@ import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
 
-import WOW from "wowjs";
-
 class SearchMoviesItem extends Component {
-  componentDidMount() {
-    if (typeof window !== "undefined") {
-      const wow = new WOW.WOW({
-        live: false
-      });
-      wow.init();
-      wow.sync();
-    }
-  }
 
   genresHandler = genres => {
     //sprawdzam id gatunku, porownuje je do listy id gatunkow i zwracam nazwe gatunku
@@ -41,7 +30,7 @@ class SearchMoviesItem extends Component {
     };
 
     const upcomings = this.props.results.map((item, i) => (
-      <div key={i} className="main__item wow fadeIn">
+      <div key={i} className="main__item">
         <figure className="main__image">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}
