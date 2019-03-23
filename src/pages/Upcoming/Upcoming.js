@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { getUpcoming } from "../../actions/upcoming.actions";
 import { getGenres } from "../../actions/genres.actions";
 import { getApi } from "../../actions/api.actions";
-import Loader from "../../components/Loader/Loader";
+// import Loader from "../../components/Loader/Loader";
 import InfiniteScroll from "react-infinite-scroller";
 
 class Upcoming extends Component {
@@ -20,6 +20,7 @@ class Upcoming extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     this.props.getApi();
+    //wola funkcje, dostaje od razu 20 rezultatow
     this.props.getUpcoming(this.props.api, this.state.page);
     this.props.getGenres(this.props.api);
   }
@@ -28,10 +29,11 @@ class Upcoming extends Component {
     if (newProps.movies.total_pages !== this.state.totalPages) {
       this.setState({
         totalPages: newProps.movies.total_pages,
-        page: newProps.movies.page,
-        results: newProps.movies.results
+        page: newProps.movies.page
+        // results: newProps.movies.results
       });
     }
+    // console.log(newProps.movies.results);
   }
   componentWillUnmount() {
     this.setState({
@@ -48,19 +50,18 @@ class Upcoming extends Component {
         results: this.state.results.concat(this.props.movies.results)
       }));
 
-      console.log(this.state.results);
+      console.log(this.props.movies.results);
 
       this.props.getUpcoming(this.props.api, this.state.page);
     }
   };
-
   render() {
-    console.log(this.props.movies.results);
+    // console.log(this.props.movies.results);
     const movies = this.state.results;
 
     return (
       <InfiniteScroll
-        pageStart={0}
+        pageStart={4}
         loadMore={this.getMore}
         hasMore={true}
         // loader={this.state.page < 12 ? <Loader /> : null}

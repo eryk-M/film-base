@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-const TopPeopleItem = props => {
+import "./MovieDetailsPeople.scss";
+const MovieDetailsPeople = props => {
   console.log(props.people);
   const people = props.people.map((item, i) => (
-    <div key={i} className="main__item swiper-slide">
-      <figure className="main__image">
+    <div key={i} className="movie__people swiper-slide">
+      <figure className="movie__people-image">
         <Link style={{ textDecoration: "none" }} to={`/people/${item.id}`}>
-          <div className="main__item-wrapper">
+          <div className="movie__people-wrapper">
             <img
-              className="main__img"
+              className="movie__people-img"
               src={`https://image.tmdb.org/t/p/w185${item.profile_path}`}
               alt=""
             />
 
-            <h2 className="main__heading-tertiary-people">{item.name}</h2>
+            <h2 className="movie__people-heading">{item.name}</h2>
           </div>
         </Link>
       </figure>
@@ -24,4 +24,4 @@ const TopPeopleItem = props => {
   return <>{people}</>;
 };
 
-export default TopPeopleItem;
+export default MovieDetailsPeople;

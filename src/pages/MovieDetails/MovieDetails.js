@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import { Link } from "react-router-dom";
-// import Upcoming from "../Upcoming/UpcomingItem/UpcomingItem";
+
 import { bindActionCreators } from "redux";
 
 import "./MovieDetails.scss";
@@ -9,17 +8,29 @@ import { connect } from "react-redux";
 import { getMovieDetails } from "../../actions/moviesDetails.actions";
 import { getApi } from "../../actions/api.actions";
 import { getVideos } from "../../actions/videos.actions";
+import { getMovieCredits } from "../../actions/movieCredits.actions";
+
+import MovieDetailsPeople from "./MovieDetailsPeople/MovieDetailsPeople";
 
 import Loader from "../../components/Loader/Loader";
 import WOW from "wowjs";
 
+import Swiper from "react-id-swiper";
+import { Pagination, Navigation } from "swiper/dist/js/swiper.esm";
+
 class MovieDetails extends Component {
-  state = {};
+  state = {
+    cast: []
+  };
 
   componentDidMount() {
     this.props.getApi();
+
     this.props.getMovieDetails(this.props.match.params.id, this.props.api);
     this.props.getVideos(this.props.match.params.id, this.props.api);
+    this.props.getMovieCredits(this.props.match.params.id, this.props.api);
+    // this.props.getMovieCredits(this.props.match.params.id, this.props.api);
+
     if (typeof window !== "undefined") {
       const wow = new WOW.WOW({
         live: false
@@ -29,32 +40,43 @@ class MovieDetails extends Component {
   }
 
   render() {
+    const params = {
+      modules: [Pagination, Navigation],
+      pagination: {
+        el: ".swiper-pagination",
+        type: "bullets",
+        clickable: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      },
+      spaceBetween: 30,
+      slidesPerView: 5,
+      slidesPerGroup: 5
+    };
+
     const { moviesDetails } = this.props;
+    //MAIN IMAGE
     const backdrop = `https://image.tmdb.org/t/p/w1280/${
       moviesDetails.backdrop_path
     }`;
-    // console.log(moviesDetails.backdrop_path);
-
+    //SECONDARY IMAGE
     const image = `https://image.tmdb.org/t/p/w370_and_h556_bestv2${
       moviesDetails.poster_path
     }`;
+    //DATE
     const date = new Date().toISOString().substr(0, 10);
+    //SUPERFILM COLOR
     const superFilm = {
       color: "rgba(46, 204, 113, 1)"
     };
+    //VIDEO
     const videos = this.props.videos.results;
     const filteredVideos = videos.filter(video => video.type === "Trailer");
     const just = filteredVideos.splice(0, 3);
-
-    // console.log(this.props.videos.results);
-
-    // console.log(genres);
-
-    // const genres = { ...this.props.moviesDetails.genres };
-    // const co = genres.map(genre => ({
-    //   genre: genre.name
-    // }));
-    // console.log(co);
+    //ACTORS
+    const actors = this.props.movieCredits.cast;
 
     return (
       <>
@@ -113,7 +135,13 @@ class MovieDetails extends Component {
               {moviesDetails.overview}
             </p>
           </div>
-          <div className="movie__trailer wow fadeIn" data-wow-delay="0.5s">
+          <div className="movie__cast">
+            <p className="movie__cast-heading">Cast</p>
+            <Swiper {...params}>
+              <MovieDetailsPeople people={actors} />
+            </Swiper>
+          </div>
+          <div className="movie__trailer">
             <p className="movie__trailer-heading">Trailers</p>
             {/* <div></div> */}
             {just.map((tr, i) => (
@@ -142,7 +170,8 @@ function mapStateToProps(state) {
     genres: state.genres,
     loaded: state.loaded,
     api: state.api.api,
-    videos: state.videos
+    videos: state.videos,
+    movieCredits: state.movieCredits
   };
 }
 
@@ -150,7 +179,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getMovieDetails: bindActionCreators(getMovieDetails, dispatch),
     getApi: bindActionCreators(getApi, dispatch),
-    getVideos: bindActionCreators(getVideos, dispatch)
+    getVideos: bindActionCreators(getVideos, dispatch),
+    getMovieCredits: bindActionCreators(getMovieCredits, dispatch)
   };
 }
 

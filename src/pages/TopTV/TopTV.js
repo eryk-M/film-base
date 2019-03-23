@@ -26,8 +26,8 @@ class TopTV extends Component {
     if (newProps.topTV.total_pages !== this.state.totalPages) {
       this.setState({
         totalPages: newProps.topTV.total_pages,
-        page: newProps.topTV.page,
-        results: newProps.topTV.results
+        page: newProps.topTV.page
+        // results: newProps.topTV.result
       });
     }
   }

@@ -70,6 +70,7 @@ class TopPeople extends Component {
             {this.props.topPeople.loaded ? null : <Loader />}
 
             <TopPeopleItem people={topPeople} visible={this.state.visible} />
+            {console.log(topPeople)}
           </div>
         </div>
       </InfiniteScroll>

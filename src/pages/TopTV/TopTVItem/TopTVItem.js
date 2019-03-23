@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class TopTVItem extends Component {
   genresHandler = genres => {
@@ -29,19 +30,23 @@ class TopTVItem extends Component {
     const topTV = this.props.topTV.map((item, i) => (
       <div key={i} className="main__item">
         <figure className="main__image">
-          <div
-            style={item.vote_average >= 7.5 ? superFilm : null}
-            className="main__average"
-          >
-            <span>{item.vote_average}</span>
-          </div>
-          <img
-            className="main__img"
-            src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
-            alt=""
-          />
+          <Link style={{ textDecoration: "none" }} to={`/tv/${item.id}`}>
+            <div className="main__item-wrapper">
+              <div
+                style={item.vote_average >= 7.5 ? superFilm : null}
+                className="main__average"
+              >
+                <span>{item.vote_average}</span>
+              </div>
+              <img
+                className="main__img"
+                src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
+                alt=""
+              />
 
-          <h2 className="main__heading-tertiary">{item.original_name}</h2>
+              <h2 className="main__heading-tertiary">{item.original_name}</h2>
+            </div>
+          </Link>
           {this.genresHandler(item.genre_ids)}
         </figure>
       </div>

@@ -35,20 +35,25 @@ class UpcomingItem extends Component {
       // <Link to={`/movies/${item.id}`}>
       <div key={i} className="main__item">
         <figure className="main__image">
-          <div
-            style={item.vote_average >= 7.5 ? superFilm : null}
-            className="main__average"
-          >
-            <span>{item.vote_average}</span>
-          </div>
-          <Link to={`/movies/${item.id}`}>
-            <img
-              className="main__img"
-              src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
-              alt=""
-            />
+          <Link style={{ textDecoration: "none" }} to={`/movies/${item.id}`}>
+            <div className="main__item-wrapper">
+              <div
+                style={item.vote_average >= 7.5 ? superFilm : null}
+                className="main__average"
+              >
+                <span>{item.vote_average}</span>
+              </div>
+
+              <img
+                className="main__img"
+                src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
+                alt=""
+              />
+
+              <h2 className="main__heading-tertiary">{item.title}</h2>
+            </div>
           </Link>
-          <h2 className="main__heading-tertiary">{item.title}</h2>
+
           {this.genresHandler(item.genre_ids)}
         </figure>
       </div>

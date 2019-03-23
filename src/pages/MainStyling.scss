@@ -26,11 +26,11 @@
       box-shadow: 0 0.4rem 0.5rem rgba(0, 0, 0, 0.7);
       transition: 0.4s all;
 
-      &:hover {
-        transform: translateY(-1rem);
-        cursor: pointer;
-        box-shadow: 0 1.5rem 2rem rgba(0, 0, 0, 0.7);
-      }
+      // &:hover {
+      //   transform: translateY(-1rem);
+      //   cursor: pointer;
+      //   box-shadow: 0 1.5rem 2rem rgba(0, 0, 0, 0.7);
+      // }
     }
   }
 
@@ -39,6 +39,13 @@
     margin-left: auto;
     width: 20%;
     position: relative;
+    &-wrapper {
+      &:hover .main__img {
+        transform: translateY(-1rem);
+        cursor: pointer;
+        box-shadow: 0 1.5rem 2rem rgba(0, 0, 0, 0.7);
+      }
+    }
   }
 
   &__average {
@@ -71,7 +78,6 @@
     letter-spacing: 4px;
     font-weight: 300;
   }
-
   &__heading-tertiary {
     margin-top: 2rem;
     color: var(--color-white);
@@ -99,12 +105,4 @@
   font-weight: 100;
   color: var(--color-white-2);
   font-style: italic;
-}
-@keyframes appear {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
