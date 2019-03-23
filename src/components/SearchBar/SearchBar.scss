@@ -8,7 +8,17 @@
     z-index: 1;
     width: 25rem;
     text-align: center;
-    background-color: var(--color-nav-2);
+    background-color: var(--color-nav);
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 6rem;
+      top: 15%;
+      left: 100%;
+      background-color: #606971;
+    }
   }
 }
 
@@ -53,7 +63,7 @@
   position: fixed;
   bottom: 5rem;
   right: 5rem;
-
+  cursor: pointer;
   z-index: 10;
   &:before,
   &:after {

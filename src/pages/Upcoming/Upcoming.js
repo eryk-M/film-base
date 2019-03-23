@@ -18,7 +18,6 @@ class Upcoming extends Component {
   };
 
   componentDidMount() {
-    window.scrollTo(0, 0);
     this.props.getApi();
     //wola funkcje, dostaje od razu 20 rezultatow
     this.props.getUpcoming(this.props.api, this.state.page);

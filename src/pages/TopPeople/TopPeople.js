@@ -17,7 +17,6 @@ class TopPeople extends Component {
     results: []
   };
   componentDidMount() {
-    window.scrollTo(0, 0);
     if (typeof window !== "undefined") {
       const wow = new WOW.WOW({
         live: false

@@ -9,6 +9,7 @@ import api from "./api.reducer";
 import videos from "./videos.reducer";
 import searchResults from "./search.reducer";
 import movieCredits from "./movieCredits.reducer";
+import peopleDetails from "./peopleDetails.reducer";
 
 import { combineReducers } from "redux";
 
@@ -23,7 +24,8 @@ const rootReducer = combineReducers({
   api,
   videos,
   searchResults,
-  movieCredits
+  movieCredits,
+  peopleDetails
 });
 
 export default rootReducer;

@@ -1,6 +1,6 @@
 .navigation {
   // width: 100%;
-  background-color: var(--color-primary-2);
+  background-color: var(--color-nav-2);
   height: 100%;
   display: inline-block;
   position: fixed;
@@ -22,7 +22,11 @@
     left: 0;
     height: 100%;
     width: 3px;
-    background-color: var(--color-nav-2);
+    background: linear-gradient(
+      45deg,
+      var(--color-arrow-1),
+      var(--color-arrow-2)
+    );
     transform: scaleY(0);
     transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
       background-color 0.1s;
@@ -33,7 +37,7 @@
     top: 0;
     left: 90%;
     font-size: 2rem;
-    color: #fff;
+    color: var(--color-white-2);
     transform: translate(-50%, -50%);
     transform: scale(0);
     transition: 0.2s all;
@@ -48,7 +52,11 @@
     transition-delay: 0;
   }
   &__link.active {
-    background-color: var(--color-nav-2);
+    background: linear-gradient(
+      45deg,
+      var(--color-arrow-1),
+      var(--color-arrow-2)
+    );
     &:after {
       transform: scale(1);
     }
@@ -66,7 +74,7 @@
     text-transform: uppercase;
     font-weight: 400;
     font-size: 1.6rem;
-    color: #fff;
+    color: var(--color-white-2);
 
     z-index: 10;
 

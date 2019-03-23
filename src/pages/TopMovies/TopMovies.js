@@ -16,7 +16,6 @@ class TopMovies extends Component {
     results: []
   };
   componentDidMount() {
-    window.scrollTo(0, 0);
     this.props.getApi();
     this.props.getTopMovies(this.props.api);
     this.props.getGenres(this.props.api);

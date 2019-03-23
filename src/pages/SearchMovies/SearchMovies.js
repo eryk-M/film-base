@@ -20,7 +20,6 @@ class SearchMovies extends Component {
   };
 
   componentDidMount() {
-    window.scrollTo(0, 0);
     this.props.getSearchResults(
       this.props.location.state.film,
       this.props.api,

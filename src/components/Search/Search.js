@@ -8,14 +8,13 @@ class Search extends Component {
     redirect: false
   };
 
-
   handleSubmit = e => {
     e.preventDefault();
     // console.log(this.state.film);
     this.setState({
       redirect: true,
-      film: this.state.film
-    }); 
+      film: ""
+    });
     this.props.history.push({
       pathname: "/results",
       state: {

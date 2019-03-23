@@ -16,7 +16,6 @@ class TopTV extends Component {
     page: 1
   };
   componentDidMount() {
-    window.scrollTo(0, 0);
     this.props.getApi();
     this.props.getTopTV(this.props.api);
     this.props.getGenres(this.props.api);
@@ -52,12 +51,7 @@ class TopTV extends Component {
   render() {
     const topTV = this.state.results;
     return (
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={this.getMore}
-        hasMore={true}
-        // loader={this.state.page < 12 ? <Loader /> : null}
-      >
+      <InfiniteScroll pageStart={0} loadMore={this.getMore} hasMore={true}>
         <div className="main">
           <h1 className="main__heading">Top rated tv shows</h1>
           <div className="main__container">

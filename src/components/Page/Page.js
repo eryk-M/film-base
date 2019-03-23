@@ -8,6 +8,7 @@ import TopPeople from "../../pages/TopPeople/TopPeople";
 import TopTV from "../../pages/TopTV/TopTV";
 import SearchMovies from "../../pages/SearchMovies/SearchMovies";
 import MovieDetails from "../../pages/MovieDetails/MovieDetails";
+import PeopleDetails from "../../pages/PeopleDetails/PeopleDetails";
 
 const Page = () => {
   return (
@@ -19,6 +20,7 @@ const Page = () => {
         <Route path="/tv/top" component={TopTV} />
         <Route path="/results" component={SearchMovies} />
         <Route path="/movies/:id" component={MovieDetails} />
+        <Route path="/people/:id" component={PeopleDetails} />
       </Switch>
     </>
   );
