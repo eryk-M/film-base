@@ -3,6 +3,8 @@
   width: 100%;
   align-items: center;
   background-color: var(--color-nav);
+  position: fixed;
+  z-index: 1000;
 
   &__logo {
     z-index: 1;
@@ -10,6 +12,7 @@
     text-align: center;
     background-color: var(--color-nav);
     position: relative;
+    box-shadow: none;
     &:after {
       content: "";
       position: absolute;

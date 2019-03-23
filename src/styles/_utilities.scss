@@ -1,0 +1,17 @@
+.heading-details {
+  color: var(--color-blue-dark);
+  padding: 1rem 0;
+  margin-left: 2rem;
+  display: inline-block;
+  font-size: 2rem;
+  position: relative;
+  &:after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    position: absolute;
+    top: 95%;
+    left: 0;
+    background-color: var(--color-blue-dark);
+  }
+}

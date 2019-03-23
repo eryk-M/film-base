@@ -12,10 +12,13 @@ class NavBar extends Component {
 
   render() {
     return (
-      <div className="searchbar">
-        <Logo />
-        <Search />
-        <ScrollUp />
+      <div className="imHere">
+        <p className="scroll__to" />
+        <div className="searchbar">
+          <Logo />
+          <Search />
+          <ScrollUp />
+        </div>
       </div>
     );
   }

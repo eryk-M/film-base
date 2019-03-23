@@ -8,11 +8,15 @@ const MovieDetailsPeople = props => {
       <figure className="movie__people-image">
         <Link style={{ textDecoration: "none" }} to={`/people/${item.id}`}>
           <div className="movie__people-wrapper">
-            <img
-              className="movie__people-img"
-              src={`https://image.tmdb.org/t/p/w185${item.profile_path}`}
-              alt=""
-            />
+            {item.profile_path ? (
+              <img
+                className="movie__people-img"
+                src={`https://image.tmdb.org/t/p/w185${item.profile_path}`}
+                alt=""
+              />
+            ) : (
+              "NO IMAGE FOUND"
+            )}
 
             <h2 className="movie__people-heading">{item.name}</h2>
           </div>

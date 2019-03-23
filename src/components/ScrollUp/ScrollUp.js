@@ -1,17 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 
-import { Link, animateScroll as scroll } from "react-scroll";
+import { Link } from "react-scroll";
 
 const ScrollUp = () => {
   return (
     <div className="scrollUp">
       <Link
         // activeClass="active"
-        to="searchbar"
+        to="scroll__to"
         spy={true}
         smooth={true}
         offset={-70}
-        duration={500}
+        duration={590}
       >
         <i className="fas fa-chevron-up" />
       </Link>
