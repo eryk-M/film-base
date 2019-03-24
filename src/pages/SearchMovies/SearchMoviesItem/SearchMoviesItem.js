@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class SearchMoviesItem extends Component {
-
   genresHandler = genres => {
     //sprawdzam id gatunku, porownuje je do listy id gatunkow i zwracam nazwe gatunku
     if (this.props.genres) {
@@ -38,15 +37,20 @@ class SearchMoviesItem extends Component {
           >
             <span>{item.vote_average}</span>
           </div>
-          <Link to={`/movies/${item.id}`}>
-            <img
-              className="main__img"
-              src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
-                item.poster_path
-              }`}
-              alt=""
-            />
-          </Link>
+
+          {item.poster_path ? (
+            <Link to={`/movies/${item.id}`}>
+              <img
+                className="main__img"
+                src={`https://image.tmdb.org/t/p/w370_and_h556_bestv2${
+                  item.poster_path
+                }`}
+                alt=""
+              />
+            </Link>
+          ) : (
+            "NO IMAGE FOUND"
+          )}
           <h2 className="main__heading-tertiary">{item.title}</h2>
           {this.genresHandler(item.genre_ids)}
         </figure>

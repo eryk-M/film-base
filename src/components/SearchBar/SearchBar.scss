@@ -5,7 +5,12 @@
   background-color: var(--color-nav);
   position: fixed;
   z-index: 1000;
-
+  & svg {
+    position: relative;
+    padding-top: 0.5rem;
+    top: 9%;
+    left: 5%;
+  }
   &__logo {
     z-index: 1;
     width: 25rem;

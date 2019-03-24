@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./PeopleDetailsMovie.scss";
 const PeopleDetailsMovie = props => {
   console.log(props.cast);
+  // console.log(props.cast);
   const cast = props.cast.map((item, i) => (
     // <div key={i}>{item.title}</div>
     <div key={i} className="people__item swiper-slide">
@@ -19,7 +20,10 @@ const PeopleDetailsMovie = props => {
               "NO IMAGE FOUND"
             )}
 
-            <h2 className="people__item-heading">{item.title}</h2>
+            <h2 className="people__item-heading">
+              {item.title}
+              <br /> {parseInt(item.release_date)}
+            </h2>
           </div>
         </Link>
       </figure>

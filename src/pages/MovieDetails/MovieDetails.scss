@@ -219,4 +219,10 @@
     //     width: 30rem;
     //   }
   }
+  &__character,
+  &__character:visited,
+  &__character:link {
+    text-align: center;
+    color: var(--color-white-2);
+  }
 }

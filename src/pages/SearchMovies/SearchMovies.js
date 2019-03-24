@@ -57,16 +57,7 @@ class SearchMovies extends Component {
   render() {
     const searchResults = this.state.results;
     return (
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={this.getMore}
-        hasMore={true}
-        loader={
-          this.state.page === this.props.searchResults.total_pages ? (
-            <Loader />
-          ) : null
-        }
-      >
+      <InfiniteScroll pageStart={0} loadMore={this.getMore} hasMore={true}>
         <div className="main">
           <h1 className="main__heading">
             Search results for "{this.props.location.state.film}"

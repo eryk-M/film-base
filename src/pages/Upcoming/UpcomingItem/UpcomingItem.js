@@ -53,8 +53,10 @@ class UpcomingItem extends Component {
               <h2 className="main__heading-tertiary">{item.title}</h2>
             </div>
           </Link>
-
-          {this.genresHandler(item.genre_ids)}
+          {this.genresHandler(item.genre_ids)}{" "}
+          <span className="main__release-date">
+            {item.release_date.substr(0, 4)}
+          </span>
         </figure>
       </div>
     ));

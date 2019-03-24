@@ -48,6 +48,9 @@ class TopTVItem extends Component {
             </div>
           </Link>
           {this.genresHandler(item.genre_ids)}
+          <span className="main__release-date">
+            {item.first_air_date.substr(0, 4)}
+          </span>
         </figure>
       </div>
     ));

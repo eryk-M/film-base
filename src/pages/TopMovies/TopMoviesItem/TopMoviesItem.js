@@ -50,6 +50,9 @@ class TopMoviesItem extends Component {
             </div>
           </Link>
           {this.genresHandler(item.genre_ids)}
+          <span className="main__release-date">
+            {item.release_date.substr(0, 4)}
+          </span>
         </figure>
       </div>
     ));

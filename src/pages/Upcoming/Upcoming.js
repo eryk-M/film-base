@@ -54,9 +54,11 @@ class Upcoming extends Component {
       this.props.getUpcoming(this.props.api, this.state.page);
     }
   };
+
   render() {
     // console.log(this.props.movies.results);
     const movies = this.state.results;
+    console.log(this.state.results);
 
     return (
       <InfiniteScroll
@@ -67,6 +69,7 @@ class Upcoming extends Component {
       >
         <div className="main">
           <h1 className="main__heading">Upcoming movies</h1>
+
           <div className="main__container">
             <UpcomingItem genres={this.props.genres.genres} movies={movies} />
           </div>

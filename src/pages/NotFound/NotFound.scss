@@ -1,0 +1,17 @@
+.notFound {
+  margin-left: 55rem;
+  margin-top: 20rem;
+  & img {
+    height: 30rem;
+  }
+  & span {
+    font-size: 40rem;
+    color: var(--color-white-2);
+    text-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
+  }
+  &__heading {
+    font-size: 5rem;
+    text-align: center;
+    color: var(--color-white-2);
+  }
+}

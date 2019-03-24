@@ -5,6 +5,7 @@
   display: inline-block;
   position: fixed;
   top: 0;
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
   &__list {
     list-style: none;
     margin-top: 13rem;
@@ -83,8 +84,28 @@
       margin-left: 1.2rem;
       font-size: 1.4rem;
     }
+    & .fa-compass {
+      font-size: 1.8rem;
+    }
   }
 
   &__greeting {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 82%;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    // display: flex;
+    // display: flex;
+    font-size: 1.4rem;
+    color: var(--color-white-2);
+    &-image {
+      margin-top: 2rem;
+      // width: 10rem;
+      // height: auto;
+      height: 10rem;
+      width: auto;
+    }
   }
 }

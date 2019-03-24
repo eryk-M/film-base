@@ -9,6 +9,7 @@ import { getMovieDetails } from "../../actions/moviesDetails.actions";
 import { getApi } from "../../actions/api.actions";
 import { getVideos } from "../../actions/videos.actions";
 import { getMovieCredits } from "../../actions/movieCredits.actions";
+import { withRouter } from "react-router-dom";
 
 import MovieDetailsPeople from "./MovieDetailsPeople/MovieDetailsPeople";
 
@@ -16,7 +17,7 @@ import Loader from "../../components/Loader/Loader";
 import WOW from "wowjs";
 
 import Swiper from "react-id-swiper";
-import { Pagination, Navigation } from "swiper/dist/js/swiper.esm";
+import { Navigation } from "swiper/dist/js/swiper.esm";
 
 class MovieDetails extends Component {
   state = {
@@ -29,7 +30,6 @@ class MovieDetails extends Component {
     this.props.getMovieDetails(this.props.match.params.id, this.props.api);
     this.props.getVideos(this.props.match.params.id, this.props.api);
     this.props.getMovieCredits(this.props.match.params.id, this.props.api);
-    // this.props.getMovieCredits(this.props.match.params.id, this.props.api);
 
     if (typeof window !== "undefined") {
       const wow = new WOW.WOW({
@@ -40,20 +40,24 @@ class MovieDetails extends Component {
   }
 
   render() {
+    //preventing from wrong ID
+    if (this.props.moviesDetails.status_code === 34) {
+      this.props.history.push({
+        pathname: "/error"
+      });
+    }
     const params = {
-      modules: [Pagination, Navigation],
-      pagination: {
-        el: ".swiper-pagination",
-        type: "bullets",
-        clickable: true
-      },
+      modules: [Navigation],
+
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev"
       },
       spaceBetween: 30,
       slidesPerView: 5,
-      slidesPerGroup: 5
+      slidesPerGroup: 5,
+      rebuildOnUpdate: true,
+      shouldSwiperUpdate: true
     };
 
     const { moviesDetails } = this.props;
@@ -77,7 +81,6 @@ class MovieDetails extends Component {
     const just = filteredVideos.splice(0, 3);
     //ACTORS
     const actors = this.props.movieCredits.cast;
-
     return (
       <>
         <div className="movie wow fadeIn" data-wow-duration="2s">
@@ -137,9 +140,11 @@ class MovieDetails extends Component {
           </div>
           <div className="movie__cast">
             <p className="movie__cast-heading">Cast</p>
-            <Swiper {...params}>
-              <MovieDetailsPeople people={actors} />
-            </Swiper>
+            {actors.length > 0 && (
+              <Swiper {...params}>
+                <MovieDetailsPeople people={actors} />
+              </Swiper>
+            )}
           </div>
           <div className="movie__trailer">
             <p className="movie__trailer-heading">Trailers</p>
@@ -184,7 +189,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MovieDetails);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(MovieDetails)
+);

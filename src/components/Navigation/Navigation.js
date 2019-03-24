@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Navigation.scss";
-
+// import { Link } from "react-router-dom";
 const list = [
   { name: "Upcoming movies", path: "/", icon: "fas fa-film" },
   { name: "Top rated movies", path: "/movies/top", icon: "far fa-star" },
   { name: "Top rated people", path: "/people/top", icon: "fas fa-users" },
-  { name: "Top rated TV shows", path: "/tv/top", icon: "fas fa-tv" }
+  { name: "Top rated TV shows", path: "/tv/top", icon: "fas fa-tv" },
+  { name: "DISCOVER", path: "/discover", icon: "far fa-compass" }
 ];
 
 const Navigation = props => {
@@ -22,32 +23,22 @@ const Navigation = props => {
   return (
     <>
       <nav className="navigation">
-        <ul className="navigation__list">
-          {/* <li className="navigation__item">
-          <a href="/" className="navigation__link">
-            Upcoming movies
+        <ul className="navigation__list">{menu}</ul>
+        <div className="navigation__greeting">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.themoviedb.org/"
+          >
+            <img
+              className="navigation__greeting-image"
+              src="https://cdn-images-1.medium.com/max/1200/1*vIR7iO-1GnY2xYxL6NiYkw.png"
+              alt="TMDB logo"
+            />
           </a>
-        </li>
-        <li className="navigation__item">
-          <a href="/movies/top" className="navigation__link">
-            Top rated movies
-          </a>
-        </li>
-        <li className="navigation__item">
-          <a href="/people/top" className="navigation__link">
-            Top rated people
-          </a>
-        </li>
-        <li className="navigation__item">
-          <a href="/tv/top" className="navigation__link">
-            Top rated TV shows
-          </a>
-        </li> */}
-          {menu}
-        </ul>
-        {/* <div className="navigation__greeting">
-          <h3>dksaldsakdsa</h3>
-        </div> */}
+          <p>Made by eryk-M</p>
+          <p>Thanks to TMDB</p>
+        </div>
       </nav>
     </>
   );

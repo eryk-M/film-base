@@ -19,6 +19,9 @@ const MovieDetailsPeople = props => {
             )}
 
             <h2 className="movie__people-heading">{item.name}</h2>
+            <p className="movie__character">
+              {item.character ? "as " + item.character : null}
+            </p>
           </div>
         </Link>
       </figure>

@@ -1,6 +1,7 @@
 .people {
   &__cast {
     margin-top: 2rem;
+    margin-bottom: 2rem;
     width: 136rem;
     background-color: rgba(0, 0, 0, 0.5);
     border-left: 2px solid var(--color-blue-dark);
@@ -29,10 +30,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // &-wrapper {
-    //   margin-top: 1rem;
-    // }
-    padding-bottom: 3rem;
+    padding-bottom: 2rem;
+    &-wrapper {
+      width: 60%;
+    }
     &-img {
       margin-top: 2rem;
       width: 15rem;
@@ -41,7 +42,7 @@
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
     }
     &-heading {
-      text-align: center;
+      // text-align: center;
       margin-top: 1rem;
       color: var(--color-white);
       font-size: 1.2rem;
