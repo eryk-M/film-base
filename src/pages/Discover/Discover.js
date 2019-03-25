@@ -9,15 +9,18 @@ import "./Discover.scss";
 import DiscoverItem from ".././Discover/DiscoverItem/DiscoverItem";
 import Nouislider from "nouislider-react";
 import "nouislider/distribute/nouislider.css";
+import Loader from "../../components/Loader/Loader";
 class Discover extends Component {
   state = {
     sortBy: "popularity.desc",
-    voteAverage: 0,
+    voteAverage: 5,
     page: 1,
     results: [],
     totalPages: 0,
     yearMin: 2000,
-    yearMax: 2019
+    yearMax: 2019,
+    date: new Date().getFullYear(),
+    error: false
   };
 
   componentDidMount() {
@@ -32,12 +35,13 @@ class Discover extends Component {
     );
     this.props.getGenres(this.props.api);
   }
-  componentWillReceiveProps(newProps) {
-    if (newProps.discover.total_pages !== this.state.totalPages) {
-      this.setState({
-        totalPages: newProps.discover.total_pages,
-        page: newProps.discover.page
-      });
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.discover.total_pages !== prevState.totalPages) {
+      return {
+        totalPages: nextProps.discover.total_pages,
+        page: nextProps.discover.page
+      };
     }
   }
   handleGetDiscover = page => {
@@ -56,12 +60,12 @@ class Discover extends Component {
     switch (type) {
       case "add":
         this.setState({ page: page + 1 });
-        this.handleGetDiscover(page);
+        this.handleGetDiscover(page + 1);
         break;
       case "minus":
         if (page !== 1) {
           this.setState({ page: page - 1 });
-          this.handleGetDiscover(page);
+          this.handleGetDiscover(page - 1);
         }
         break;
       default:
@@ -70,11 +74,6 @@ class Discover extends Component {
   };
   handleChange = e => {
     this.setState({ voteAverage: e.target.value });
-  };
-  handleYearChange = e => {
-    this.setState({
-      year: e.target.value
-    });
   };
   handleSelectChange(e) {
     this.setState({
@@ -89,40 +88,110 @@ class Discover extends Component {
       yearMax: max
     });
   };
+
+  handleYearMinChange = e => {
+    this.setState({
+      yearMin: e.target.value
+    });
+  };
+  handleYearMaxChange = e => {
+    this.setState({
+      yearMax: e.target.value
+    });
+  };
+  handleSearch = page => {
+    if (
+      parseInt(this.state.yearMin) < 1944 ||
+      parseInt(this.state.yearMax) > this.state.date
+    ) {
+      this.setState({
+        error: true
+      });
+    } else if (
+      // 2000 > 1944 - true
+      parseInt(this.state.yearMin) >= 1944 ||
+      // 2030 < 2019 - false
+      parseInt(this.state.yearMax) <= this.state.date
+    ) {
+      this.props.getDiscover(
+        this.props.api,
+        1,
+        this.state.sortBy,
+        this.state.voteAverage,
+        this.state.yearMin,
+        this.state.yearMax
+      );
+      this.setState({
+        error: false,
+        page: 1
+      });
+    }
+  };
+
   render() {
+    const { date } = this.state;
     const discover = this.props.discover.results;
     const btnOff = {
-      opacity: 0.5
+      opacity: 0.2,
+      cursor: "default",
+      boxShadow: `0 0.2rem 0.2rem rgba(0, 0, 0, 0.5)`,
+      transform: "translateY(0.1rem)"
     };
+    // const date = new Date().getFullYear();
+    // console.log(date);
+
     return (
       <div className="main">
         <h1 className="main__heading">DISCOVER MOVIES</h1>
         <div className="main__sort">
           <div className="main__sort-range">
-            <span>Vote Average</span>
+            <span>Vote Average ></span>
             <span id="rangeValue">{this.state.voteAverage}</span>
             <input
               className="range"
               type="range"
               value={this.state.voteAverage}
-              min="0"
-              max="10"
+              min="1"
+              max="9"
               onChange={this.handleChange}
             />
           </div>
 
           <div className="main__sort-year">
+            <p
+              className="main__sort-year-error"
+              style={this.state.error ? { opacity: 1 } : { opacity: 0 }}
+            >
+              You must provide years between 1944 and {date}!
+            </p>
             <span className="main__sort-info--1">
-              From: {this.state.yearMin}
+              From:{" "}
+              <input
+                className="main__sort-info-input"
+                type="number"
+                value={this.state.yearMin}
+                min="1944"
+                onChange={this.handleYearMinChange}
+              />
             </span>
-            <span className="main__sort-info--2">To: {this.state.yearMax}</span>
+            <span className="main__sort-info--2">
+              To:{" "}
+              <input
+                className="main__sort-info-input"
+                type="number"
+                max={date}
+                min={this.state.yearMin}
+                value={this.state.yearMax}
+                onChange={this.handleYearMaxChange}
+              />
+            </span>
             <Nouislider
+              start={[this.state.yearMin, this.state.yearMax]}
+              behaviour="tap-drag"
               connect
-              start={[2000, 2019]}
-              behaviour="tap"
               range={{
                 min: [1944],
-                max: [2019]
+                max: [this.state.yearMax]
               }}
               onSlide={this.onSlide}
             />
@@ -139,14 +208,16 @@ class Discover extends Component {
           </div>
         </div>
         <div className="main__sort-search">
-          <button className="main__sort-search-btn">Search</button>
+          <button onClick={this.handleSearch} className="main__sort-search-btn">
+            Search
+          </button>
         </div>
         <div className="main__sort-buttons">
           <button
             style={this.state.page === 1 ? btnOff : null}
             onClick={() => {
               this.handlePagination("minus");
-              this.handleGetDiscover();
+              // this.handleGetDiscover();
             }}
           >
             Previous
@@ -154,25 +225,33 @@ class Discover extends Component {
           <button
             onClick={() => {
               this.handlePagination("add");
-              this.handleGetDiscover();
+              // this.handleGetDiscover();
               // this.plus();
             }}
           >
             Next
           </button>
         </div>
-        <p
-          style={{
-            fontSize: 30
-          }}
-        >
-          Strona: {this.state.page}
-          wszystkich stron: {this.props.discover.total_pages}
+        <p className="main__sort-pages">
+          Actual page: <span>{this.state.page}</span> Total pages:{" "}
+          <span>{this.props.discover.total_pages}</span> Total results:{" "}
+          <span>{this.props.discover.total_results}</span>
         </p>
-
-        <div className="main__container">
-          <DiscoverItem genres={this.props.genres.genres} discover={discover} />
-        </div>
+        {this.props.discover.loaded ? (
+          <div className="main__container">
+            <DiscoverItem
+              genres={this.props.genres.genres}
+              discover={discover}
+            />
+          </div>
+        ) : (
+          <Loader
+            style={{
+              margin: "0 auto",
+              width: "100%"
+            }}
+          />
+        )}
       </div>
     );
   }

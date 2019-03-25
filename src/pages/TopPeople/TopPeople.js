@@ -28,22 +28,16 @@ class TopPeople extends Component {
     this.props.getTopPeople(this.props.api, this.state.page);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.topPeople.total_pages !== this.state.totalPages) {
-      this.setState({
-        totalPages: newProps.topPeople.total_pages,
-        page: newProps.topPeople.page,
-        results: newProps.topPeople.results
-      });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.topPeople.total_pages !== prevState.totalPages) {
+      return {
+        totalPages: nextProps.topPeople.total_pages,
+        page: nextProps.topPeople.page,
+        results: nextProps.topPeople.results
+      };
     }
   }
-  componentWillUnmount() {
-    this.setState({
-      totalPages: 1,
-      page: 1,
-      results: []
-    });
-  }
+
   getMore = () => {
     if (this.state.page !== this.state.totalPages) {
       this.setState(prevState => ({
@@ -55,7 +49,9 @@ class TopPeople extends Component {
     }
   };
   render() {
+    console.log(" w renderze: " + this.state.page);
     const topPeople = this.state.results;
+    console.log("w renderze" + topPeople);
     return (
       <InfiniteScroll
         pageStart={0}
@@ -66,10 +62,13 @@ class TopPeople extends Component {
         <div className="main">
           <h1 className="main__heading">top rated people</h1>
           <div className="main__container">
-            {this.props.topPeople.loaded ? null : <Loader />}
+            {this.props.topPeople.loaded ? (
+              <TopPeopleItem people={topPeople} visible={this.state.visible} />
+            ) : (
+              <Loader />
+            )}
 
-            <TopPeopleItem people={topPeople} visible={this.state.visible} />
-            {console.log(topPeople)}
+            {/* <TopPeopleItem people={topPeople} visible={this.state.visible} /> */}
           </div>
         </div>
       </InfiniteScroll>

@@ -14,7 +14,7 @@ export const getMovieCredits = (movie_id, api) => {
         });
       })
       .catch(err => {
-        console.log(err);
+        alert(err);
       });
   };
 };

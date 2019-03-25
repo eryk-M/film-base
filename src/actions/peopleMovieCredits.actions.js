@@ -14,7 +14,7 @@ export const getPeopleCredits = (person_id, api) => {
         });
       })
       .catch(err => {
-        console.log(err);
+        alert(err);
       });
   };
 };

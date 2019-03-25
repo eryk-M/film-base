@@ -13,7 +13,7 @@ export const getUpcoming = (api, page) => {
         });
       })
       .catch(err => {
-        console.log(err);
+        alert(err);
       });
   };
 };

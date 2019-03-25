@@ -13,7 +13,7 @@ export const getTopPeople = (api, page) => {
         });
       })
       .catch(err => {
-        console.log(err);
+        alert(err);
       });
   };
 };

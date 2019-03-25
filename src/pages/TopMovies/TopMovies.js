@@ -24,8 +24,8 @@ class TopMovies extends Component {
     if (newProps.topMovies.total_pages !== this.state.totalPages) {
       this.setState({
         totalPages: newProps.topMovies.total_pages,
-        page: newProps.topMovies.page,
-        results: newProps.topMovies.results
+        page: newProps.topMovies.page
+        // results: newProps.topMovies.results
       });
     }
   }
@@ -43,7 +43,7 @@ class TopMovies extends Component {
         results: this.state.results.concat(this.props.topMovies.results)
       }));
 
-      this.props.getTopMovies(this.props.api, this.state.page);
+      this.props.getTopMovies(this.props.api, this.state.page + 1);
     }
   };
 
@@ -59,12 +59,14 @@ class TopMovies extends Component {
         <div className="main">
           <h1 className="main__heading">Top rated movies</h1>
           <div className="main__container">
-            {this.props.topMovies.loaded ? null : <Loader />}
-
-            <TopMoviesItem
-              genres={this.props.genres.genres}
-              movies={topMovies}
-            />
+            {this.props.topMovies.loaded ? (
+              <TopMoviesItem
+                genres={this.props.genres.genres}
+                movies={topMovies}
+              />
+            ) : (
+              <Loader />
+            )}
           </div>
         </div>
       </InfiniteScroll>

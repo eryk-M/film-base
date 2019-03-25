@@ -24,15 +24,14 @@ class Upcoming extends Component {
     this.props.getGenres(this.props.api);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.movies.total_pages !== this.state.totalPages) {
-      this.setState({
-        totalPages: newProps.movies.total_pages,
-        page: newProps.movies.page
-        // results: newProps.movies.results
-      });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.movies.total_pages !== prevState.totalPages) {
+      return {
+        totalPages: nextProps.movies.total_pages,
+        page: nextProps.movies.page,
+        results: nextProps.movies.results
+      };
     }
-    // console.log(newProps.movies.results);
   }
   componentWillUnmount() {
     this.setState({
@@ -46,11 +45,9 @@ class Upcoming extends Component {
     if (this.state.page !== this.state.totalPages) {
       this.setState(prevState => ({
         page: prevState.page + 1,
+        // results: this.state.results.concat(this.props.movies.results)
         results: this.state.results.concat(this.props.movies.results)
       }));
-
-      console.log(this.props.movies.results);
-
       this.props.getUpcoming(this.props.api, this.state.page);
     }
   };
@@ -58,15 +55,8 @@ class Upcoming extends Component {
   render() {
     // console.log(this.props.movies.results);
     const movies = this.state.results;
-    console.log(this.state.results);
-
     return (
-      <InfiniteScroll
-        pageStart={4}
-        loadMore={this.getMore}
-        hasMore={true}
-        // loader={this.state.page < 12 ? <Loader /> : null}
-      >
+      <InfiniteScroll pageStart={1} loadMore={this.getMore} hasMore={true}>
         <div className="main">
           <h1 className="main__heading">Upcoming movies</h1>
 

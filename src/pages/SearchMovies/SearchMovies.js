@@ -39,6 +39,22 @@ class SearchMovies extends Component {
       });
     }
   }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   if (nextProps.location.state.film !== this.props.location.state.film) {
+  //     this.props.getSearchResults(
+  //       nextProps.location.state.film,
+  //       this.props.api
+  //     );
+  //   }
+  //   if (nextProps.searchResults.total_pages !== prevState.totalPages) {
+  //     return {
+  //       totalPages: nextProps.searchResults.total_pages,
+  //       page: nextProps.searchResults.page,
+  //       results: nextProps.searchResults.results
+  //     };
+  //   }
+  // }
+
   getMore = () => {
     if (this.state.page !== this.state.totalPages) {
       this.setState(prevState => ({
@@ -49,7 +65,7 @@ class SearchMovies extends Component {
       this.props.getSearchResults(
         this.props.location.state.film,
         this.props.api,
-        this.state.page
+        this.state.page + 1
       );
     }
   };

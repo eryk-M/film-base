@@ -15,7 +15,7 @@ export const getSearchResults = (query, api, page) => {
         });
       })
       .catch(err => {
-        console.log(err);
+        alert(err);
       });
   };
 };

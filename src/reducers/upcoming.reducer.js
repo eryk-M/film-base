@@ -1,7 +1,7 @@
 import { FETCH_UPCOMING } from "../actions/upcoming.actions";
 
 let initialState = {
-  loaded: false,
+  loading: false,
   results: []
 };
 // loaded: false

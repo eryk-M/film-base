@@ -41,7 +41,11 @@ class DiscoverItem extends Component {
               {item.poster_path ? (
                 <img
                   className="main__img"
-                  src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
+                  src={
+                    item.poster_path
+                      ? `https://image.tmdb.org/t/p/w342${item.poster_path}`
+                      : null
+                  }
                   alt=""
                 />
               ) : null}

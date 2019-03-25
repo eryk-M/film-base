@@ -21,13 +21,12 @@ class TopTV extends Component {
     this.props.getGenres(this.props.api);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.topTV.total_pages !== this.state.totalPages) {
-      this.setState({
-        totalPages: newProps.topTV.total_pages,
-        page: newProps.topTV.page
-        // results: newProps.topTV.result
-      });
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.topTV.total_pages !== prevState.totalPages) {
+      return {
+        totalPages: nextProps.topTV.total_pages,
+        page: nextProps.topTV.page
+      };
     }
   }
   componentWillUnmount() {
@@ -44,7 +43,7 @@ class TopTV extends Component {
         results: this.state.results.concat(this.props.topTV.results)
       }));
 
-      this.props.getTopTV(this.props.api, this.state.page);
+      this.props.getTopTV(this.props.api, this.state.page + 1);
     }
   };
 
@@ -55,9 +54,11 @@ class TopTV extends Component {
         <div className="main">
           <h1 className="main__heading">Top rated tv shows</h1>
           <div className="main__container">
-            {this.props.topTV.loaded ? null : <Loader />}
-
-            <TopTVItem genres={this.props.genres.genres} topTV={topTV} />
+            {this.props.topTV.loaded ? (
+              <TopTVItem genres={this.props.genres.genres} topTV={topTV} />
+            ) : (
+              <Loader />
+            )}
           </div>
         </div>
       </InfiniteScroll>

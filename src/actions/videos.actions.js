@@ -14,7 +14,7 @@ export const getVideos = (movie_id, api) => {
         });
       })
       .catch(err => {
-        console.log(err);
+        alert(err);
       });
   };
 };

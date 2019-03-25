@@ -14,7 +14,7 @@ export const getGenres = api => {
         });
       })
       .catch(err => {
-        console.log(err);
+        alert(err);
       });
   };
 };

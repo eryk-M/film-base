@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const TopPeopleItem = props => {
-  console.log(props.people);
   const people = props.people.map((item, i) => (
     <div key={i} className="main__item swiper-slide">
       <figure className="main__image">
