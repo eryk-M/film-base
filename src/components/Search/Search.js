@@ -36,13 +36,13 @@ class Search extends Component {
     return (
       <div className="search">
         <form onSubmit={this.handleSubmit}>
-          <i className="fas fa-search" />
           <input
             type="text"
             placeholder="Search movies..."
             value={this.state.film}
             onChange={this.handleChange}
           />
+          <i className="fas fa-search" />
           {/* <span /> */}
           {/* <button>Szukaj</button> */}
           {/* <i class="fas fa-search" /> */}

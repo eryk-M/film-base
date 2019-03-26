@@ -5,19 +5,25 @@
   background-color: var(--color-nav);
   position: fixed;
   z-index: 1000;
-  & svg {
-    position: relative;
-    padding-top: 0.5rem;
-    top: 9%;
-    left: 5%;
-  }
+  // & svg {
+  //   position: relative;
+  //   padding-top: 0.5rem;
+  //   top: 9%;
+  //   left: 5%;
+  //   transform: scale(0.5);
+  //   width: 300px;
+  //   height: 140px;
+  // }
   &__logo {
     z-index: 1;
+    // height: 25rem;
     width: 25rem;
     text-align: center;
-    background-color: var(--color-nav);
+    // background-color: var(--color-nav);
+    // background-image: url("/src/assets/images/logo.png");
     position: relative;
     box-shadow: none;
+
     &:after {
       content: "";
       position: absolute;
@@ -34,6 +40,7 @@
   height: 8rem;
   width: auto;
   margin-right: auto;
+  animation: moveInLeft 0.5s ease-in-out;
 }
 
 // .scrollUp {

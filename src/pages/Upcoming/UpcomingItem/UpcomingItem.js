@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-// import "./UpcomingItem.scss";
-
 class UpcomingItem extends Component {
   // console.log(movies.results);
 
@@ -32,8 +30,7 @@ class UpcomingItem extends Component {
     };
     // console.log(this);
     const upcomings = this.props.movies.map((item, i) => (
-      // <Link to={`/movies/${item.id}`}>
-      <div key={i} className="main__item">
+      <div key={item.id} className="main__item">
         <figure className="main__image">
           <Link style={{ textDecoration: "none" }} to={`/movies/${item.id}`}>
             <div className="main__item-wrapper">
@@ -43,12 +40,15 @@ class UpcomingItem extends Component {
               >
                 <span>{item.vote_average}</span>
               </div>
-
-              <img
-                className="main__img"
-                src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
-                alt=""
-              />
+              {item.poster_path ? (
+                <img
+                  className="main__img"
+                  src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
+                  alt=""
+                />
+              ) : (
+                "NO IMAGE FOUND"
+              )}
 
               <h2 className="main__heading-tertiary">{item.title}</h2>
             </div>

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const TopPeopleItem = props => {
   const people = props.people.map((item, i) => (
-    <div key={i} className="main__item swiper-slide">
+    <div key={item.id} className="main__item swiper-slide">
       <figure className="main__image">
         <Link style={{ textDecoration: "none" }} to={`/people/${item.id}`}>
           <div className="main__item-wrapper">

@@ -29,7 +29,7 @@ class SearchMoviesItem extends Component {
     };
 
     const upcomings = this.props.results.map((item, i) => (
-      <div key={i} className="main__item">
+      <div key={item.id} className="main__item">
         <figure className="main__image">
           <div
             style={item.vote_average >= 7.5 ? superFilm : null}

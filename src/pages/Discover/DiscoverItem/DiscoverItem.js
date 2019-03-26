@@ -28,7 +28,7 @@ class DiscoverItem extends Component {
     };
     const discovers = this.props.discover.map((item, i) => (
       // <Link to={`/movies/${item.id}`}>
-      <div key={i} className="main__item">
+      <div key={item.id} className="main__item">
         <figure className="main__image">
           <Link style={{ textDecoration: "none" }} to={`/movies/${item.id}`}>
             <div className="main__item-wrapper">

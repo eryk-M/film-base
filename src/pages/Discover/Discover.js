@@ -36,12 +36,12 @@ class Discover extends Component {
     this.props.getGenres(this.props.api);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.discover.total_pages !== prevState.totalPages) {
-      return {
-        totalPages: nextProps.discover.total_pages,
-        page: nextProps.discover.page
-      };
+  componentDidUpdate() {
+    if (this.props.discover.total_pages !== this.state.totalPages) {
+      this.setState(() => ({
+        totalPages: this.props.discover.total_pages,
+        page: this.props.discover.page
+      }));
     }
   }
   handleGetDiscover = page => {

@@ -28,7 +28,7 @@ class TopTVItem extends Component {
     };
 
     const topTV = this.props.topTV.map((item, i) => (
-      <div key={i} className="main__item">
+      <div key={item.id} className="main__item">
         <figure className="main__image">
           <Link style={{ textDecoration: "none" }} to={`/tv/${item.id}`}>
             <div className="main__item-wrapper">

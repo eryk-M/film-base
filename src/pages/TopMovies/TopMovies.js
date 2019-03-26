@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Loader from "../../components/Loader/Loader";
 import { getGenres } from "../../actions/genres.actions";
 import { getTopMovies } from "../../actions/topMovies.actions";
 import { getApi } from "../../actions/api.actions";
 import TopMoviesItem from "./TopMoviesItem/TopMoviesItem";
-import InfiniteScroll from "react-infinite-scroller";
+// import InfiniteScroll from "react-infinite-scroller";
 import "../MainStyling.scss";
+import { animateScroll as scroll } from "react-scroll";
+import Paginate from "../../components/Paginate/Paginate";
 
 class TopMovies extends Component {
   state = {
@@ -17,59 +18,52 @@ class TopMovies extends Component {
   };
   componentDidMount() {
     this.props.getApi();
-    this.props.getTopMovies(this.props.api);
+    this.props.getTopMovies(this.props.api, this.state.page);
     this.props.getGenres(this.props.api);
   }
-  componentWillReceiveProps(newProps) {
-    if (newProps.topMovies.total_pages !== this.state.totalPages) {
-      this.setState({
-        totalPages: newProps.topMovies.total_pages,
-        page: newProps.topMovies.page
-        // results: newProps.topMovies.results
-      });
-    }
-  }
-  componentWillUnmount() {
-    this.setState({
-      totalPages: 1,
-      page: 1,
-      results: []
-    });
-  }
-  getMore = () => {
-    if (this.state.page !== this.state.totalPages) {
-      this.setState(prevState => ({
-        page: prevState.page + 1,
-        results: this.state.results.concat(this.props.topMovies.results)
+
+  componentDidUpdate() {
+    if (this.props.topMovies.total_pages !== this.state.totalPages) {
+      this.setState(() => ({
+        totalPages: this.props.topMovies.total_pages,
+        page: this.props.topMovies.page,
+        results: this.props.topMovies.results
       }));
-
-      this.props.getTopMovies(this.props.api, this.state.page + 1);
     }
-  };
+  }
 
+  handlePageClick = data => {
+    let selected = data.selected + 1;
+
+    this.props.getTopMovies(this.props.api, selected);
+    this.setState({
+      page: selected,
+      results: this.props.topMovies.results
+    });
+    scroll.scrollToTop();
+  };
   render() {
-    const topMovies = this.state.results;
+    const topMovies = this.props.topMovies.results;
     return (
-      <InfiniteScroll
-        pageStart={1}
-        loadMore={this.getMore}
-        hasMore={true}
-        // loader={this.state.page < 12 ? <Loader /> : null}
-      >
-        <div className="main">
-          <h1 className="main__heading">Top rated movies</h1>
-          <div className="main__container">
-            {this.props.topMovies.loaded ? (
-              <TopMoviesItem
-                genres={this.props.genres.genres}
-                movies={topMovies}
-              />
-            ) : (
-              <Loader />
-            )}
-          </div>
+      <div className="main">
+        <div className="main__info">
+          <h1 className="main__heading">Top movies</h1>
+
+          {this.props.topMovies.total_results ? (
+            <p>{this.props.topMovies.total_results} results</p>
+          ) : null}
         </div>
-      </InfiniteScroll>
+        <div className="main__container">
+          <TopMoviesItem genres={this.props.genres.genres} movies={topMovies} />
+
+          {this.state.results.length > 19 ? (
+            <Paginate
+              totalPages={this.state.totalPages}
+              handlePageClick={this.handlePageClick}
+            />
+          ) : null}
+        </div>
+      </div>
     );
   }
 }

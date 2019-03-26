@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Loader from "../../components/Loader/Loader";
+// import Loader from "../../components/Loader/Loader";
 
 import { getTopPeople } from "../../actions/topPeople.actions";
 import { getApi } from "../../actions/api.actions";
 import TopPeopleItem from "./TopPeopleItem/TopPeopleItem.js";
-import InfiniteScroll from "react-infinite-scroller";
+// import InfiniteScroll from "react-infinite-scroller";
 import "../MainStyling.scss";
+import { animateScroll as scroll } from "react-scroll";
+import Paginate from "../../components/Paginate/Paginate";
 
-import WOW from "wowjs";
 class TopPeople extends Component {
   state = {
     totalPages: 1,
@@ -17,61 +18,52 @@ class TopPeople extends Component {
     results: []
   };
   componentDidMount() {
-    if (typeof window !== "undefined") {
-      const wow = new WOW.WOW({
-        live: false
-      });
-      wow.init();
-      wow.sync();
-    }
     this.props.getApi();
     this.props.getTopPeople(this.props.api, this.state.page);
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    if (nextProps.topPeople.total_pages !== prevState.totalPages) {
-      return {
-        totalPages: nextProps.topPeople.total_pages,
-        page: nextProps.topPeople.page,
-        results: nextProps.topPeople.results
-      };
+  componentDidUpdate() {
+    if (this.props.topPeople.total_pages !== this.state.totalPages) {
+      this.setState(() => ({
+        totalPages: this.props.topPeople.total_pages,
+        page: this.props.topPeople.page,
+        results: this.props.topPeople.results
+      }));
     }
   }
+  handlePageClick = data => {
+    let selected = data.selected + 1;
 
-  getMore = () => {
-    if (this.state.page !== this.state.totalPages) {
-      this.setState(prevState => ({
-        page: prevState.page + 1,
-        results: this.state.results.concat(this.props.topPeople.results)
-      }));
-
-      this.props.getTopPeople(this.props.api, this.state.page);
-    }
+    this.props.getTopPeople(this.props.api, selected);
+    this.setState({
+      page: selected,
+      results: this.props.topPeople.results
+    });
+    scroll.scrollToTop();
   };
   render() {
-    console.log(" w renderze: " + this.state.page);
-    const topPeople = this.state.results;
-    console.log("w renderze" + topPeople);
+    const topPeople = this.props.topPeople.results;
     return (
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={this.getMore}
-        hasMore={true}
-        // loader={this.state.page < 12 ? <Loader /> : null}
-      >
-        <div className="main">
+      <div className="main">
+        <div className="main__info">
           <h1 className="main__heading">top rated people</h1>
-          <div className="main__container">
-            {this.props.topPeople.loaded ? (
-              <TopPeopleItem people={topPeople} visible={this.state.visible} />
-            ) : (
-              <Loader />
-            )}
 
-            {/* <TopPeopleItem people={topPeople} visible={this.state.visible} /> */}
-          </div>
+          {this.props.topPeople.total_results ? (
+            <p>{this.props.topPeople.total_results} results</p>
+          ) : null}
         </div>
-      </InfiniteScroll>
+        <div className="main__container">
+          <TopPeopleItem people={topPeople} visible={this.state.visible} />
+
+          {/* <TopPeopleItem people={topPeople} visible={this.state.visible} /> */}
+          {this.state.results.length > 19 ? (
+            <Paginate
+              totalPages={this.state.totalPages}
+              handlePageClick={this.handlePageClick}
+            />
+          ) : null}
+        </div>
+      </div>
     );
   }
 }

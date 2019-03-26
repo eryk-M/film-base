@@ -8,7 +8,7 @@ import { getApi } from "../../actions/api.actions";
 import { getGenres } from "../../actions/genres.actions";
 import { getSearchResults } from "../../actions/search.actions";
 import Loader from "../../components/Loader/Loader";
-import InfiniteScroll from "react-infinite-scroller";
+// import InfiniteScroll from "react-infinite-scroller";
 import SearchMoviesItem from "./SearchMoviesItem/SearchMoviesItem";
 
 class SearchMovies extends Component {
@@ -57,10 +57,10 @@ class SearchMovies extends Component {
 
   getMore = () => {
     if (this.state.page !== this.state.totalPages) {
-      this.setState(prevState => ({
-        page: prevState.page + 1,
+      this.setState({
+        page: this.state.page + 1,
         results: this.state.results.concat(this.props.searchResults.results)
-      }));
+      });
 
       this.props.getSearchResults(
         this.props.location.state.film,
@@ -73,27 +73,27 @@ class SearchMovies extends Component {
   render() {
     const searchResults = this.state.results;
     return (
-      <InfiniteScroll pageStart={0} loadMore={this.getMore} hasMore={true}>
-        <div className="main">
-          <h1 className="main__heading">
-            Search results for "{this.props.location.state.film}"
-          </h1>
-          <p className="search__results">
-            Found:
-            {" " + this.props.searchResults.total_results + " movies"}
-          </p>
-          <div className="main__container">
-            {this.props.searchResults.loaded ? (
-              <SearchMoviesItem
-                genres={this.props.genres.genres}
-                results={searchResults}
-              />
-            ) : (
-              <Loader />
-            )}
-          </div>
+      // <InfiniteScroll pageStart={0} loadMore={this.getMore} hasMore={true}>
+      <div className="main">
+        <h1 className="main__heading">
+          Search results for "{this.props.location.state.film}"
+        </h1>
+        <p className="search__results">
+          Found:
+          {" " + this.props.searchResults.total_results + " movies"}
+        </p>
+        <div className="main__container">
+          {this.props.searchResults.loaded ? (
+            <SearchMoviesItem
+              genres={this.props.genres.genres}
+              results={searchResults}
+            />
+          ) : (
+            <Loader />
+          )}
         </div>
-      </InfiniteScroll>
+      </div>
+      // </InfiniteScroll>
     );
   }
 }
