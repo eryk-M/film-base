@@ -12,7 +12,9 @@ import movieCredits from "./movieCredits.reducer";
 import peopleDetails from "./peopleDetails.reducer";
 import peopleCredits from "./peopleMovieCredits.reducer";
 import discover from "./discover.reducer";
-
+import requestToken from "./auth/getRequestToken.reducer";
+import sessionID from "./auth/postSessionId.reducer";
+import accountDetails from "./auth/getAccountDetails.reducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
@@ -29,7 +31,10 @@ const rootReducer = combineReducers({
   movieCredits,
   peopleDetails,
   peopleCredits,
-  discover
+  discover,
+  requestToken,
+  sessionID,
+  accountDetails
 });
 
 export default rootReducer;

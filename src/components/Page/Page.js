@@ -10,11 +10,11 @@ import SearchMovies from "../../pages/SearchMovies/SearchMovies";
 import MovieDetails from "../../pages/MovieDetails/MovieDetails";
 import PeopleDetails from "../../pages/PeopleDetails/PeopleDetails";
 import Discover from "../../pages/Discover/Discover";
-
 import NotFound from "../../pages/NotFound/NotFound";
+import Profile from "../../pages/Profile/Profile";
 
 const Page = () => {
-  console.log(this);
+  // console.log(this);
   return (
     <>
       <Switch>
@@ -26,6 +26,7 @@ const Page = () => {
         <Route path="/movies/:id" component={MovieDetails} />
         <Route path="/people/:id" exact component={PeopleDetails} />
         <Route path="/discover" exact component={Discover} />
+        <Route path="/profile/:status" exact component={Profile} />
 
         <Route path="*" component={NotFound} />
       </Switch>
