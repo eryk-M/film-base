@@ -56,7 +56,7 @@ class TopPeople extends Component {
           <TopPeopleItem people={topPeople} visible={this.state.visible} />
 
           {/* <TopPeopleItem people={topPeople} visible={this.state.visible} /> */}
-          {this.state.results.length > 19 ? (
+          {this.state.results.length >= 1 ? (
             <Paginate
               totalPages={this.state.totalPages}
               handlePageClick={this.handlePageClick}

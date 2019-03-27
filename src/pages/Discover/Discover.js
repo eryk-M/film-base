@@ -10,6 +10,7 @@ import DiscoverItem from ".././Discover/DiscoverItem/DiscoverItem";
 import Nouislider from "nouislider-react";
 import "nouislider/distribute/nouislider.css";
 import Loader from "../../components/Loader/Loader";
+
 class Discover extends Component {
   state = {
     sortBy: "popularity.desc",
@@ -59,8 +60,10 @@ class Discover extends Component {
     const { page } = this.state;
     switch (type) {
       case "add":
-        this.setState({ page: page + 1 });
-        this.handleGetDiscover(page + 1);
+        if (page !== this.state.totalPages) {
+          this.setState({ page: page + 1 });
+          this.handleGetDiscover(page + 1);
+        }
         break;
       case "minus":
         if (page !== 1) {
@@ -223,6 +226,7 @@ class Discover extends Component {
             Previous
           </button>
           <button
+            style={this.state.page === this.state.totalPages ? btnOff : null}
             onClick={() => {
               this.handlePagination("add");
               // this.handleGetDiscover();

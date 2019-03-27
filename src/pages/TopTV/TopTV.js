@@ -58,7 +58,7 @@ class TopTV extends Component {
           ) : (
             <Loader />
           )}
-          {this.state.results.length > 19 ? (
+          {this.state.results.length >= 1 ? (
             <Paginate
               totalPages={this.state.totalPages}
               handlePageClick={this.handlePageClick}

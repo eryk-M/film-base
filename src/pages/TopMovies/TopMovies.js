@@ -56,7 +56,7 @@ class TopMovies extends Component {
         <div className="main__container">
           <TopMoviesItem genres={this.props.genres.genres} movies={topMovies} />
 
-          {this.state.results.length > 19 ? (
+          {this.state.results.length >= 1 ? (
             <Paginate
               totalPages={this.state.totalPages}
               handlePageClick={this.handlePageClick}

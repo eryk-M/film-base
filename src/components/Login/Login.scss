@@ -1,0 +1,59 @@
+.login {
+  //   margin-left: -7rem;
+  //   margin-top: 2rem;
+
+  padding: 5rem 0;
+  padding-right: 10rem;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  //   align-content: center;
+  align-items: center;
+  background-image: linear-gradient(
+    to right,
+    var(--color-nav) 0%,
+    var(--color-nav) 100%
+  );
+  clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
+
+  &__blob {
+    width: 25rem;
+    height: 25rem;
+    background: linear-gradient(
+      45deg,
+      var(--color-arrow-1),
+      var(--color-arrow-2)
+    );
+    animation: blob 5s linear infinite;
+    position: relative;
+    &-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 17rem;
+      height: 17rem;
+    }
+  }
+  &__btn {
+    padding: 1rem 2.5rem;
+    // border-radius: 25%;
+    border: none;
+    outline: none;
+    margin-top: 2rem;
+    // margin: 0 auto;
+    width: 10rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid var(--color-arrow-1);
+    color: var(--color-arrow-1);
+    &-login {
+      //   margin-top: 2rem;
+      display: block;
+    }
+    &-guest {
+      // margin-top:
+    }
+  }
+}

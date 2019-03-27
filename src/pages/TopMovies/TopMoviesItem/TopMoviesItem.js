@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { Link } from "react-router-dom";
+import noImage from "../../../assets/images/no_image1.png";
 
 class TopMoviesItem extends Component {
   genresHandler = genres => {
@@ -42,7 +43,11 @@ class TopMoviesItem extends Component {
 
               <img
                 className="main__img"
-                src={`https://image.tmdb.org/t/p/w342${item.poster_path}`}
+                src={
+                  item.poster_path
+                    ? `https://image.tmdb.org/t/p/w342${item.poster_path}`
+                    : noImage
+                }
                 alt=""
               />
 

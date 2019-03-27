@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import noImage from "../../../assets/images/no_image1.png";
 
 class DiscoverItem extends Component {
   genresHandler = genres => {
@@ -38,18 +39,15 @@ class DiscoverItem extends Component {
               >
                 <span>{item.vote_average}</span>
               </div>
-              {item.poster_path ? (
-                <img
-                  className="main__img"
-                  src={
-                    item.poster_path
-                      ? `https://image.tmdb.org/t/p/w342${item.poster_path}`
-                      : null
-                  }
-                  alt=""
-                />
-              ) : null}
-
+              <img
+                className="main__img"
+                src={
+                  item.poster_path
+                    ? `https://image.tmdb.org/t/p/w342${item.poster_path}`
+                    : noImage
+                }
+                alt=""
+              />
               <h2 className="main__heading-tertiary">{item.title}</h2>
             </div>
           </Link>
