@@ -9,7 +9,7 @@ import { getMovieDetails } from "../../actions/moviesDetails.actions";
 import { getVideos } from "../../actions/videos.actions";
 import { getMovieCredits } from "../../actions/movieCredits.actions";
 import { withRouter } from "react-router-dom";
-// import { getMovieFavorites } from "../../actions/userFavorites/movieFavorites.actions";
+
 import { getAccountState } from "../../actions/userFavorites/movieAccountState.actions";
 import MovieDetailsPeople from "./MovieDetailsPeople/MovieDetailsPeople";
 
@@ -36,11 +36,6 @@ class MovieDetails extends Component {
       wow.init();
     }
     if (this.props.status === "user") {
-      // this.handleGetFavorites(
-      //   this.props.api,
-      //   this.props.accountDetails.id,
-      //   this.props.sessionID.session_id
-      // );
       this.props.getAccountState(
         this.props.api,
         this.props.match.params.id,
@@ -49,12 +44,7 @@ class MovieDetails extends Component {
     }
   }
 
-  // handleGetFavorites = (api, accountID, sessionID) => {
-  //   this.props.getMovieFavorites(api, accountID, sessionID);
-  // };
-
   handleFavorite = (e, api, accountID, sessionID, type, id) => {
-    console.log(e, api, accountID, sessionID, type, id);
     if (this.props.status === "user") {
       this.props.getAccountState(api, id, sessionID);
       fetch(
@@ -80,12 +70,6 @@ class MovieDetails extends Component {
   };
 
   render() {
-    // const favorites = this.props.movieFavorites.results.filter(
-    //   favorite => favorite.id === parseInt(this.props.match.params.id)
-    // );
-    //preventing from wrong ID
-    // console.log(favorites);
-    console.log(this.props.movieState.favorite);
     if (this.props.moviesDetails.status_code === 34) {
       this.props.history.push({
         pathname: "/error"
@@ -138,6 +122,24 @@ class MovieDetails extends Component {
               backgroundImage: `url(${backdrop})`
             }}
           >
+            {" "}
+            <i
+              onClick={e =>
+                this.handleFavorite(
+                  e,
+                  this.props.api,
+                  this.props.accountDetails.id,
+                  this.props.sessionID.session_id,
+                  "movie",
+                  this.props.moviesDetails.id
+                )
+              }
+              className={
+                this.props.movieState.favorite
+                  ? "fas fa-heart fa-heart--active"
+                  : "fas fa-heart"
+              }
+            />
             <img className="movie__image" src={image} alt="" />
             <p className="movie__genres">
               {this.props.moviesDetails.genres
@@ -177,23 +179,6 @@ class MovieDetails extends Component {
                   {moviesDetails.release_date <= date ? " | released" : null}
                 </span>
               </p>
-              <i
-                onClick={e =>
-                  this.handleFavorite(
-                    e,
-                    this.props.api,
-                    this.props.accountDetails.id,
-                    this.props.sessionID.session_id,
-                    "movie",
-                    this.props.moviesDetails.id
-                  )
-                }
-                className={
-                  this.props.movieState.favorite
-                    ? "fas fa-heart fa-heart--active"
-                    : "fas fa-heart"
-                }
-              />
             </div>
           </div>
           <div className="movie__overview">
@@ -245,8 +230,6 @@ function mapStateToProps(state) {
     sessionID: state.sessionID,
     status: state.status.status,
 
-    // movieFavorites: state.movieFavorites,
-
     movieState: state.movieState
   };
 }
@@ -258,7 +241,6 @@ function mapDispatchToProps(dispatch) {
     getMovieCredits: bindActionCreators(getMovieCredits, dispatch),
 
     getAccountState: bindActionCreators(getAccountState, dispatch)
-    // getMovieFavorites: bindActionCreators(getMovieFavorites, dispatch)
   };
 }
 

@@ -17,7 +17,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.props.requestToken);
     return (
       <div
         className="login"

@@ -47,17 +47,6 @@
     position: absolute;
     top: 40%;
     left: 25%;
-    & .fa-heart {
-      position: absolute;
-      bottom: 0;
-      right: -5rem;
-      font-size: 2.5rem;
-      color: var(--color-white-2);
-      cursor: pointer;
-      &--active {
-        color: var(--color-arrow-1);
-      }
-    }
   }
 
   &__heading {
@@ -67,7 +56,17 @@
     // text-shadow: 0 0.2rem 0.1rem rgba(0,0,0,);
     // color: var(--color-white-2);
   }
-
+  & .fa-heart {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    font-size: 5rem;
+    color: var(--color-white-2);
+    cursor: pointer;
+    &--active {
+      color: var(--color-arrow-1);
+    }
+  }
   &__rating {
     font-size: 2rem;
     color: var(--color-blue-dark);

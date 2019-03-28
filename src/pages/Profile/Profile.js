@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-
+import { withRouter } from "react-router-dom";
 import { postSession } from "../../actions/auth/postSessionId.actions";
 import { getAccountDetails } from "../../actions/auth/getAccountDetails.actions";
 import { changeStatus } from "../../actions/auth/changeStatus.actions";
@@ -16,12 +16,30 @@ class Profile extends Component {
   };
 
   componentDidMount() {
-    if (this.props.match.params.status === "user" && !this.props.status) {
+    const approved = this.props.location.search.split("&approved=")[1];
+    if (approved) {
       this.props.postSession(
         this.props.api,
         this.takeRequestToken(this.props.location.search)
       );
       this.props.changeStatus({ status: "user" });
+    } else if (this.props.status === "user") {
+      this.handleGetFavorites(
+        this.props.api,
+        this.props.accountDetails.id,
+        this.props.sessionID.session_id
+      );
+      return true;
+    } else if (this.props.status === "guest") {
+      this.props.history.push({
+        pathname: "/profile/guest"
+      });
+      this.props.changeStatus({ status: "guest" });
+    } else {
+      this.props.history.push({
+        pathname: "/"
+      });
+      alert("You need to login first!");
     }
     this.handleGetFavorites(
       this.props.api,
@@ -41,11 +59,12 @@ class Profile extends Component {
         this.props.sessionID.session_id
       );
     }
+    localStorage.setItem("session", `${this.props.sessionID.session_id}`);
   }
 
   takeRequestToken = requestToken =>
     requestToken.split("?request_token=")[1].split("&")[0];
-
+  takeApprove = approve => approve.split("&approved=");
   handleGetFavorites = (api, accountID, sessionID) => {
     this.props.getTVFavorites(api, accountID, sessionID);
     this.props.getMovieFavorites(api, accountID, sessionID);
@@ -72,6 +91,7 @@ class Profile extends Component {
   };
 
   render() {
+    console.log(this.props.status);
     return (
       <div className="profile">
         <h1 className="profile__heading">
@@ -83,6 +103,11 @@ class Profile extends Component {
         <div className="profile__favorites">
           <h2 className="profile__heading-secondary">Your favorite movies</h2>
           <div className="profile__movies">
+            {this.props.status === "guest" ? (
+              <p>
+                You cant add movies to favorite, because you have GUEST status
+              </p>
+            ) : null}
             {this.props.movieFavorites.results.map(result => (
               <div
                 id={result.id}
@@ -118,6 +143,11 @@ class Profile extends Component {
             ))}
           </div>
           <h2 className="profile__heading-secondary">Your favorite TV shows</h2>
+          {this.props.status === "guest" ? (
+            <p>
+              You cant add TV shows to favorite, because you have GUEST status
+            </p>
+          ) : null}
           {this.props.TVFavorites.results.map(result => (
             <p key={result.id}>{result.title}</p>
           ))}
@@ -147,7 +177,9 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Profile);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Profile)
+);

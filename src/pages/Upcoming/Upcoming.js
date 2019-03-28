@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import { getUpcoming } from "../../actions/upcoming.actions";
 import { getGenres } from "../../actions/genres.actions";
 import { getApi } from "../../actions/api.actions";
-// import Transition from "react-transition-group/Transition";
 
 import { animateScroll as scroll } from "react-scroll";
 import Paginate from "../../components/Paginate/Paginate";
@@ -47,7 +46,6 @@ class Upcoming extends Component {
 
   render() {
     const movies = this.props.movies.results;
-    console.log(this.state.results);
 
     return (
       <div className="main">

@@ -31,8 +31,6 @@ class Search extends Component {
   };
 
   render() {
-    // console.log(this.props.results);
-    // console.log(this.props.history);
     return (
       <div className="search">
         <form onSubmit={this.handleSubmit}>

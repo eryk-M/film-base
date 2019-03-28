@@ -21,6 +21,11 @@ class NavBar extends Component {
     login: false
   };
 
+  // componentDidMount() {
+  //   const session = localStorage.getItem("session");
+
+  // }
+
   handleLogin = () => {
     this.setState({
       login: !this.state.login
@@ -30,6 +35,7 @@ class NavBar extends Component {
   };
   handleLogout = () => {
     this.props.deleteSession(this.props.api, this.props.sessionID.session_id);
+    localStorage.removeItem("session");
     this.props.changeStatus({ status: false });
     this.props.history.push({
       pathname: "/"
@@ -42,6 +48,7 @@ class NavBar extends Component {
     });
   };
   render() {
+    console.log(this.props.location.search.split("&approved=")[1]);
     return (
       <div className="imHere">
         <p className="scroll__to" />
@@ -53,21 +60,19 @@ class NavBar extends Component {
           />
           <Logo />
           <Search />
-          {/* {this.props.status ? (
-            <Link className="searchbar__profile" to="/profile/user">
-              User Profile
-            </Link>
-          ) : null} */}
           {this.props.status ? (
             <div className="searchbar__profile">
-              <Link className="searchbar__profile-user" to="/profile/user">
-                <i class="fas fa-user" />
+              <Link
+                className="searchbar__profile-user"
+                to={`/profile/${this.props.status}`}
+              >
+                <i className="fas fa-user" />
               </Link>
               <button
                 className="searchbar__profile-logout"
                 onClick={this.handleLogout}
               >
-                <i class="fas fa-sign-out-alt" />
+                <i className="fas fa-sign-out-alt" />
               </button>
             </div>
           ) : (
