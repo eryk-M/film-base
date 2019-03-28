@@ -43,6 +43,13 @@ class MovieDetails extends Component {
       );
     }
   }
+  // componentDidUpdate() {
+  //   if (parseInt(this.props.match.params.id) !== this.props.moviesDetails.id) {
+  //     this.props.history.push({
+  //       pathname: "/error"
+  //     });
+  //   }
+  // }
 
   handleFavorite = (e, api, accountID, sessionID, type, id) => {
     if (this.props.status === "user") {
@@ -66,15 +73,22 @@ class MovieDetails extends Component {
         .then(res => res.json())
         .catch(error => console.log(error));
       e.target.closest(".fa-heart").classList.toggle("fa-heart--active");
+    } else {
+      // <document className="querySele"></document>
+      document.querySelector(".movie__favorite-warning").style.display =
+        "block";
     }
   };
 
   render() {
-    if (this.props.moviesDetails.status_code === 34) {
-      this.props.history.push({
-        pathname: "/error"
-      });
-    }
+    console.log(this.props.match.params.id);
+    console.log(this.props.moviesDetails.id);
+    // if (parseInt(this.props.match.params.id) !== this.props.moviesDetails.id) {
+    //   this.props.history.push({
+    //     path: "/"
+    //   });
+    // }
+
     const params = {
       modules: [Navigation],
 
@@ -140,6 +154,12 @@ class MovieDetails extends Component {
                   : "fas fa-heart"
               }
             />
+            <div
+              className="movie__favorite-warning"
+              style={{ display: "none" }}
+            >
+              <p>You need TMDB account to use this feature</p>
+            </div>
             <img className="movie__image" src={image} alt="" />
             <p className="movie__genres">
               {this.props.moviesDetails.genres

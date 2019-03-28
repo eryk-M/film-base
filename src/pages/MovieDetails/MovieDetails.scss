@@ -1,7 +1,21 @@
 .movie {
   margin-left: 30rem;
   margin-top: 10rem;
-
+  &__favorite-warning {
+    position: absolute;
+    right: -10rem;
+    bottom: 10rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid red;
+    width: 35rem;
+    padding: 1rem;
+    color: var(--color-white-2);
+    // z-index: 300000;
+    & p {
+      font-size: 1.6rem;
+      // z-index: 30000;
+    }
+  }
   &__backdrop {
     height: 43rem;
     width: 136rem;

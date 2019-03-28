@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Upcoming from "../../pages/Upcoming/Upcoming";
@@ -31,25 +31,8 @@ class Page extends Component {
           <Route path="/profile/user" exact component={Profile} />
           <Route path="/profile/guest" exact component={Profile} />
           <Route path="/profile/approved" exact component={Profile} />
-          {/* {!this.props.status || this.props.sessionID.failure ? (
-            <Redirect from="/profile" to="/" />
-          ) : (
-            <Redirect from="/profile" to="/profile/user" />
-          )}
-
-          {this.props.status === "guest" ? (
-            <Redirect from="/profile/user" to="profile/guest" />
-          ) : (
-            <Redirect from="/profile/guest" to="/" />
-          )} */}
 
           <Route path="*" component={NotFound} />
-
-          {/* <Redirect from="/profile/guest" to="/" /> */}
-
-          {/* {!this.props.status ? (
-            <Redirect from="/profile/guest" to="/" />
-          ) : null} */}
         </Switch>
       </>
     );
