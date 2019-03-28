@@ -1,8 +1,61 @@
 .profile {
+  margin-top: 10rem;
+  margin-left: 30rem;
   &__heading {
-    margin-top: 10rem;
-    margin-left: 30rem;
-    font-size: 5rem;
-    color: #ccc;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.7);
+    font-size: 3rem;
+    color: var(--color-white-2);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 300;
+    width: 45rem;
+  }
+  &__heading-secondary {
+    // display: block;
+    margin-left: 3.5rem;
+    font-size: 2rem;
+    margin-top: 2rem;
+    font-weight: 300;
+    color: var(--color-white-2);
+  }
+  &__movies {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: center;
+    // align-content: center;
+    // align-items: center;
+    max-width: 136rem;
+
+    &-item {
+      width: 20rem;
+      margin-left: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+      &-heading {
+        margin-top: 1rem;
+        color: var(--color-white-2);
+        font-size: 1.4rem;
+      }
+      position: relative;
+    }
+    &-delete {
+      cursor: pointer;
+      position: absolute;
+      background-color: var(--color-arrow-1);
+      border: none;
+      top: 0;
+      right: 1.7rem;
+      font-size: 2rem;
+      padding: 0.5rem 1rem;
+      &:hover {
+        color: var(--color-arrow-2);
+      }
+    }
+  }
+
+  &__image {
+    // float: left;
+    height: 25rem;
+    width: auto;
   }
 }

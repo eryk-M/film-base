@@ -5,6 +5,9 @@ import LoginLogo from "../../assets/images/login.png";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getApi } from "../../actions/api.actions";
+import { changeStatus } from "../../actions/auth/changeStatus.actions";
+import { Link } from "react-router-dom";
+
 class Login extends Component {
   state = {};
 
@@ -13,12 +16,15 @@ class Login extends Component {
     // this.props.getRequestToken(this.props.api);
   }
 
-  handleLogin = () => {};
-  handleGuest = () => {};
   render() {
     console.log(this.props.requestToken);
     return (
-      <div className="login">
+      <div
+        className="login"
+        style={{
+          opacity: this.props.show ? "1" : "0"
+        }}
+      >
         <div className="login__blob">
           <img className="login__blob-image" src={LoginLogo} alt="" />
         </div>
@@ -34,25 +40,29 @@ class Login extends Component {
             Login
           </button>
         </a>
-        <button
-          onClick={this.handleGuest}
-          className="login__btn-guest login__btn"
-        >
-          Guest
-        </button>
+        <Link to="/profile/guest">
+          <button
+            onClick={this.props.guest}
+            className="login__btn-guest login__btn"
+          >
+            Guest
+          </button>
+        </Link>
       </div>
     );
   }
 }
 function mapStateToProps(state) {
   return {
-    api: state.api.api
+    api: state.api.api,
+    status: state.status.status
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    getApi: bindActionCreators(getApi, dispatch)
+    getApi: bindActionCreators(getApi, dispatch),
+    changeStatus: bindActionCreators(changeStatus, dispatch)
   };
 }
 export default connect(

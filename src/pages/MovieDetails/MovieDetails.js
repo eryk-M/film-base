@@ -6,11 +6,11 @@ import "./MovieDetails.scss";
 
 import { connect } from "react-redux";
 import { getMovieDetails } from "../../actions/moviesDetails.actions";
-import { getApi } from "../../actions/api.actions";
 import { getVideos } from "../../actions/videos.actions";
 import { getMovieCredits } from "../../actions/movieCredits.actions";
 import { withRouter } from "react-router-dom";
-
+// import { getMovieFavorites } from "../../actions/userFavorites/movieFavorites.actions";
+import { getAccountState } from "../../actions/userFavorites/movieAccountState.actions";
 import MovieDetailsPeople from "./MovieDetailsPeople/MovieDetailsPeople";
 
 import Loader from "../../components/Loader/Loader";
@@ -25,8 +25,6 @@ class MovieDetails extends Component {
   };
 
   componentDidMount() {
-    this.props.getApi();
-
     this.props.getMovieDetails(this.props.match.params.id, this.props.api);
     this.props.getVideos(this.props.match.params.id, this.props.api);
     this.props.getMovieCredits(this.props.match.params.id, this.props.api);
@@ -37,10 +35,57 @@ class MovieDetails extends Component {
       });
       wow.init();
     }
+    if (this.props.status === "user") {
+      // this.handleGetFavorites(
+      //   this.props.api,
+      //   this.props.accountDetails.id,
+      //   this.props.sessionID.session_id
+      // );
+      this.props.getAccountState(
+        this.props.api,
+        this.props.match.params.id,
+        this.props.sessionID.session_id
+      );
+    }
   }
 
+  // handleGetFavorites = (api, accountID, sessionID) => {
+  //   this.props.getMovieFavorites(api, accountID, sessionID);
+  // };
+
+  handleFavorite = (e, api, accountID, sessionID, type, id) => {
+    console.log(e, api, accountID, sessionID, type, id);
+    if (this.props.status === "user") {
+      this.props.getAccountState(api, id, sessionID);
+      fetch(
+        `https://api.themoviedb.org/3/account/${accountID}/favorite?api_key=${api}&session_id=${sessionID}`,
+        {
+          method: "POST",
+          body: JSON.stringify({
+            media_type: type,
+            media_id: id,
+            favorite: !e.target
+              .closest(".fa-heart")
+              .classList.value.includes("--active")
+          }),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+        .then(res => res.json())
+        .catch(error => console.log(error));
+      e.target.closest(".fa-heart").classList.toggle("fa-heart--active");
+    }
+  };
+
   render() {
+    // const favorites = this.props.movieFavorites.results.filter(
+    //   favorite => favorite.id === parseInt(this.props.match.params.id)
+    // );
     //preventing from wrong ID
+    // console.log(favorites);
+    console.log(this.props.movieState.favorite);
     if (this.props.moviesDetails.status_code === 34) {
       this.props.history.push({
         pathname: "/error"
@@ -81,6 +126,8 @@ class MovieDetails extends Component {
     const just = filteredVideos.splice(0, 3);
     //ACTORS
     const actors = this.props.movieCredits.cast;
+    //favorite
+
     return (
       <>
         <div className="movie wow fadeIn" data-wow-duration="2s">
@@ -130,6 +177,23 @@ class MovieDetails extends Component {
                   {moviesDetails.release_date <= date ? " | released" : null}
                 </span>
               </p>
+              <i
+                onClick={e =>
+                  this.handleFavorite(
+                    e,
+                    this.props.api,
+                    this.props.accountDetails.id,
+                    this.props.sessionID.session_id,
+                    "movie",
+                    this.props.moviesDetails.id
+                  )
+                }
+                className={
+                  this.props.movieState.favorite
+                    ? "fas fa-heart fa-heart--active"
+                    : "fas fa-heart"
+                }
+              />
             </div>
           </div>
           <div className="movie__overview">
@@ -148,7 +212,6 @@ class MovieDetails extends Component {
           </div>
           <div className="movie__trailer">
             <p className="movie__trailer-heading">Trailers</p>
-            {/* <div></div> */}
             {just.map((tr, i) => (
               <iframe
                 allowFullScreen="allowfullscreen"
@@ -176,16 +239,26 @@ function mapStateToProps(state) {
     loaded: state.loaded,
     api: state.api.api,
     videos: state.videos,
-    movieCredits: state.movieCredits
+    movieCredits: state.movieCredits,
+
+    accountDetails: state.accountDetails,
+    sessionID: state.sessionID,
+    status: state.status.status,
+
+    // movieFavorites: state.movieFavorites,
+
+    movieState: state.movieState
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     getMovieDetails: bindActionCreators(getMovieDetails, dispatch),
-    getApi: bindActionCreators(getApi, dispatch),
     getVideos: bindActionCreators(getVideos, dispatch),
-    getMovieCredits: bindActionCreators(getMovieCredits, dispatch)
+    getMovieCredits: bindActionCreators(getMovieCredits, dispatch),
+
+    getAccountState: bindActionCreators(getAccountState, dispatch)
+    // getMovieFavorites: bindActionCreators(getMovieFavorites, dispatch)
   };
 }
 

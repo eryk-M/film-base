@@ -26,6 +26,7 @@ const Page = () => {
         <Route path="/movies/:id" component={MovieDetails} />
         <Route path="/people/:id" exact component={PeopleDetails} />
         <Route path="/discover" exact component={Discover} />
+
         <Route path="/profile/:status" exact component={Profile} />
 
         <Route path="*" component={NotFound} />

@@ -5,15 +5,6 @@
   background-color: var(--color-nav);
   position: fixed;
   z-index: 1000;
-  // & svg {
-  //   position: relative;
-  //   padding-top: 0.5rem;
-  //   top: 9%;
-  //   left: 5%;
-  //   transform: scale(0.5);
-  //   width: 300px;
-  //   height: 140px;
-  // }
   &__logo {
     z-index: 1;
     // height: 25rem;
@@ -34,9 +25,43 @@
       background-color: var(--color-dark-grey);
     }
   }
-  &__login {
+
+  &__profile {
     margin-right: 18rem;
     margin-left: auto;
+    font-size: 3rem;
+
+    &-user {
+      margin-right: 2.5rem;
+      color: var(--color-arrow-1);
+      &:hover {
+        color: var(--color-arrow-2);
+      }
+    }
+    &-logout {
+      font-size: 3rem;
+      color: var(--color-arrow-1);
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      &:hover {
+        color: var(--color-arrow-2);
+      }
+    }
+  }
+  &__button,
+  &__button:active {
+    margin-right: 18rem;
+    margin-left: auto;
+    font-size: 3rem;
+    color: var(--color-arrow-1);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    &:hover {
+      color: var(--color-arrow-2);
+    }
   }
 }
 

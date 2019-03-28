@@ -12,9 +12,16 @@ import movieCredits from "./movieCredits.reducer";
 import peopleDetails from "./peopleDetails.reducer";
 import peopleCredits from "./peopleMovieCredits.reducer";
 import discover from "./discover.reducer";
+
 import requestToken from "./auth/getRequestToken.reducer";
 import sessionID from "./auth/postSessionId.reducer";
 import accountDetails from "./auth/getAccountDetails.reducer";
+import status from "./auth/changeStatus.reducer";
+import del_session from "./auth/deleteSession.reducer";
+
+import movieFavorites from "./userFavorites/movieFavorites.reducer";
+import TVFavorites from "./userFavorites/TVFavorites.reducer";
+import movieState from "./userFavorites/movieAccountState.reducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
@@ -34,7 +41,12 @@ const rootReducer = combineReducers({
   discover,
   requestToken,
   sessionID,
-  accountDetails
+  accountDetails,
+  status,
+  movieFavorites,
+  TVFavorites,
+  del_session,
+  movieState
 });
 
 export default rootReducer;

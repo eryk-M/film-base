@@ -1,6 +1,7 @@
 .movie {
   margin-left: 30rem;
   margin-top: 10rem;
+
   &__backdrop {
     height: 43rem;
     width: 136rem;
@@ -46,6 +47,17 @@
     position: absolute;
     top: 40%;
     left: 25%;
+    & .fa-heart {
+      position: absolute;
+      bottom: 0;
+      right: -5rem;
+      font-size: 2.5rem;
+      color: var(--color-white-2);
+      cursor: pointer;
+      &--active {
+        color: var(--color-arrow-1);
+      }
+    }
   }
 
   &__heading {
