@@ -13,7 +13,7 @@
     font-family: inherit;
     transition: all 0.5s ease-out;
     color: white;
-    margin-left: 2rem;
+    margin-left: 4.5rem;
     position: relative;
     // position: relative;
     &::placeholder {
@@ -24,7 +24,7 @@
     &:focus {
       // width: 25rem;
       outline: none;
-      border-bottom: 1px solid white;
+      // border-bottom: 1px solid white;
       &::placeholder {
         opacity: 0;
       }
@@ -32,11 +32,30 @@
     &:focus + .fa-search {
       color: var(--color-arrow-1);
     }
+    &:focus ~ span {
+      // width: 14rem;
+      // top: 50%;
+      transform: scale(1);
+    }
   }
   & i {
+    position: absolute;
+    left: 0;
+    top: 1.5rem;
     margin-left: 2rem;
     font-size: 1.6rem;
     vertical-align: -3px;
     color: rgba(255, 255, 255, 0.5);
+  }
+
+  & span {
+    transform: scale(0);
+    width: 14rem;
+    height: 1px;
+    position: absolute;
+    top: 96.5%;
+    left: 4.5rem;
+    background-color: var(--color-arrow-1);
+    transition: 0.4s;
   }
 }

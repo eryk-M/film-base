@@ -7,7 +7,7 @@ import { getAccountDetails } from "../../actions/auth/getAccountDetails.actions"
 import { changeStatus } from "../../actions/auth/changeStatus.actions";
 import { getMovieFavorites } from "../../actions/userFavorites/movieFavorites.actions";
 import { getTVFavorites } from "../../actions/userFavorites/TVFavorites.actions";
-
+import { Link } from "react-router-dom";
 import "./Profile.scss";
 import noImage from "../../assets/images/no_image.png";
 class Profile extends Component {
@@ -96,33 +96,108 @@ class Profile extends Component {
       <div className="profile">
         <h1 className="profile__heading">
           Username:{" "}
-          {this.props.accountDetails.username
-            ? this.props.accountDetails.username
-            : "GUEST"}
+          <span
+            style={
+              this.props.status === "guest"
+                ? { color: "orangered" }
+                : { color: "var(--color-arrow-1" }
+            }
+          >
+            {" "}
+            {this.props.status === "guest"
+              ? "GUEST"
+              : this.props.accountDetails.username}
+          </span>
         </h1>
         <div className="profile__favorites">
           <h2 className="profile__heading-secondary">Your favorite movies</h2>
           <div className="profile__movies">
             {this.props.status === "guest" ? (
+              <div className="profile__guest">
+                <p>
+                  You cant add movies to favorites, because you have{" "}
+                  <span>GUEST</span> status
+                </p>
+              </div>
+            ) : (
+              this.props.movieFavorites.results.map(result => (
+                <div
+                  id={result.id}
+                  key={result.id}
+                  className="profile__movies-item"
+                >
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={`/details/movies/${result.id}`}
+                  >
+                    <img
+                      className="profile__image"
+                      src={
+                        result.poster_path
+                          ? `https://image.tmdb.org/t/p/w342${
+                              result.poster_path
+                            }`
+                          : noImage
+                      }
+                      alt=""
+                    />
+
+                    <h3 className="profile__movies-item-heading">
+                      {result.title}
+                    </h3>
+                  </Link>
+                  <button
+                    id={result.id}
+                    onClick={e =>
+                      this.handleDelete(
+                        e,
+                        this.props.api,
+                        this.props.accountDetails.id,
+                        this.props.sessionID.session_id,
+                        "movie"
+                      )
+                    }
+                    className="profile__movies-delete"
+                  >
+                    X
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
+          <h2 className="profile__heading-secondary">Your favorite TV shows</h2>
+          {this.props.status === "guest" ? (
+            <div className="profile__guest">
               <p>
-                You cant add movies to favorite, because you have GUEST status
+                You cant add TV shows to favorites, because you have{" "}
+                <span>GUEST</span> status
               </p>
-            ) : null}
-            {this.props.movieFavorites.results.map(result => (
+            </div>
+          ) : (
+            this.props.TVFavorites.results.map(result => (
               <div
                 id={result.id}
                 key={result.id}
                 className="profile__movies-item"
               >
-                <img
-                  className="profile__image"
-                  src={
-                    result.poster_path
-                      ? `https://image.tmdb.org/t/p/w342${result.poster_path}`
-                      : noImage
-                  }
-                  alt=""
-                />
+                <Link
+                  style={{ textDecoration: "none" }}
+                  to={`/details/tv/${result.id}`}
+                >
+                  <img
+                    className="profile__image"
+                    src={
+                      result.poster_path
+                        ? `https://image.tmdb.org/t/p/w342${result.poster_path}`
+                        : noImage
+                    }
+                    alt=""
+                  />
+
+                  <h3 className="profile__movies-item-heading">
+                    {result.original_name}
+                  </h3>
+                </Link>
                 <button
                   id={result.id}
                   onClick={e =>
@@ -131,26 +206,19 @@ class Profile extends Component {
                       this.props.api,
                       this.props.accountDetails.id,
                       this.props.sessionID.session_id,
-                      "movie"
+                      "tv"
                     )
                   }
                   className="profile__movies-delete"
                 >
                   X
                 </button>
-                <h3 className="profile__movies-item-heading">{result.title}</h3>
               </div>
-            ))}
-          </div>
-          <h2 className="profile__heading-secondary">Your favorite TV shows</h2>
-          {this.props.status === "guest" ? (
-            <p>
-              You cant add TV shows to favorite, because you have GUEST status
-            </p>
-          ) : null}
-          {this.props.TVFavorites.results.map(result => (
-            <p key={result.id}>{result.title}</p>
-          ))}
+            ))
+          )}
+          {/* {this.props.TVFavorites.results.map(result => (
+            <p key={result.id}>{result.original_name}</p>
+          ))} */}
         </div>
       </div>
     );

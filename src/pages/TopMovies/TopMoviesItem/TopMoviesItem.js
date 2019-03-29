@@ -32,7 +32,10 @@ class TopMoviesItem extends Component {
     const upcomings = this.props.movies.map((item, i) => (
       <div key={item.id} className="main__item">
         <figure className="main__image">
-          <Link style={{ textDecoration: "none" }} to={`/movies/${item.id}`}>
+          <Link
+            style={{ textDecoration: "none" }}
+            to={`/details/movies/${item.id}`}
+          >
             <div className="main__item-wrapper">
               <div
                 style={item.vote_average >= 7.5 ? superFilm : null}

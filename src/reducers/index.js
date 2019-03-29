@@ -22,6 +22,11 @@ import del_session from "./auth/deleteSession.reducer";
 import movieFavorites from "./userFavorites/movieFavorites.reducer";
 import TVFavorites from "./userFavorites/TVFavorites.reducer";
 import movieState from "./userFavorites/movieAccountState.reducer";
+
+import TVDetails from "./TVReducers/TVDetails.reducer";
+import TVVideos from "./TVReducers/TVVideos.reducer";
+import TVCredits from "./TVReducers/TVCredits.reducer";
+import TVState from "./userFavorites/TVAccountState.reducer";
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
@@ -46,7 +51,11 @@ const rootReducer = combineReducers({
   movieFavorites,
   TVFavorites,
   del_session,
-  movieState
+  movieState,
+  TVDetails,
+  TVVideos,
+  TVCredits,
+  TVState
 });
 
 export default rootReducer;

@@ -24,7 +24,7 @@ class Page extends Component {
           <Route path="/people/top" exact component={TopPeople} />
           <Route path="/tv/top" exact component={TopTV} />
           <Route path="/results" exact component={SearchMovies} />
-          <Route path="/movies/:id" component={MovieDetails} />
+          <Route path="/details/:type/:id" component={MovieDetails} />
           <Route path="/people/:id" exact component={PeopleDetails} />
           <Route path="/discover" exact component={Discover} />
 

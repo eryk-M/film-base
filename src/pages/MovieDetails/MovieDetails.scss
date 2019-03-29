@@ -11,9 +11,31 @@
     padding: 1rem;
     color: var(--color-white-2);
     // z-index: 300000;
+    text-align: center;
     & p {
       font-size: 1.6rem;
       // z-index: 30000;
+    }
+  }
+  &__favorite-accept {
+    position: absolute;
+    right: -6rem;
+    bottom: 10rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--color-arrow-1);
+    width: 22rem;
+    text-align: center;
+    padding: 1rem;
+    color: var(--color-white-2);
+    // z-index: 300000;
+    transition: 0.4s all;
+    opacity: 0;
+    & p {
+      font-size: 1.6rem;
+      // z-index: 30000;
+    }
+    &--active {
+      opacity: 1;
     }
   }
   &__backdrop {

@@ -41,6 +41,7 @@ class Search extends Component {
             onChange={this.handleChange}
           />
           <i className="fas fa-search" />
+          <span />
           {/* <span /> */}
           {/* <button>Szukaj</button> */}
           {/* <i class="fas fa-search" /> */}

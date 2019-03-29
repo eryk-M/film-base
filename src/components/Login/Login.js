@@ -21,7 +21,8 @@ class Login extends Component {
       <div
         className="login"
         style={{
-          opacity: this.props.show ? "1" : "0"
+          opacity: this.props.show ? "1" : "0",
+          transform: this.props.show ? "scale(1)" : "scale(0)"
         }}
       >
         <div className="login__blob">
