@@ -1,5 +1,4 @@
 @import "./variables";
-@import "./mixins";
 @import "./animations";
 @import "./utilities";
 
@@ -12,22 +11,9 @@
 html {
   font-size: 62.5%;
 }
-
 body {
-  background: var(--color-primary); /* fallback for old browsers */
-
+  background: var(--color-primary);
   font-family: "Open Sans", sans-serif;
-
-  //TEMPORARY
-  // min-height: 100vh;
-}
-
-aside {
-  // width: 50rem;
-  // flex-grow: 1;
-  // flex-basis: 0 0 100%;
-  // align-self: stretch;
-  // height: 100%;
 }
 
 main {

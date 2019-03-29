@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import noImage from "../../../assets/images/no_image1.png";
 class UpcomingItem extends Component {
-  // console.log(movies.results);
-
   genresHandler = genres => {
     //sprawdzam id gatunku, porownuje je do listy id gatunkow i zwracam nazwe gatunku
     if (this.props.genres) {
@@ -28,7 +26,6 @@ class UpcomingItem extends Component {
     const superFilm = {
       backgroundColor: "rgba(35, 160, 82, 0.7)"
     };
-    // console.log(this);
     const upcomings = this.props.movies.map((item, i) => (
       <div key={item.id} className="main__item">
         <figure className="main__image">
@@ -63,9 +60,6 @@ class UpcomingItem extends Component {
         </figure>
       </div>
     ));
-
-    // upcomings.splice(this.props.visible);
-
     return <>{upcomings}</>;
   }
 }

@@ -1,7 +1,5 @@
-import React, { Component } from "react";
-
 import "./styles/main.scss";
-
+import React, { Component } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ScrollToTop from "./hoc/ScrollToTop/ScrollToTop";
 import Navigation from "./components/Navigation/Navigation";
@@ -11,12 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 class App extends Component {
   state = {};
 
-  componentWillMount() {
-    // console.log("component will update");
-  }
-
   render() {
-    // console.log("render");
     return (
       <BrowserRouter>
         <ScrollToTop>
@@ -27,9 +20,6 @@ class App extends Component {
                 <Navigation />
               </aside>
               <Page />
-              {/* 
-            <Upcoming />
-            <People /> */}
             </main>
           </div>
         </ScrollToTop>

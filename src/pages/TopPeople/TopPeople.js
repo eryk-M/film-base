@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-// import Loader from "../../components/Loader/Loader";
-
 import { getTopPeople } from "../../actions/topPeople.actions";
-import { getApi } from "../../actions/api.actions";
 import TopPeopleItem from "./TopPeopleItem/TopPeopleItem.js";
-// import InfiniteScroll from "react-infinite-scroller";
 import "../MainStyling.scss";
 import { animateScroll as scroll } from "react-scroll";
 import Paginate from "../../components/Paginate/Paginate";
@@ -18,7 +14,6 @@ class TopPeople extends Component {
     results: []
   };
   componentDidMount() {
-    this.props.getApi();
     this.props.getTopPeople(this.props.api, this.state.page);
   }
 
@@ -70,7 +65,6 @@ class TopPeople extends Component {
 
 function mapStateToProps(state) {
   return {
-    // genres: state.genres,
     topPeople: state.topPeople,
     loaded: state.loaded,
     api: state.api.api
@@ -79,8 +73,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getTopPeople: bindActionCreators(getTopPeople, dispatch),
-    getApi: bindActionCreators(getApi, dispatch)
+    getTopPeople: bindActionCreators(getTopPeople, dispatch)
   };
 }
 

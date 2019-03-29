@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getApi } from "../../actions/api.actions";
 import { getGenres } from "../../actions/genres.actions";
 import { getDiscover } from "../../actions/discover.actions";
 import "../MainStyling.scss";
@@ -25,7 +24,6 @@ class Discover extends Component {
   };
 
   componentDidMount() {
-    this.props.getApi();
     this.props.getDiscover(
       this.props.api,
       this.state.page,
@@ -140,8 +138,6 @@ class Discover extends Component {
       boxShadow: `0 0.2rem 0.2rem rgba(0, 0, 0, 0.5)`,
       transform: "translateY(0.1rem)"
     };
-    // const date = new Date().getFullYear();
-    // console.log(date);
 
     return (
       <div className="main">
@@ -220,7 +216,6 @@ class Discover extends Component {
             style={this.state.page === 1 ? btnOff : null}
             onClick={() => {
               this.handlePagination("minus");
-              // this.handleGetDiscover();
             }}
           >
             Previous
@@ -229,8 +224,6 @@ class Discover extends Component {
             style={this.state.page === this.state.totalPages ? btnOff : null}
             onClick={() => {
               this.handlePagination("add");
-              // this.handleGetDiscover();
-              // this.plus();
             }}
           >
             Next
@@ -272,7 +265,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getGenres: bindActionCreators(getGenres, dispatch),
-    getApi: bindActionCreators(getApi, dispatch),
     getDiscover: bindActionCreators(getDiscover, dispatch)
   };
 }

@@ -1,11 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Navigation.scss";
-// import { Link } from "react-router-dom";
 const list = [
   { name: "Upcoming movies", path: "/", icon: "fas fa-film" },
   { name: "Top rated movies", path: "/movies/top", icon: "far fa-star" },
-  { name: "DISCOVER", path: "/discover", icon: "far fa-compass" },
+  { name: "Discover movies", path: "/discover", icon: "far fa-compass" },
   { name: "Top rated people", path: "/people/top", icon: "fas fa-users" },
   { name: "Top rated TV shows", path: "/tv/top", icon: "fas fa-tv" }
 ];

@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 
 import { getUpcoming } from "../../actions/upcoming.actions";
 import { getGenres } from "../../actions/genres.actions";
-import { getApi } from "../../actions/api.actions";
 
 import { animateScroll as scroll } from "react-scroll";
 import Paginate from "../../components/Paginate/Paginate";
@@ -19,7 +18,6 @@ class Upcoming extends Component {
   };
 
   componentDidMount() {
-    this.props.getApi();
     this.props.getUpcoming(this.props.api, this.state.page);
     this.props.getGenres(this.props.api);
   }
@@ -83,8 +81,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getUpcoming: bindActionCreators(getUpcoming, dispatch),
-    getGenres: bindActionCreators(getGenres, dispatch),
-    getApi: bindActionCreators(getApi, dispatch)
+    getGenres: bindActionCreators(getGenres, dispatch)
   };
 }
 

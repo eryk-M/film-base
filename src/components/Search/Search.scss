@@ -1,8 +1,6 @@
 .search {
   margin-left: 4rem;
   position: relative;
-  // transition: .3s transform;
-  // transform: scale(1.2);
   & input {
     background-color: transparent;
     border: none;
@@ -15,16 +13,13 @@
     color: white;
     margin-left: 4.5rem;
     position: relative;
-    // position: relative;
     &::placeholder {
       opacity: 0.5;
       color: white;
       transition: opacity 0.5s;
     }
     &:focus {
-      // width: 25rem;
       outline: none;
-      // border-bottom: 1px solid white;
       &::placeholder {
         opacity: 0;
       }
@@ -33,8 +28,6 @@
       color: var(--color-arrow-1);
     }
     &:focus ~ span {
-      // width: 14rem;
-      // top: 50%;
       transform: scale(1);
     }
   }

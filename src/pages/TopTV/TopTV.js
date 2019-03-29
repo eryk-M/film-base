@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader/Loader";
 import { getGenres } from "../../actions/genres.actions";
 import { getTopTV } from "../../actions/topTV.actions";
-import { getApi } from "../../actions/api.actions";
 import TopTVItem from "./TopTVItem/TopTVItem";
 import "../MainStyling.scss";
 
@@ -17,7 +16,6 @@ class TopTV extends Component {
     results: []
   };
   componentDidMount() {
-    this.props.getApi();
     this.props.getTopTV(this.props.api, this.state.page);
     this.props.getGenres(this.props.api);
   }
@@ -82,8 +80,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getGenres: bindActionCreators(getGenres, dispatch),
-    getTopTV: bindActionCreators(getTopTV, dispatch),
-    getApi: bindActionCreators(getApi, dispatch)
+    getTopTV: bindActionCreators(getTopTV, dispatch)
   };
 }
 

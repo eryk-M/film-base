@@ -1,4 +1,4 @@
-import { FETCH_MOVIES_DETAILS } from "../actions/moviesDetails.actions";
+import { FETCH_MOVIES_DETAILS } from "../../actions/MovieActions/moviesDetails.actions";
 
 let initialState = {
   results: [],

@@ -1,12 +1,12 @@
-import { MOVIE_CREDITS } from "../actions/movieCredits.actions";
+import { GET_VIDEOS } from "../../actions/MovieActions/videos.actions";
 
 let initialState = {
-  cast: []
+  results: []
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case MOVIE_CREDITS:
+    case GET_VIDEOS:
       return { ...state, ...action.payload };
     default:
       return state;

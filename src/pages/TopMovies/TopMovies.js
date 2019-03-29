@@ -3,7 +3,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getGenres } from "../../actions/genres.actions";
 import { getTopMovies } from "../../actions/topMovies.actions";
-import { getApi } from "../../actions/api.actions";
 import TopMoviesItem from "./TopMoviesItem/TopMoviesItem";
 // import InfiniteScroll from "react-infinite-scroller";
 import "../MainStyling.scss";
@@ -17,7 +16,6 @@ class TopMovies extends Component {
     results: []
   };
   componentDidMount() {
-    this.props.getApi();
     this.props.getTopMovies(this.props.api, this.state.page);
     this.props.getGenres(this.props.api);
   }
@@ -80,8 +78,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getGenres: bindActionCreators(getGenres, dispatch),
-    getTopMovies: bindActionCreators(getTopMovies, dispatch),
-    getApi: bindActionCreators(getApi, dispatch)
+    getTopMovies: bindActionCreators(getTopMovies, dispatch)
   };
 }
 

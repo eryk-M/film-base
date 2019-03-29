@@ -10,7 +10,6 @@ class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    // console.log(this.state.film);
     this.setState({
       redirect: true,
       film: ""
@@ -42,9 +41,6 @@ class Search extends Component {
           />
           <i className="fas fa-search" />
           <span />
-          {/* <span /> */}
-          {/* <button>Szukaj</button> */}
-          {/* <i class="fas fa-search" /> */}
         </form>
       </div>
     );

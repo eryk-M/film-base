@@ -4,7 +4,6 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import "../MainStyling.scss";
 import { withRouter } from "react-router-dom";
-import { getApi } from "../../actions/api.actions";
 import { getGenres } from "../../actions/genres.actions";
 import { getSearchResults } from "../../actions/search.actions";
 import Loader from "../../components/Loader/Loader";
@@ -141,7 +140,6 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     getSearchResults: bindActionCreators(getSearchResults, dispatch),
-    getApi: bindActionCreators(getApi, dispatch),
     getGenres: bindActionCreators(getGenres, dispatch)
   };
 }

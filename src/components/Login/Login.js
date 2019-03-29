@@ -4,18 +4,10 @@ import "./Login.scss";
 import LoginLogo from "../../assets/images/login.png";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { getApi } from "../../actions/api.actions";
 import { changeStatus } from "../../actions/auth/changeStatus.actions";
 import { Link } from "react-router-dom";
 
 class Login extends Component {
-  state = {};
-
-  componentDidMount() {
-    // this.props.getApi();
-    // this.props.getRequestToken(this.props.api);
-  }
-
   render() {
     return (
       <div
@@ -61,7 +53,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getApi: bindActionCreators(getApi, dispatch),
     changeStatus: bindActionCreators(changeStatus, dispatch)
   };
 }

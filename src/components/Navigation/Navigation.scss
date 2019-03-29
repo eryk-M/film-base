@@ -1,5 +1,4 @@
 .navigation {
-  // width: 100%;
   background-color: var(--color-nav-2);
   height: 100%;
   display: inline-block;
@@ -97,14 +96,10 @@
     top: 82%;
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
-    // display: flex;
-    // display: flex;
     font-size: 1.4rem;
     color: var(--color-white-2);
     &-image {
       margin-top: 2rem;
-      // width: 10rem;
-      // height: auto;
       height: 10rem;
       width: auto;
     }

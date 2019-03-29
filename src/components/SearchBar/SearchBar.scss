@@ -79,7 +79,6 @@
   height: 8rem;
   border-radius: 50%;
   position: relative;
-  // background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,7 +135,6 @@
   & a,
   &:before,
   &:after {
-    // background: linear-gradient(45deg, var(--color-nav), var(--color-nav-2));
     background: linear-gradient(
       45deg,
       var(--color-arrow-1),
@@ -144,5 +142,3 @@
     );
   }
 }
-
-// li - kazdy element

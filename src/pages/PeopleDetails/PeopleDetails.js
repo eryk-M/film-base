@@ -6,7 +6,6 @@ import "./PeopleDetails.scss";
 
 import { connect } from "react-redux";
 
-import { getApi } from "../../actions/api.actions";
 import { getPeopleDetails } from "../../actions/peopleDetails.actions";
 import { getPeopleCredits } from "../../actions/peopleMovieCredits.actions";
 import { withRouter } from "react-router-dom";
@@ -23,8 +22,6 @@ class PeopleDetails extends Component {
   };
 
   componentDidMount() {
-    this.props.getApi();
-
     this.props.getPeopleDetails(this.props.match.params.id, this.props.api);
     this.props.getPeopleCredits(this.props.match.params.id, this.props.api);
   }
@@ -38,15 +35,12 @@ class PeopleDetails extends Component {
   }
 
   render() {
-    // console.log(this.props);
     const error = { ...this.props.peopleDetails.errors };
     if (error[0] === "id is not a valid integer") {
       this.props.history.push({
         pathname: "/error"
       });
     }
-    // const date = new Date().getFullYear();
-    // const years = parseInt(this.props.peopleDetails.birthday);
     const datem = new Date().getUTCMonth();
     const datey = new Date().getFullYear();
     const dated = new Date().getUTCDate();
@@ -111,7 +105,6 @@ class PeopleDetails extends Component {
               ) : (
                 <p className="people__image-found">No image found</p>
               )}
-              {/* <img className="people__image" src={profileImage} alt="" /> */}
             </div>
 
             <div className="people__text-box">
@@ -155,9 +148,6 @@ class PeopleDetails extends Component {
                 <PeopleDetailsMovie cast={cast} />
               </Swiper>
             )}
-            {/* <Swiper {...params}>
-              <PeopleDetailsMovie cast={cast} />
-            </Swiper> */}
           </div>
         </div>
       </>
@@ -175,7 +165,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    getApi: bindActionCreators(getApi, dispatch),
     getPeopleDetails: bindActionCreators(getPeopleDetails, dispatch),
     getPeopleCredits: bindActionCreators(getPeopleCredits, dispatch)
   };

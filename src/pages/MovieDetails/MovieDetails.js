@@ -1,27 +1,25 @@
 import React, { Component } from "react";
 
 import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 import "./MovieDetails.scss";
 
-import { connect } from "react-redux";
-import { getMovieDetails } from "../../actions/moviesDetails.actions";
-import { getVideos } from "../../actions/videos.actions";
-import { getMovieCredits } from "../../actions/movieCredits.actions";
+import { getMovieDetails } from "../../actions/MovieActions/moviesDetails.actions";
+import { getVideos } from "../../actions/MovieActions/videos.actions";
+import { getMovieCredits } from "../../actions/MovieActions/movieCredits.actions";
 
 import { getTVDetails } from "../../actions/TVactions/TVDetails.actions";
 import { getTVVideos } from "../../actions/TVactions/TVVideos.actions";
 import { getTVCredits } from "../../actions/TVactions/TVCredits.actions";
 
-import { withRouter } from "react-router-dom";
-
 import { getMovieAccountState } from "../../actions/userFavorites/movieAccountState.actions";
 import { getTVAccountState } from "../../actions/userFavorites/TVAccountState.actions";
-import MovieDetailsPeople from "./MovieDetailsPeople/MovieDetailsPeople";
 
+import MovieDetailsPeople from "./MovieDetailsPeople/MovieDetailsPeople";
 import Loader from "../../components/Loader/Loader";
 import WOW from "wowjs";
-
 import Swiper from "react-id-swiper";
 import { Navigation } from "swiper/dist/js/swiper.esm";
 
@@ -122,12 +120,9 @@ class MovieDetails extends Component {
       const videos = this.props.TVVideos.results;
       const filteredVideos = videos.filter(video => video.type === "Trailer");
       just = filteredVideos.splice(0, 3);
-      //ACTORS MOVIES
+      //ACTORS TV
       actors = this.props.TVCredits.cast;
     }
-
-    console.log(actors.length);
-    //favorite
     switch (type) {
       case "movies":
         return (

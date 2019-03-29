@@ -11,10 +11,6 @@ import { Link } from "react-router-dom";
 import "./Profile.scss";
 import noImage from "../../assets/images/no_image.png";
 class Profile extends Component {
-  state = {
-    // accountStatus: ""
-  };
-
   componentDidMount() {
     const approved = this.props.location.search.split("&approved=")[1];
     if (approved) {
@@ -91,7 +87,6 @@ class Profile extends Component {
   };
 
   render() {
-    console.log(this.props.status);
     return (
       <div className="profile">
         <h1 className="profile__heading">
@@ -216,9 +211,6 @@ class Profile extends Component {
               </div>
             ))
           )}
-          {/* {this.props.TVFavorites.results.map(result => (
-            <p key={result.id}>{result.original_name}</p>
-          ))} */}
         </div>
       </div>
     );

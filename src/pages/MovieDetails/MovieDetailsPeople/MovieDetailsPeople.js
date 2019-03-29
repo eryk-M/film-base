@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./MovieDetailsPeople.scss";
 const MovieDetailsPeople = props => {
-  console.log(props.people);
   const people = props.people.map((item, i) => (
     <div key={i} className="movie__people swiper-slide">
       <figure className="movie__people-image">

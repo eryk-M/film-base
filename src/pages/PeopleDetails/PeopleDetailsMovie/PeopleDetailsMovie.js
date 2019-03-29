@@ -2,10 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./PeopleDetailsMovie.scss";
 const PeopleDetailsMovie = props => {
-  console.log(props.cast);
-  // console.log(props.cast);
   const cast = props.cast.map((item, i) => (
-    // <div key={i}>{item.title}</div>
     <div key={i} className="people__item swiper-slide">
       <figure className="people__item-image">
         <Link

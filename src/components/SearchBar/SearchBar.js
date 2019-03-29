@@ -21,11 +21,6 @@ class NavBar extends Component {
     login: false
   };
 
-  // componentDidMount() {
-  //   const session = localStorage.getItem("session");
-
-  // }
-
   handleLogin = () => {
     this.setState({
       login: !this.state.login
@@ -48,7 +43,6 @@ class NavBar extends Component {
     });
   };
   render() {
-    console.log(this.props.location.search.split("&approved=")[1]);
     return (
       <div className="imHere">
         <p className="scroll__to" />
