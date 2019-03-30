@@ -35,6 +35,7 @@ class PeopleDetails extends Component {
   }
 
   render() {
+    const width = window.innerWidth;
     const error = { ...this.props.peopleDetails.errors };
     if (error[0] === "id is not a valid integer") {
       this.props.history.push({
@@ -81,6 +82,9 @@ class PeopleDetails extends Component {
       rebuildOnUpdate: true,
       shouldSwiperUpdate: true
     };
+    if (width < 415) {
+      params.slidesPerView = 2;
+    }
     const profileImage = `https://image.tmdb.org/t/p/w300${
       this.state.profile_path
     }`;

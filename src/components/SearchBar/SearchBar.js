@@ -68,6 +68,7 @@ class NavBar extends Component {
               >
                 <i className="fas fa-sign-out-alt" />
               </button>
+
             </div>
           ) : (
             <LoginButton click={this.handleLogin} />

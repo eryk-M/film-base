@@ -10,6 +10,12 @@
 }
 html {
   font-size: 62.5%;
+  @media only screen and (max-width: 1601px) {
+    font-size: 56.5%;
+  }
+  @media only screen and (max-width: 1367px) {
+    font-size: 48%;
+  }
 }
 body {
   background: var(--color-primary);

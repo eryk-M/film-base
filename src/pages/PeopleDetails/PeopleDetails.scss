@@ -2,10 +2,20 @@
   margin-left: 30rem;
   margin-top: 10rem;
   animation: appear 2s linear;
+  @media only screen and (max-width: 1025px) {
+    margin-left: 2rem;
+  }
+
   &__right-wrapper {
     display: flex;
+    @media only screen and (max-width: 415px) {
+      display: block;
+      // margin-left: -2rem;
+      // margin: 0 auto;
+    }
   }
   &__image {
+    width: 30rem;
     border-radius: 5px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
     &-wrapper {
@@ -25,6 +35,19 @@
     width: 104rem;
     color: var(--color-white-2);
     position: relative;
+    // @media only screen and (max-width: 1601px) {
+    //   margin-left: 5rem;
+    // }
+    @media only screen and (max-width: 1025px) {
+      width: 78%;
+    }
+    @media only screen and (max-width: 769px) {
+      width: 67%;
+    }
+    @media only screen and (max-width: 415px) {
+      margin-left: 0;
+      width: 100%;
+    }
   }
   & .fa-ribbon {
     position: absolute;
@@ -33,6 +56,9 @@
     color: black;
     font-size: 7rem;
     z-index: 1;
+    @media only screen and (max-width: 769px) {
+      left: -12%;
+    }
   }
   &__name {
     display: inline;

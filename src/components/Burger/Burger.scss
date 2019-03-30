@@ -1,0 +1,88 @@
+/* Individual item */
+
+.bm-item {
+  display: inline-block;
+
+  /* Our sidebar item styling */
+  text-decoration: none;
+  margin-bottom: 2rem;
+  // color: #d1d1d1;
+  color: var(--color-white-2);
+  transition: color 0.2s;
+}
+
+/* Change color on hover */
+// .bm-item:hover {
+//   color: white;
+// }
+
+/* The rest copied directly from react-burger-menu docs */
+
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 3.6rem;
+  height: 3rem;
+  right: 3rem;
+  top: 2.5rem;
+  @media only screen and (max-width: 415px) {
+    top: 1.5rem;
+  }
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  // background: #373a47;
+  background: var(--color-arrow-1);
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  // height: 5rem !important;
+  // width: 5rem !important;
+  font-size: 3rem !important;
+  // font-size: 555rem;
+  color: var(--color-arrow-1);
+}
+.bm-cross-button > span {
+  top: 10px !important;
+  // width: 10px !important;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: var(--color-arrow-1);
+  width: 5px !important;
+  height: 25px !important;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  // background: #373a47;
+  background: var(--color-nav-2);
+  // background: var(--color-arrow-1);
+  padding: 2.5em 1.5em 0;
+  font-size: 1.8rem;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  // fill: #373a47;
+  // fill: var(--color-arrow-1);
+  fill: var(--color-nav-2);
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  // color: #b8b7ad;
+  color: var(--color-white-2);
+}
+.bm-item-list .active {
+  // color: #b8b7ad;
+  color: var(--color-arrow-1);
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}

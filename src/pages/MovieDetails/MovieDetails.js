@@ -73,6 +73,9 @@ class MovieDetails extends Component {
   };
 
   handleGetDetails = type => {
+    //WIDTH - CHANGING PEOPLE VISIBLE IN SWIPER
+    const windowWidth = window.innerWidth;
+
     const params = {
       modules: [Navigation],
 
@@ -86,8 +89,15 @@ class MovieDetails extends Component {
       rebuildOnUpdate: true,
       shouldSwiperUpdate: true
     };
-
+    if (windowWidth < 780 && windowWidth >= 415) {
+      params.slidesPerView = 4;
+      params.slidesPerGroup = 4;
+    } else if (windowWidth < 415) {
+      params.slidesPerView = 2;
+      params.slidesPerGroup = 2;
+    }
     const { moviesDetails, TVDetails } = this.props;
+
     //MAIN IMAGE
     const backdrop = `https://image.tmdb.org/t/p/w1280/${
       this.props.match.params.type === "movies"
@@ -106,23 +116,28 @@ class MovieDetails extends Component {
     const superFilm = {
       color: "rgba(46, 204, 113, 1)"
     };
-    let just = null;
-    let actors = null;
+    let just,
+      actors,
+      videos = null;
     if (type === "movies") {
       //VIDEO MOVIES
-      const videos = this.props.videos.results;
-      const filteredVideos = videos.filter(video => video.type === "Trailer");
-      just = filteredVideos.splice(0, 3);
+      videos = this.props.videos.results;
       //ACTORS MOVIES
       actors = this.props.movieCredits.cast;
     } else if (type === "tv") {
       //VIDEO TV
-      const videos = this.props.TVVideos.results;
-      const filteredVideos = videos.filter(video => video.type === "Trailer");
-      just = filteredVideos.splice(0, 3);
+      videos = this.props.TVVideos.results;
       //ACTORS TV
       actors = this.props.TVCredits.cast;
     }
+    //check if video === trailer for movies/tv
+    const filteredVideos = videos.filter(video => video.type === "Trailer");
+    if (windowWidth > 415) {
+      just = filteredVideos.splice(0, 3);
+    } else if (windowWidth <= 415) {
+      just = filteredVideos.splice(0, 1);
+    }
+
     switch (type) {
       case "movies":
         return (

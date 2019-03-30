@@ -1,6 +1,9 @@
 .search {
   margin-left: 4rem;
   position: relative;
+  @media only screen and (max-width: 415px) {
+    margin-left: -1rem;
+  }
   & input {
     background-color: transparent;
     border: none;
