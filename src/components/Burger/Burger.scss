@@ -64,12 +64,20 @@
   padding: 2.5em 1.5em 0;
   font-size: 1.8rem;
 }
+.bm-menu-wrap {
+  @media only screen and (max-width: 415px) {
+    width: 200px !important;
+  }
+}
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
   // fill: #373a47;
   // fill: var(--color-arrow-1);
   fill: var(--color-nav-2);
+  @media only screen and (max-width: 415px) {
+    // width: 1rem;
+  }
 }
 
 /* Wrapper for item list */

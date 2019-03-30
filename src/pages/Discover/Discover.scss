@@ -6,13 +6,20 @@
   align-items: center;
   max-width: 136rem;
   animation: appear 0.7s linear;
-
+  @media only screen and (max-width: 415px) {
+    width: 100%;
+    flex-direction: column;
+  }
   &-search {
     display: flex;
     justify-content: center;
     align-items: center;
     max-width: 136rem;
     margin-top: 2rem;
+    @media only screen and (max-width: 415px) {
+      width: 100%;
+      margin-top: -5rem;
+    }
     &-btn {
       margin-top: 7rem;
       padding: 1rem;
@@ -58,6 +65,10 @@
     display: flex;
     justify-content: center;
     width: 136rem;
+    @media only screen and (max-width: 415px) {
+      width: 100%;
+      margin: 2rem auto 0;
+    }
     & span {
       font-weight: 600;
       color: var(--color-arrow-1);
@@ -71,6 +82,7 @@
   display: inline;
   position: relative;
   margin-bottom: 0.6rem;
+
   & span {
     font-size: 1.6rem;
     display: block;
@@ -137,6 +149,9 @@
     &:focus > option:checked {
       background: #17803e;
     }
+    @media only screen and (max-width: 415px) {
+      margin-top: 10rem;
+    }
   }
   &:before {
     content: "\f358";
@@ -156,6 +171,11 @@
     pointer-events: none;
     transition: 0.4s all;
     z-index: 5;
+    @media only screen and (max-width: 415px) {
+      // margin-top: 10rem;
+      top: 10rem;
+      height: 4.8rem;
+    }
   }
   &:hover:before {
     background-color: var(--color-arrow-2);
@@ -232,6 +252,9 @@
     font-size: 1.4rem;
     transition: 0.4s all;
   }
+  @media only screen and (max-width: 415px) {
+    margin-top: 10rem;
+  }
 }
 
 .main__sort-buttons {
@@ -240,6 +263,9 @@
   max-width: 136rem;
   justify-content: center;
   margin-top: 3rem;
+  @media only screen and (max-width: 415px) {
+    width: 50rem;
+  }
   & button {
     color: var(--color-white-2);
     background-color: var(--color-nav-2);

@@ -160,57 +160,62 @@ class Profile extends Component {
               ))
             )}
           </div>
-          <h2 className="profile__heading-secondary">Your favorite TV shows</h2>
-          {this.props.status === "guest" ? (
-            <div className="profile__guest">
-              <p>
-                You cant add TV shows to favorites, because you have{" "}
-                <span>GUEST</span> status
-              </p>
-            </div>
-          ) : (
-            this.props.TVFavorites.results.map(result => (
-              <div
-                id={result.id}
-                key={result.id}
-                className="profile__movies-item"
-              >
-                <Link
-                  style={{ textDecoration: "none" }}
-                  to={`/details/tv/${result.id}`}
-                >
-                  <img
-                    className="profile__image"
-                    src={
-                      result.poster_path
-                        ? `https://image.tmdb.org/t/p/w342${result.poster_path}`
-                        : noImage
-                    }
-                    alt=""
-                  />
 
-                  <h3 className="profile__movies-item-heading">
-                    {result.original_name}
-                  </h3>
-                </Link>
-                <button
-                  id={result.id}
-                  onClick={e =>
-                    this.handleDelete(
-                      e,
-                      this.props.api,
-                      this.props.accountDetails.id,
-                      this.props.sessionID.session_id,
-                      "tv"
-                    )
-                  }
-                  className="profile__movies-delete"
-                >
-                  X
-                </button>
+          <h2 className="profile__heading-secondary">Your favorite TV shows</h2>
+          <div className="profile__tv">
+            {this.props.status === "guest" ? (
+              <div className="profile__guest">
+                <p>
+                  You cant add TV shows to favorites, because you have{" "}
+                  <span>GUEST</span> status
+                </p>
               </div>
-            ))
-          )}
+            ) : (
+              this.props.TVFavorites.results.map(result => (
+                <div
+                  id={result.id}
+                  key={result.id}
+                  className="profile__movies-item"
+                >
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={`/details/tv/${result.id}`}
+                  >
+                    <img
+                      className="profile__image"
+                      src={
+                        result.poster_path
+                          ? `https://image.tmdb.org/t/p/w342${
+                              result.poster_path
+                            }`
+                          : noImage
+                      }
+                      alt=""
+                    />
+
+                    <h3 className="profile__movies-item-heading">
+                      {result.original_name}
+                    </h3>
+                  </Link>
+                  <button
+                    id={result.id}
+                    onClick={e =>
+                      this.handleDelete(
+                        e,
+                        this.props.api,
+                        this.props.accountDetails.id,
+                        this.props.sessionID.session_id,
+                        "tv"
+                      )
+                    }
+                    className="profile__movies-delete"
+                  >
+                    X
+                  </button>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
     );

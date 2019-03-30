@@ -1,6 +1,9 @@
 .profile {
   margin-top: 10rem;
   margin-left: 30rem;
+  @media only screen and (max-width: 1025px) {
+    margin-left: 0.5rem;
+  }
   &__heading {
     text-shadow: 0 2px 2px rgba(0, 0, 0, 0.7);
     font-size: 3rem;
@@ -9,6 +12,9 @@
     letter-spacing: 4px;
     font-weight: 300;
     width: 45rem;
+    @media only screen and (max-width: 321px) {
+      width: 50%;
+    }
   }
   &__heading-secondary {
     margin-left: 3.5rem;
@@ -16,24 +22,37 @@
     margin-top: 2rem;
     font-weight: 300;
     color: var(--color-white-2);
+    @media only screen and (max-width: 415px) {
+      margin-left: 0;
+      // width: 20rem;
+    }
   }
   &__movies {
     display: flex;
     flex-wrap: wrap;
     max-width: 136rem;
-
     &-item {
       animation: appear 0.7s ease-in-out;
       width: 20rem;
       margin-left: 2rem;
       margin-top: 2rem;
       text-align: center;
+      @media only screen and (max-width: 321px) {
+        // margin-left: 1rem;
+        margin-left: 0;
+        // width: 15rem;
+      }
+
       &-heading {
         margin-top: 1rem;
         color: var(--color-white-2);
         font-size: 1.4rem;
       }
       position: relative;
+      @media only screen and (max-width: 321px) {
+        // margin-left: 1rem;
+        margin-left: 0;
+      }
     }
     &-delete {
       cursor: pointer;
@@ -48,8 +67,18 @@
         color: var(--color-arrow-2);
       }
     }
+    @media only screen and (max-width: 415px) {
+      width: 105%;
+    }
+    @media only screen and (max-width: 376px) {
+      width: 100%;
+    }
   }
 
+  &__tv {
+    display: flex;
+    flex-wrap: wrap;
+  }
   &__image {
     height: 25rem;
     width: auto;
@@ -65,6 +94,17 @@
     align-items: center;
     color: var(--color-white-2);
     font-size: 1.6rem;
+    @media only screen and (max-width: 415px) {
+      margin-left: 0;
+      text-align: center;
+      width: 105%;
+    }
+    @media only screen and (max-width: 376px) {
+      width: 100%;
+    }
+    @media only screen and (max-width: 321px) {
+      width: 90%;
+    }
     & span {
       color: orangered;
     }
