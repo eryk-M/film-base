@@ -60,15 +60,15 @@ class Upcoming extends Component {
           {this.props.movies.isLoading ? (
             <Loader />
           ) : (
-            <UpcomingItem genres={this.props.genres.genres} movies={movies} />
+            <>
+              <UpcomingItem genres={this.props.genres.genres} movies={movies} />
+              <Paginate
+                selected={this.state.page - 1}
+                totalPages={this.state.totalPages}
+                handlePageClick={this.handlePageClick}
+              />
+            </>
           )}
-
-          {this.state.results.length >= 1 ? (
-            <Paginate
-              totalPages={this.state.totalPages}
-              handlePageClick={this.handlePageClick}
-            />
-          ) : null}
         </div>
       </div>
     );

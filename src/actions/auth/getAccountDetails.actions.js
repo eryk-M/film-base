@@ -13,6 +13,7 @@ export const getAccountDetails = (api, session) => {
           type: GET_ACCOUNT_DETAILS,
           payload: accountDetails
         });
+        localStorage.setItem("user_id", accountDetails.id);
       })
       .catch(err => {
         console.log(err);

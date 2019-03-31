@@ -19,6 +19,7 @@ export const postSession = (api, requestToken) => {
           type: POST_SESSION_ID,
           payload: sessionID
         });
+        localStorage.setItem("session", sessionID.session_id);
       })
       .catch(err => {
         console.log(err);

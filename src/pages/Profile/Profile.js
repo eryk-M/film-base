@@ -13,6 +13,8 @@ import noImage from "../../assets/images/no_image.png";
 class Profile extends Component {
   componentDidMount() {
     const approved = this.props.location.search.split("&approved=")[1];
+    const session = localStorage.getItem("session");
+    const userID = localStorage.getItem("user_id");
     if (approved) {
       this.props.postSession(
         this.props.api,
@@ -20,11 +22,8 @@ class Profile extends Component {
       );
       this.props.changeStatus({ status: "user" });
     } else if (this.props.status === "user") {
-      this.handleGetFavorites(
-        this.props.api,
-        this.props.accountDetails.id,
-        this.props.sessionID.session_id
-      );
+      this.handleGetFavorites(this.props.api, userID, session);
+      this.props.getAccountDetails(this.props.api, session);
       return true;
     } else if (this.props.status === "guest") {
       this.props.history.push({
@@ -37,25 +36,14 @@ class Profile extends Component {
       });
       alert("You need to login first!");
     }
-    this.handleGetFavorites(
-      this.props.api,
-      this.props.accountDetails.id,
-      this.props.sessionID.session_id
-    );
   }
   componentDidUpdate() {
     if (!this.props.accountDetails.id && this.props.sessionID.session_id) {
-      this.props.getAccountDetails(
-        this.props.api,
-        this.props.sessionID.session_id
-      );
-      this.handleGetFavorites(
-        this.props.api,
-        this.props.accountDetails.id,
-        this.props.sessionID.session_id
-      );
+      const session = localStorage.getItem("session");
+      const userID = localStorage.getItem("user_id");
+      this.props.getAccountDetails(this.props.api, session);
+      this.handleGetFavorites(this.props.api, userID, session);
     }
-    localStorage.setItem("session", `${this.props.sessionID.session_id}`);
   }
 
   takeRequestToken = requestToken =>
@@ -66,9 +54,11 @@ class Profile extends Component {
     this.props.getMovieFavorites(api, accountID, sessionID);
   };
 
-  handleDelete = (e, api, accountID, sessionID, type) => {
+  handleDelete = (e, api, type) => {
+    const session = localStorage.getItem("session");
+    const userID = localStorage.getItem("user_id");
     fetch(
-      `https://api.themoviedb.org/3/account/${accountID}/favorite?api_key=${api}&session_id=${sessionID}`,
+      `https://api.themoviedb.org/3/account/${userID}/favorite?api_key=${api}&session_id=${session}`,
       {
         method: "POST",
         body: JSON.stringify({
@@ -143,15 +133,7 @@ class Profile extends Component {
                   </Link>
                   <button
                     id={result.id}
-                    onClick={e =>
-                      this.handleDelete(
-                        e,
-                        this.props.api,
-                        this.props.accountDetails.id,
-                        this.props.sessionID.session_id,
-                        "movie"
-                      )
-                    }
+                    onClick={e => this.handleDelete(e, this.props.api, "movie")}
                     className="profile__movies-delete"
                   >
                     X
@@ -199,15 +181,7 @@ class Profile extends Component {
                   </Link>
                   <button
                     id={result.id}
-                    onClick={e =>
-                      this.handleDelete(
-                        e,
-                        this.props.api,
-                        this.props.accountDetails.id,
-                        this.props.sessionID.session_id,
-                        "tv"
-                      )
-                    }
+                    onClick={e => this.handleDelete(e, this.props.api, "tv")}
                     className="profile__movies-delete"
                   >
                     X

@@ -22,7 +22,11 @@ class TopTV extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.topTV.total_pages !== this.state.totalPages) {
+    // {this.props.topTV.isLoading ? }
+    if (
+      this.props.topTV.total_pages !== this.state.totalPages &&
+      this.props.topTV.isLoading === false
+    ) {
       this.setState(() => ({
         totalPages: this.props.topTV.total_pages,
         page: this.props.topTV.page,
@@ -55,15 +59,16 @@ class TopTV extends Component {
           {this.props.topTV.isLoading ? (
             <Loader />
           ) : (
-            <TopTVItem genres={this.props.genres.genres} topTV={topTV} />
-          )}
+            <>
+              <TopTVItem genres={this.props.genres.genres} topTV={topTV} />
 
-          {this.state.results.length >= 1 ? (
-            <Paginate
-              totalPages={this.state.totalPages}
-              handlePageClick={this.handlePageClick}
-            />
-          ) : null}
+              <Paginate
+                selected={this.state.page - 1}
+                totalPages={this.state.totalPages}
+                handlePageClick={this.handlePageClick}
+              />
+            </>
+          )}
         </div>
       </div>
     );
@@ -74,7 +79,6 @@ function mapStateToProps(state) {
   return {
     genres: state.genres,
     topTV: state.topTV,
-    loaded: state.loaded,
     api: state.api.api
   };
 }

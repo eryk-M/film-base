@@ -29,18 +29,19 @@ class MovieDetails extends Component {
 
   componentDidMount() {
     this.handleFetchData(this.props.match.params.id);
+    const session = localStorage.getItem("session");
     if (this.props.status === "user") {
       if (this.props.match.params.type === "movies") {
         this.props.getMovieAccountState(
           this.props.api,
           this.props.match.params.id,
-          this.props.sessionID.session_id
+          session
         );
       } else if (this.props.match.params.type === "tv") {
         this.props.getTVAccountState(
           this.props.api,
           this.props.match.params.id,
-          this.props.sessionID.session_id
+          session
         );
       }
     }
@@ -61,11 +62,13 @@ class MovieDetails extends Component {
     this.props.history.goBack();
   };
 
-  handleFavorite = (e, api, accountID, sessionID, type, id) => {
+  handleFavorite = (e, api, type, id) => {
+    const session = localStorage.getItem("session");
+    const userID = localStorage.getItem("user_id");
     if (this.props.status === "user") {
-      this.props.getMovieAccountState(api, id, sessionID);
+      this.props.getMovieAccountState(api, id, session);
       fetch(
-        `https://api.themoviedb.org/3/account/${accountID}/favorite?api_key=${api}&session_id=${sessionID}`,
+        `https://api.themoviedb.org/3/account/${userID}/favorite?api_key=${api}&session_id=${session}`,
         {
           method: "POST",
           body: JSON.stringify({
@@ -176,8 +179,6 @@ class MovieDetails extends Component {
                       this.handleFavorite(
                         e,
                         this.props.api,
-                        this.props.accountDetails.id,
-                        this.props.sessionID.session_id,
                         "movie",
                         this.props.moviesDetails.id
                       )
@@ -300,8 +301,6 @@ class MovieDetails extends Component {
                       this.handleFavorite(
                         e,
                         this.props.api,
-                        this.props.accountDetails.id,
-                        this.props.sessionID.session_id,
                         "tv",
                         this.props.TVDetails.id
                       )

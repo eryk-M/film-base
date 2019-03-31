@@ -21,6 +21,22 @@ class NavBar extends Component {
     login: false
   };
 
+  componentDidMount() {
+    const session = localStorage.getItem("session");
+    if (typeof session === "string") {
+      fetch(
+        `https://api.themoviedb.org/3/account?api_key=${
+          this.props.api
+        }&session_id=${session}`
+      ).then(res => {
+        if (res.ok) {
+          this.props.changeStatus({ status: "user" });
+        } else {
+          this.props.changeStatus({ status: false });
+        }
+      });
+    }
+  }
   handleLogin = () => {
     this.setState({
       login: !this.state.login
@@ -31,6 +47,7 @@ class NavBar extends Component {
   handleLogout = () => {
     this.props.deleteSession(this.props.api, this.props.sessionID.session_id);
     localStorage.removeItem("session");
+    localStorage.removeItem("user_id");
     this.props.changeStatus({ status: false });
     this.props.history.push({
       pathname: "/"
@@ -42,6 +59,8 @@ class NavBar extends Component {
       login: !this.state.login
     });
   };
+
+  handleCheckSession = () => {};
   render() {
     return (
       <div className="imHere">
@@ -68,7 +87,6 @@ class NavBar extends Component {
               >
                 <i className="fas fa-sign-out-alt" />
               </button>
-
             </div>
           ) : (
             <LoginButton click={this.handleLogin} />

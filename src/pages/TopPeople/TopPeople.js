@@ -51,15 +51,15 @@ class TopPeople extends Component {
           {this.props.topPeople.isLoading ? (
             <Loader />
           ) : (
-            <TopPeopleItem people={topPeople} visible={this.state.visible} />
+            <>
+              <TopPeopleItem people={topPeople} visible={this.state.visible} />
+              <Paginate
+                selected={this.state.page - 1}
+                totalPages={this.state.totalPages}
+                handlePageClick={this.handlePageClick}
+              />
+            </>
           )}
-
-          {this.state.results.length >= 1 ? (
-            <Paginate
-              totalPages={this.state.totalPages}
-              handlePageClick={this.handlePageClick}
-            />
-          ) : null}
         </div>
       </div>
     );

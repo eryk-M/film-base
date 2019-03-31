@@ -57,18 +57,18 @@ class TopMovies extends Component {
           {this.props.topMovies.isLoading ? (
             <Loader />
           ) : (
-            <TopMoviesItem
-              genres={this.props.genres.genres}
-              movies={topMovies}
-            />
+            <>
+              <TopMoviesItem
+                genres={this.props.genres.genres}
+                movies={topMovies}
+              />
+              <Paginate
+                selected={this.state.page - 1}
+                totalPages={this.state.totalPages}
+                handlePageClick={this.handlePageClick}
+              />
+            </>
           )}
-
-          {this.state.results.length >= 1 ? (
-            <Paginate
-              totalPages={this.state.totalPages}
-              handlePageClick={this.handlePageClick}
-            />
-          ) : null}
         </div>
       </div>
     );

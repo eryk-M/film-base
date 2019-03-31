@@ -6,6 +6,7 @@ const Paginate = props => {
   const width = window.innerWidth;
   return (
     <ReactPaginate
+      forcePage={props.selected}
       previousLabel={"\u2190"}
       nextLabel={"\u2192"}
       breakLabel={"..."}
