@@ -10,6 +10,8 @@ import { getGenres } from "../../actions/genres.actions";
 import { animateScroll as scroll } from "react-scroll";
 import Paginate from "../../components/Paginate/Paginate";
 
+import Loader from "../../components/Loader/Loader";
+
 class Upcoming extends Component {
   state = {
     totalPages: 1,
@@ -55,7 +57,11 @@ class Upcoming extends Component {
           ) : null}
         </div>
         <div className="main__container">
-          <UpcomingItem genres={this.props.genres.genres} movies={movies} />
+          {this.props.movies.isLoading ? (
+            <Loader />
+          ) : (
+            <UpcomingItem genres={this.props.genres.genres} movies={movies} />
+          )}
 
           {this.state.results.length >= 1 ? (
             <Paginate
@@ -72,7 +78,7 @@ class Upcoming extends Component {
 function mapStateToProps(state) {
   return {
     movies: state.movies,
-    loaded: state.loaded,
+    isLoading: state.isLoading,
     genres: state.genres,
     api: state.api.api
   };

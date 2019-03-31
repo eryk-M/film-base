@@ -7,7 +7,13 @@ export const getRequestToken = api => {
       `
     )
       .then(res => res.json())
+
       .then(requestToken => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("expirationDate");
+        const expirationDate = new Date(requestToken.expires_at);
+        localStorage.setItem("token", requestToken.request_token);
+        localStorage.setItem("expirationDate", expirationDate);
         dispatch({
           type: GET_REQUEST_TOKEN,
           payload: requestToken
@@ -18,3 +24,26 @@ export const getRequestToken = api => {
       });
   };
 };
+
+// export const logout = () => {
+//   localStorage.removeItem('token');
+//   localStorage.removeItem('expirationDate')
+//   deleteSession()
+// }
+
+// export const authCheckStatus = () => {
+//   return dispatch => {
+//     const token = localStorage.getItem('token');
+//     if(!token){
+//       dispatch(logout())
+//     } else {
+//       const expirationDate = localStorage.getItem('expirationDate')
+//       if(expirationDate > new Date()) {
+//         dispatch(logout())
+//       } else {
+
+//       }
+//     }
+
+//   }
+// }

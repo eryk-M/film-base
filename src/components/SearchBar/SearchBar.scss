@@ -70,6 +70,9 @@
         color: var(--color-arrow-2);
       }
     }
+    @media only screen and (max-width: 1025px) {
+      margin-right: 10rem;
+    }
   }
   &__button,
   &__button:active {

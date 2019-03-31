@@ -17,7 +17,6 @@ import { Navigation } from "swiper/dist/js/swiper.esm";
 
 class PeopleDetails extends Component {
   state = {
-    loaded: false,
     profile_path: ""
   };
 
@@ -95,65 +94,70 @@ class PeopleDetails extends Component {
     };
     return (
       <>
-        <div className="people">
-          {this.props.peopleDetails.loaded ? null : <Loader />}
-          <div className="people__right-wrapper">
-            <div className="people__image-wrapper">
-              {this.state.profile_path ? (
-                <img
-                  style={peopleDetails.deathday ? grayDied : null}
-                  className="people__image"
-                  src={profileImage}
-                  alt={`${peopleDetails.name}`}
-                />
-              ) : (
-                <p className="people__image-found">No image found</p>
+        {this.props.peopleDetails.isLoading ? (
+          <Loader />
+        ) : (
+          <div className="people">
+            <div className="people__right-wrapper">
+              <div className="people__image-wrapper">
+                {this.state.profile_path ? (
+                  <img
+                    style={peopleDetails.deathday ? grayDied : null}
+                    className="people__image"
+                    src={profileImage}
+                    alt={`${peopleDetails.name}`}
+                  />
+                ) : (
+                  <p className="people__image-found">No image found</p>
+                )}
+              </div>
+
+              <div className="people__text-box">
+                {peopleDetails.deathday ? <i class="fas fa-ribbon" /> : null}
+                <h3 className="people__name">{peopleDetails.name}</h3>
+                <div className="people__info">
+                  <p className="people__info-para">Info</p>
+                  <p className="people__birth-day">
+                    Born:{" "}
+                    {peopleDetails.birthday
+                      ? peopleDetails.birthday + `   / ${yo} years old`
+                      : "No info"}
+                  </p>
+                  <p className="people__birth">
+                    {peopleDetails.place_of_birth}
+                  </p>
+                  {peopleDetails.deathday ? (
+                    <p className="people__death">
+                      Died: {peopleDetails.deathday}
+                    </p>
+                  ) : null}
+                  <p className="people__popularity">
+                    Popularity:{" "}
+                    {peopleDetails.popularity
+                      ? peopleDetails.popularity
+                      : "No info"}
+                  </p>
+                </div>
+                <div className="people__biography">
+                  <h3 className="people__biography-heading">Biography</h3>
+                  <p className="people__biography-paragraph">
+                    {peopleDetails.biography
+                      ? peopleDetails.biography
+                      : "No info"}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="people__cast">
+              <p className="people__cast-heading heading-details">Cast</p>
+              {cast.length > 0 && (
+                <Swiper {...params}>
+                  <PeopleDetailsMovie cast={cast} />
+                </Swiper>
               )}
             </div>
-
-            <div className="people__text-box">
-              {peopleDetails.deathday ? <i class="fas fa-ribbon" /> : null}
-              <h3 className="people__name">{peopleDetails.name}</h3>
-              <div className="people__info">
-                <p className="people__info-para">Info</p>
-                <p className="people__birth-day">
-                  Born:{" "}
-                  {peopleDetails.birthday
-                    ? peopleDetails.birthday + `   / ${yo} years old`
-                    : "No info"}
-                </p>
-                <p className="people__birth">{peopleDetails.place_of_birth}</p>
-                {peopleDetails.deathday ? (
-                  <p className="people__death">
-                    Died: {peopleDetails.deathday}
-                  </p>
-                ) : null}
-                <p className="people__popularity">
-                  Popularity:{" "}
-                  {peopleDetails.popularity
-                    ? peopleDetails.popularity
-                    : "No info"}
-                </p>
-              </div>
-              <div className="people__biography">
-                <h3 className="people__biography-heading">Biography</h3>
-                <p className="people__biography-paragraph">
-                  {peopleDetails.biography
-                    ? peopleDetails.biography
-                    : "No info"}
-                </p>
-              </div>
-            </div>
           </div>
-          <div className="people__cast">
-            <p className="people__cast-heading heading-details">Cast</p>
-            {cast.length > 0 && (
-              <Swiper {...params}>
-                <PeopleDetailsMovie cast={cast} />
-              </Swiper>
-            )}
-          </div>
-        </div>
+        )}
       </>
     );
   }

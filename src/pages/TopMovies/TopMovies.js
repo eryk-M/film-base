@@ -9,6 +9,8 @@ import "../MainStyling.scss";
 import { animateScroll as scroll } from "react-scroll";
 import Paginate from "../../components/Paginate/Paginate";
 
+import Loader from "../../components/Loader/Loader";
+
 class TopMovies extends Component {
   state = {
     totalPages: 1,
@@ -52,7 +54,14 @@ class TopMovies extends Component {
           ) : null}
         </div>
         <div className="main__container">
-          <TopMoviesItem genres={this.props.genres.genres} movies={topMovies} />
+          {this.props.topMovies.isLoading ? (
+            <Loader />
+          ) : (
+            <TopMoviesItem
+              genres={this.props.genres.genres}
+              movies={topMovies}
+            />
+          )}
 
           {this.state.results.length >= 1 ? (
             <Paginate
@@ -70,7 +79,6 @@ function mapStateToProps(state) {
   return {
     genres: state.genres,
     topMovies: state.topMovies,
-    loaded: state.loaded,
     api: state.api.api
   };
 }

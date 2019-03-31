@@ -25,9 +25,16 @@
   height: 3rem;
   right: 3rem;
   top: 2.5rem;
+  @media only screen and (min-width: 1026px) {
+    display: none;
+  }
   @media only screen and (max-width: 415px) {
     top: 1.5rem;
   }
+}
+
+.bm-burger-button > button:active {
+  outline: none;
 }
 
 /* Color/shape of burger icon bars */
@@ -43,9 +50,16 @@
   font-size: 3rem !important;
   // font-size: 555rem;
   color: var(--color-arrow-1);
+  top: 15px !important;
+  right: 30px !important;
+}
+.bm-cross-button > button:active {
+  outline: none;
+  border: none;
 }
 .bm-cross-button > span {
-  top: 10px !important;
+  // top: 5px !important;
+  top: 0 !important;
   // width: 10px !important;
 }
 
@@ -56,6 +70,12 @@
   height: 25px !important;
 }
 
+.bm-item,
+.bm-item:active {
+  border: none;
+  outline: none;
+  width: 50%;
+}
 /* General sidebar styles */
 .bm-menu {
   // background: #373a47;

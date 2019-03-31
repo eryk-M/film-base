@@ -1,14 +1,22 @@
-import { FETCH_TV_DETAILS } from "../../actions/TVactions/TVDetails.actions";
+import {
+  FETCH_TV_DETAILS_BEGIN,
+  FETCH_TV_DETAILS_SUCCESS,
+  FETCH_TV_DETAILS_FAILURE
+} from "../../actions/TVactions/TVDetails.actions";
 
 let initialState = {
   results: [],
-  loaded: false
+  isLoading: true
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_TV_DETAILS:
-      return { ...state, ...action.payload, loaded: true };
+    case FETCH_TV_DETAILS_BEGIN:
+      return { ...state, isLoading: true };
+    case FETCH_TV_DETAILS_SUCCESS:
+      return { ...state, ...action.payload, isLoading: false };
+    case FETCH_TV_DETAILS_FAILURE:
+      return { ...state, isLoading: true };
     default:
       return state;
   }

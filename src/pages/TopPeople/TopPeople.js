@@ -6,7 +6,7 @@ import TopPeopleItem from "./TopPeopleItem/TopPeopleItem.js";
 import "../MainStyling.scss";
 import { animateScroll as scroll } from "react-scroll";
 import Paginate from "../../components/Paginate/Paginate";
-
+import Loader from "../../components/Loader/Loader";
 class TopPeople extends Component {
   state = {
     totalPages: 1,
@@ -48,9 +48,12 @@ class TopPeople extends Component {
           ) : null}
         </div>
         <div className="main__container">
-          <TopPeopleItem people={topPeople} visible={this.state.visible} />
+          {this.props.topPeople.isLoading ? (
+            <Loader />
+          ) : (
+            <TopPeopleItem people={topPeople} visible={this.state.visible} />
+          )}
 
-          {/* <TopPeopleItem people={topPeople} visible={this.state.visible} /> */}
           {this.state.results.length >= 1 ? (
             <Paginate
               totalPages={this.state.totalPages}
@@ -66,7 +69,6 @@ class TopPeople extends Component {
 function mapStateToProps(state) {
   return {
     topPeople: state.topPeople,
-    loaded: state.loaded,
     api: state.api.api
   };
 }

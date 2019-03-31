@@ -7,7 +7,6 @@ import { withRouter } from "react-router-dom";
 import { getGenres } from "../../actions/genres.actions";
 import { getSearchResults } from "../../actions/search.actions";
 import Loader from "../../components/Loader/Loader";
-// import InfiniteScroll from "react-infinite-scroller";
 import SearchMoviesItem from "./SearchMoviesItem/SearchMoviesItem";
 
 class SearchMovies extends Component {
@@ -15,7 +14,6 @@ class SearchMovies extends Component {
     totalPages: 1,
     page: 1,
     results: [],
-    loaded: false,
     film: ""
   };
 
@@ -34,6 +32,9 @@ class SearchMovies extends Component {
         this.props.api,
         1
       );
+      this.setState({
+        film: this.props.location.state.film
+      });
     }
     if (this.props.searchResults.total_pages !== this.state.totalPages) {
       this.setState(() => ({
@@ -81,7 +82,6 @@ class SearchMovies extends Component {
     };
     const searchResults = this.props.searchResults.results;
     return (
-      // <InfiniteScroll pageStart={0} loadMore={this.getMore} hasMore={true}>
       <div className="main">
         <h1 className="main__heading">
           Search results for "{this.props.location.state.film}"
@@ -92,7 +92,6 @@ class SearchMovies extends Component {
             style={this.state.page === 1 ? btnOff : null}
             onClick={() => {
               this.handlePagination("minus");
-              // this.handleGetDiscover();
             }}
           >
             Previous
@@ -101,8 +100,6 @@ class SearchMovies extends Component {
             style={this.state.page === this.state.totalPages ? btnOff : null}
             onClick={() => {
               this.handlePagination("add");
-              // this.handleGetDiscover();
-              // this.plus();
             }}
           >
             Next
@@ -114,17 +111,16 @@ class SearchMovies extends Component {
           <span>{this.props.searchResults.total_results}</span>
         </p>
         <div className="main__container">
-          {this.props.searchResults.loaded ? (
+          {this.props.searchResults.isLoading ? (
+            <Loader />
+          ) : (
             <SearchMoviesItem
               genres={this.props.genres.genres}
               results={searchResults}
             />
-          ) : (
-            <Loader />
           )}
         </div>
       </div>
-      // </InfiniteScroll>
     );
   }
 }

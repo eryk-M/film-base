@@ -15,10 +15,7 @@ class App extends Component {
       <BrowserRouter>
         <ScrollToTop>
           <div className="App" id="outer-container">
-            <Burger
-              pageWrapId={"page-wrap"}
-              outerContainerId={"outer-container"}
-            />
+            <Burger />
             <div id="page-wrap">
               <SearchBar />
               <main>

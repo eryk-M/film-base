@@ -234,20 +234,15 @@ class Discover extends Component {
           <span>{this.props.discover.total_pages}</span> Total results:{" "}
           <span>{this.props.discover.total_results}</span>
         </p>
-        {this.props.discover.loaded ? (
+        {this.props.discover.isLoading ? (
+          <Loader />
+        ) : (
           <div className="main__container">
             <DiscoverItem
               genres={this.props.genres.genres}
               discover={discover}
             />
           </div>
-        ) : (
-          <Loader
-            style={{
-              margin: "0 auto",
-              width: "100%"
-            }}
-          />
         )}
       </div>
     );

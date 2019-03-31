@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import "./Burger.scss";
-import { slide as Menu } from "react-burger-menu";
+import { stack as Menu } from "react-burger-menu";
 import { NavLink } from "react-router-dom";
 
 const burgerList = [
@@ -23,14 +23,19 @@ class Burger extends Component {
   };
 
   render() {
-    const burgerMenu = burgerList.map(burgerItem => (
-      <NavLink onClick={this.handleClick} exact to={burgerItem.path}>
+    const burgerMenu = burgerList.map((burgerItem, i) => (
+      <NavLink key={i} onClick={this.handleClick} exact to={burgerItem.path}>
         {" "}
         {burgerItem.name}
       </NavLink>
     ));
     return (
-      <Menu right isOpen={this.state.isOpen}>
+      <Menu
+        right
+        isOpen={this.state.isOpen}
+        pageWrapId={"page-wrap"}
+        outerContainerId={"outer-container"}
+      >
         {/* <NavLink onClick={this.handleClick} to="/" exact className="menu-item">
           Upcoming movies
         </NavLink>

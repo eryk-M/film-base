@@ -9,6 +9,7 @@ import "../MainStyling.scss";
 
 import { animateScroll as scroll } from "react-scroll";
 import Paginate from "../../components/Paginate/Paginate";
+
 class TopTV extends Component {
   state = {
     totalPages: 1,
@@ -51,11 +52,12 @@ class TopTV extends Component {
           ) : null}
         </div>
         <div className="main__container">
-          {this.props.topTV.loaded ? (
-            <TopTVItem genres={this.props.genres.genres} topTV={topTV} />
-          ) : (
+          {this.props.topTV.isLoading ? (
             <Loader />
+          ) : (
+            <TopTVItem genres={this.props.genres.genres} topTV={topTV} />
           )}
+
           {this.state.results.length >= 1 ? (
             <Paginate
               totalPages={this.state.totalPages}
