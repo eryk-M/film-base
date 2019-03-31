@@ -34,7 +34,6 @@ class Profile extends Component {
       this.props.history.push({
         pathname: "/"
       });
-      alert("You need to login first!");
     }
   }
   componentDidUpdate() {

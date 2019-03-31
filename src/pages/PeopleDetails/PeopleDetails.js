@@ -16,31 +16,23 @@ import Swiper from "react-id-swiper";
 import { Navigation } from "swiper/dist/js/swiper.esm";
 
 class PeopleDetails extends Component {
-  state = {
-    profile_path: ""
-  };
-
   componentDidMount() {
     this.props.getPeopleDetails(this.props.match.params.id, this.props.api);
     this.props.getPeopleCredits(this.props.match.params.id, this.props.api);
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.peopleDetails.profile_path !== this.state.profile_path) {
-      this.setState({
-        profile_path: newProps.peopleDetails.profile_path
-      });
-    }
-  }
-
-  render() {
-    const width = window.innerWidth;
-    const error = { ...this.props.peopleDetails.errors };
-    if (error[0] === "id is not a valid integer") {
+  componentDidUpdate() {
+    if (this.props.peopleDetails.error) {
       this.props.history.push({
         pathname: "/error"
       });
     }
+  }
+  render() {
+    //INNER WIDTH FOR SWIPER CHANGING
+    const width = window.innerWidth;
+
+    //CHECK HOW MANY YEARS U GOT
     const datem = new Date().getUTCMonth();
     const datey = new Date().getFullYear();
     const dated = new Date().getUTCDate();
@@ -85,10 +77,11 @@ class PeopleDetails extends Component {
       params.slidesPerView = 2;
     }
     const profileImage = `https://image.tmdb.org/t/p/w300${
-      this.state.profile_path
+      this.props.peopleDetails.profile_path
     }`;
 
     const cast = this.props.peopleCredits.cast;
+    //CHECK IF DIED > IF YES > GRAY PICTURE && RIBBON
     const grayDied = {
       filter: "grayscale(1)"
     };
@@ -100,7 +93,7 @@ class PeopleDetails extends Component {
           <div className="people">
             <div className="people__right-wrapper">
               <div className="people__image-wrapper">
-                {this.state.profile_path ? (
+                {this.props.peopleDetails.profile_path ? (
                   <img
                     style={peopleDetails.deathday ? grayDied : null}
                     className="people__image"

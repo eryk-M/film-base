@@ -46,6 +46,13 @@ class MovieDetails extends Component {
       }
     }
   }
+  componentDidUpdate() {
+    if (this.props.moviesDetails.error || this.props.TVDetails.error) {
+      this.props.history.push({
+        pathname: "/error"
+      });
+    }
+  }
 
   handleFetchData = (id, type = this.props.match.params.type) => {
     if (type === "movies") {
@@ -255,10 +262,14 @@ class MovieDetails extends Component {
                 </div>
                 <div className="movie__cast">
                   <p className="movie__cast-heading">Cast</p>
-                  {actors.length > 0 && (
+                  {actors.length > 0 ? (
                     <Swiper {...params}>
                       <MovieDetailsPeople people={actors} />
                     </Swiper>
+                  ) : (
+                    <p className="movie__trailer-paragraph">
+                      No info about cast...
+                    </p>
                   )}
                 </div>
                 <div className="movie__trailer">
@@ -375,10 +386,19 @@ class MovieDetails extends Component {
                 </div>
                 <div className="movie__cast">
                   <p className="movie__cast-heading">Cast</p>
-                  {actors.length > 0 && (
+                  {/* {actors.length > 0 && (
                     <Swiper {...params}>
                       <MovieDetailsPeople people={actors} />
                     </Swiper>
+                  )} */}
+                  {actors.length > 0 ? (
+                    <Swiper {...params}>
+                      <MovieDetailsPeople people={actors} />
+                    </Swiper>
+                  ) : (
+                    <p className="movie__trailer-paragraph">
+                      No info about cast...
+                    </p>
                   )}
                 </div>
                 <div className="movie__trailer">

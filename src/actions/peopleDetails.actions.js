@@ -9,19 +9,22 @@ export const getPeopleDetails = (person_id, api) => {
       `https://api.themoviedb.org/3/person/${person_id}?api_key=${api}&language=en-US
       `
     )
-      .then(res => res.json())
-      .then(peopleDetails => {
-        if (peopleDetails.success === false) {
-          alert(peopleDetails.status_message);
+      .then(res => {
+        if (res.ok) {
+          return res;
+        } else {
           dispatch({
             type: FETCH_PEOPLE_DETAILS_FAILURE
           });
-        } else {
-          dispatch({
-            type: FETCH_PEOPLE_DETAILS_SUCCESS,
-            payload: peopleDetails
-          });
         }
-      });
+      })
+      .then(res => res.json())
+      .then(peopleDetails => {
+        dispatch({
+          type: FETCH_PEOPLE_DETAILS_SUCCESS,
+          payload: peopleDetails
+        });
+      })
+      .catch(err => console.log(err));
   };
 };

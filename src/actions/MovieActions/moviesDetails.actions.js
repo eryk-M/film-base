@@ -8,19 +8,23 @@ export const getMovieDetails = (movie_id, api) => {
     fetch(
       `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${api}&language=en-US`
     )
-      .then(res => res.json())
-      .then(moviesDetails => {
-        if (moviesDetails.success === false) {
-          alert(moviesDetails.status_message);
+      .then(res => {
+        if (res.ok) {
+          console.log(res);
+          return res;
+        } else {
           dispatch({
             type: FETCH_MOVIES_DETAILS_FAILURE
           });
-        } else {
-          dispatch({
-            type: FETCH_MOVIES_DETAILS_SUCCESS,
-            payload: moviesDetails
-          });
         }
-      });
+      })
+      .then(res => res.json())
+      .then(moviesDetails => {
+        dispatch({
+          type: FETCH_MOVIES_DETAILS_SUCCESS,
+          payload: moviesDetails
+        });
+      })
+      .catch(err => console.log(err));
   };
 };
