@@ -8,7 +8,6 @@ import "./Discover.scss";
 import DiscoverItem from ".././Discover/DiscoverItem/DiscoverItem";
 import Nouislider from "nouislider-react";
 import "nouislider/distribute/nouislider.css";
-import Loader from "../../components/Loader/Loader";
 
 class Discover extends Component {
   state = {
@@ -234,16 +233,18 @@ class Discover extends Component {
           <span>{this.props.discover.total_pages}</span> Total results:{" "}
           <span>{this.props.discover.total_results}</span>
         </p>
-        {this.props.discover.isLoading ? (
-          <Loader />
-        ) : (
-          <div className="main__container">
+        <div className="main__container">
+          {this.props.discover.isLoading ? (
+            <div className="loader-wrapper discover-mobile">
+              <div className="loader" />
+            </div>
+          ) : (
             <DiscoverItem
               genres={this.props.genres.genres}
               discover={discover}
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     );
   }

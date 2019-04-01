@@ -10,7 +10,6 @@ export const getMovieDetails = (movie_id, api) => {
     )
       .then(res => {
         if (res.ok) {
-          console.log(res);
           return res;
         } else {
           dispatch({

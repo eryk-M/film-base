@@ -43,9 +43,9 @@ class TopPeople extends Component {
         <div className="main__info">
           <h1 className="main__heading">top rated people</h1>
 
-          {this.props.topPeople.total_results ? (
+          {this.props.topPeople.isLoading ? null : (
             <p>{this.props.topPeople.total_results} results</p>
-          ) : null}
+          )}
         </div>
         <div className="main__container">
           {this.props.topPeople.isLoading ? (

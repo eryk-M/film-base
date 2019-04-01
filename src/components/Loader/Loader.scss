@@ -65,6 +65,16 @@
   top: 50%;
   left: 47%;
   z-index: 10;
+  @media only screen and (max-width: 415px) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.discover-mobile {
+  @media only screen and (max-width: 415px) {
+    top: 80%;
+  }
 }
 .loader {
   width: 8vmax;

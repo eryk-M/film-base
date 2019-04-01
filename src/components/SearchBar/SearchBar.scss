@@ -10,11 +10,8 @@
   }
   &__logo {
     z-index: 1;
-    // height: 25rem;
     width: 25rem;
     text-align: center;
-    // background-color: var(--color-nav);
-    // background-image: url("/src/assets/images/logo.png");
     position: relative;
     box-shadow: none;
     @media only screen and (max-width: 1025px) {

@@ -12,7 +12,7 @@ import "./Profile.scss";
 import noImage from "../../assets/images/no_image.png";
 class Profile extends Component {
   componentDidMount() {
-    const approved = this.props.location.search.split("&approved=")[1];
+    const approved = Boolean(this.props.location.search.split("&approved=")[1]);
     const session = localStorage.getItem("session");
     const userID = localStorage.getItem("user_id");
     if (approved) {
@@ -94,7 +94,12 @@ class Profile extends Component {
           </span>
         </h1>
         <div className="profile__favorites">
-          <h2 className="profile__heading-secondary">Your favorite movies</h2>
+          <h2 className="profile__heading-secondary">
+            Your favorite movies{" "}
+            {this.props.movieFavorites.results.length >= 1
+              ? ` (${this.props.movieFavorites.results.length})`
+              : " (0)"}
+          </h2>
           <div className="profile__movies">
             {this.props.status === "guest" ? (
               <div className="profile__guest">
@@ -142,7 +147,12 @@ class Profile extends Component {
             )}
           </div>
 
-          <h2 className="profile__heading-secondary">Your favorite TV shows</h2>
+          <h2 className="profile__heading-secondary">
+            Your favorite TV shows{" "}
+            {this.props.TVFavorites.results.length >= 1
+              ? ` (${this.props.TVFavorites.results.length})`
+              : " (0)"}
+          </h2>
           <div className="profile__tv">
             {this.props.status === "guest" ? (
               <div className="profile__guest">

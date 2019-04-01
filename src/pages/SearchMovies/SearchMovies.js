@@ -6,8 +6,8 @@ import "../MainStyling.scss";
 import { withRouter } from "react-router-dom";
 import { getGenres } from "../../actions/genres.actions";
 import { getSearchResults } from "../../actions/search.actions";
-import Loader from "../../components/Loader/Loader";
 import SearchMoviesItem from "./SearchMoviesItem/SearchMoviesItem";
+import Loader from "../../components/Loader/Loader";
 
 class SearchMovies extends Component {
   state = {

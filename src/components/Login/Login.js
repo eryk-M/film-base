@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import "./Login.scss";
-import LoginLogo from "../../assets/images/login.png";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { changeStatus } from "../../actions/auth/changeStatus.actions";
@@ -18,7 +17,7 @@ class Login extends Component {
         }}
       >
         <div className="login__blob">
-          <img className="login__blob-image" src={LoginLogo} alt="" />
+          <i className="fas fa-user-circle" />
         </div>
         <a
           href={`https://www.themoviedb.org/authenticate/${

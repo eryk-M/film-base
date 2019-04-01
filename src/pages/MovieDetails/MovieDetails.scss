@@ -25,6 +25,9 @@
     @media only screen and (max-width: 1025px) {
       right: 0;
     }
+    @media only screen and (max-width: 415px) {
+      bottom: 21rem;
+    }
   }
   &__favorite-accept {
     position: absolute;
@@ -105,7 +108,8 @@
     }
     @media only screen and (max-width: 415px) {
       top: 140%;
-      left: 0%;
+      width: 100%;
+      text-align: left;
     }
   }
   &__info {
@@ -127,7 +131,7 @@
     }
     @media only screen and (max-width: 415px) {
       left: 40%;
-      top: 60%;
+      top: 52%;
     }
     @media only screen and (max-width: 376px) {
       left: 45%;
@@ -160,7 +164,7 @@
       right: 1rem;
     }
     @media only screen and (max-width: 376px) {
-      bottom: 15rem;
+      bottom: 15.5rem;
     }
   }
   &__rating {
@@ -262,6 +266,7 @@
     @media only screen and (max-width: 1025px) {
       width: 100%;
     }
+
     & iframe {
       padding: 2rem 1rem;
       padding-top: 9rem;
@@ -303,6 +308,9 @@
       font-size: 4rem;
       color: var(--color-white-2);
       font-weight: 100;
+      @media only screen and (max-width: 415px) {
+        font-size: 2rem;
+      }
     }
   }
 
@@ -366,5 +374,6 @@
   @media only screen and (max-width: 415px) {
     // top: 1rem;
     right: 1rem;
+    top: 4rem;
   }
 }

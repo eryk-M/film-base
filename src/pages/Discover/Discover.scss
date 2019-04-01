@@ -5,7 +5,7 @@
   justify-content: space-evenly;
   align-items: center;
   max-width: 136rem;
-  animation: appear 0.7s linear;
+  animation: appear 1s linear;
   @media only screen and (max-width: 415px) {
     width: 100%;
     flex-direction: column;
@@ -68,6 +68,9 @@
     @media only screen and (max-width: 415px) {
       width: 100%;
       margin: 2rem auto 0;
+    }
+    @media only screen and (max-width: 321px) {
+      font-size: 1.4rem;
     }
     & span {
       font-weight: 600;
@@ -151,6 +154,7 @@
     }
     @media only screen and (max-width: 415px) {
       margin-top: 10rem;
+      z-index: 0;
     }
   }
   &:before {
@@ -253,6 +257,8 @@
     transition: 0.4s all;
   }
   @media only screen and (max-width: 415px) {
+    // margin-top: 10rem;
+    box-sizing: content-box;
     margin-top: 10rem;
   }
 }
@@ -264,7 +270,7 @@
   justify-content: center;
   margin-top: 3rem;
   @media only screen and (max-width: 415px) {
-    width: 50rem;
+    width: 100vw;
   }
   & button {
     color: var(--color-white-2);
@@ -291,11 +297,17 @@
   left: 18rem;
   width: 12rem;
   margin-top: 3.2rem;
+  @media only screen and (max-width: 415px) {
+    z-index: 1;
+  }
 }
 .main__sort-info--1 {
   position: absolute;
   left: 0;
   margin-top: 3.2rem;
+  @media only screen and (max-width: 415px) {
+    z-index: 1;
+  }
 }
 .main__sort-info-input {
   width: 8rem;

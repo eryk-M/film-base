@@ -52,9 +52,9 @@ class Upcoming extends Component {
         <div className="main__info">
           <h1 className="main__heading">Upcoming movies</h1>
 
-          {this.props.movies.total_results ? (
+          {this.props.movies.isLoading ? null : (
             <p>{this.props.movies.total_results} results</p>
-          ) : null}
+          )}
         </div>
         <div className="main__container">
           {this.props.movies.isLoading ? (

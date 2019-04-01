@@ -51,9 +51,9 @@ class TopTV extends Component {
         <div className="main__info">
           <h1 className="main__heading">top rated tv shows</h1>
 
-          {this.props.topTV.total_results ? (
+          {this.props.topTV.isLoading ? null : (
             <p>{this.props.topTV.total_results} results</p>
-          ) : null}
+          )}
         </div>
         <div className="main__container">
           {this.props.topTV.isLoading ? (

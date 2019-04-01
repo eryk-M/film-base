@@ -36,6 +36,11 @@ class NavBar extends Component {
         }
       });
     }
+    document.querySelector("main").addEventListener("click", () => {
+      this.setState({
+        login: false
+      });
+    });
   }
   handleLogin = () => {
     this.setState({
