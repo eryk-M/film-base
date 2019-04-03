@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import UpcomingItem from "./UpcomingItem/UpcomingItem";
+// import UpcomingItem from "./UpcomingItem/UpcomingItem";
+// import TopMoviesItem from '../TopMovies/TopMoviesItem/TopMoviesItem'
+import MainItemDetails from "../../components/MainItemsDetails/MainItemDetails";
 import "../MainStyling.scss";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -61,7 +63,11 @@ class Upcoming extends Component {
             <Loader />
           ) : (
             <>
-              <UpcomingItem genres={this.props.genres.genres} movies={movies} />
+              <MainItemDetails
+                genres={this.props.genres.genres}
+                movies={movies}
+                link={`movies`}
+              />
               <Paginate
                 selected={this.state.page - 1}
                 totalPages={this.state.totalPages}

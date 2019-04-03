@@ -5,7 +5,7 @@ import { getGenres } from "../../actions/genres.actions";
 import { getDiscover } from "../../actions/discover.actions";
 import "../MainStyling.scss";
 import "./Discover.scss";
-import DiscoverItem from ".././Discover/DiscoverItem/DiscoverItem";
+import MainItemDetails from "../../components/MainItemsDetails/MainItemDetails";
 import Nouislider from "nouislider-react";
 import "nouislider/distribute/nouislider.css";
 
@@ -239,9 +239,10 @@ class Discover extends Component {
               <div className="loader" />
             </div>
           ) : (
-            <DiscoverItem
+            <MainItemDetails
               genres={this.props.genres.genres}
-              discover={discover}
+              movies={discover}
+              link={`movies`}
             />
           )}
         </div>

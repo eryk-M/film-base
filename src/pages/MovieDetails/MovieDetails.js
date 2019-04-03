@@ -386,11 +386,6 @@ class MovieDetails extends Component {
                 </div>
                 <div className="movie__cast">
                   <p className="movie__cast-heading">Cast</p>
-                  {/* {actors.length > 0 && (
-                    <Swiper {...params}>
-                      <MovieDetailsPeople people={actors} />
-                    </Swiper>
-                  )} */}
                   {actors.length > 0 ? (
                     <Swiper {...params}>
                       <MovieDetailsPeople people={actors} />

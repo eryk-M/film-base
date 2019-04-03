@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Loader from "../../components/Loader/Loader";
 import { getGenres } from "../../actions/genres.actions";
 import { getTopTV } from "../../actions/topTV.actions";
-import TopTVItem from "./TopTVItem/TopTVItem";
+import MainItemDetails from "../../components/MainItemsDetails/MainItemDetails";
 import "../MainStyling.scss";
 
 import { animateScroll as scroll } from "react-scroll";
@@ -60,7 +60,11 @@ class TopTV extends Component {
             <Loader />
           ) : (
             <>
-              <TopTVItem genres={this.props.genres.genres} topTV={topTV} />
+              <MainItemDetails
+                genres={this.props.genres.genres}
+                movies={topTV}
+                link={"tv"}
+              />
 
               <Paginate
                 selected={this.state.page - 1}

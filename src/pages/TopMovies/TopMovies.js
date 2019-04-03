@@ -3,8 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getGenres } from "../../actions/genres.actions";
 import { getTopMovies } from "../../actions/topMovies.actions";
-import TopMoviesItem from "./TopMoviesItem/TopMoviesItem";
-// import InfiniteScroll from "react-infinite-scroller";
+import MainItemDetails from "../../components/MainItemsDetails/MainItemDetails";
 import "../MainStyling.scss";
 import { animateScroll as scroll } from "react-scroll";
 import Paginate from "../../components/Paginate/Paginate";
@@ -58,9 +57,10 @@ class TopMovies extends Component {
             <Loader />
           ) : (
             <>
-              <TopMoviesItem
+              <MainItemDetails
                 genres={this.props.genres.genres}
                 movies={topMovies}
+                link={`movies`}
               />
               <Paginate
                 selected={this.state.page - 1}

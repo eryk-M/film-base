@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { getTopPeople } from "../../actions/topPeople.actions";
-import TopPeopleItem from "./TopPeopleItem/TopPeopleItem.js";
+import MainItemDetails from "../../components/MainItemsDetails/MainItemDetails";
 import "../MainStyling.scss";
 import { animateScroll as scroll } from "react-scroll";
 import Paginate from "../../components/Paginate/Paginate";
@@ -52,7 +52,11 @@ class TopPeople extends Component {
             <Loader />
           ) : (
             <>
-              <TopPeopleItem people={topPeople} visible={this.state.visible} />
+              <MainItemDetails
+                link={`people`}
+                people={topPeople}
+                visible={this.state.visible}
+              />
               <Paginate
                 selected={this.state.page - 1}
                 totalPages={this.state.totalPages}
