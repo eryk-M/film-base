@@ -10,6 +10,7 @@ class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    this.refs.input.blur()
     this.setState({
       redirect: true,
       film: ""
@@ -34,6 +35,7 @@ class Search extends Component {
       <div className="search">
         <form onSubmit={this.handleSubmit}>
           <input
+          ref="input"
             type="text"
             placeholder="Search movies..."
             value={this.state.film}

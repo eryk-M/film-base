@@ -85,6 +85,7 @@ class PeopleDetails extends Component {
     const grayDied = {
       filter: "grayscale(1)"
     };
+
     return (
       <>
         {this.props.peopleDetails.isLoading ? (
@@ -106,14 +107,18 @@ class PeopleDetails extends Component {
               </div>
 
               <div className="people__text-box">
-                {peopleDetails.deathday ? <i class="fas fa-ribbon" /> : null}
+                {peopleDetails.deathday ? (
+                  <i className="fas fa-ribbon" />
+                ) : null}
                 <h3 className="people__name">{peopleDetails.name}</h3>
                 <div className="people__info">
                   <p className="people__info-para">Info</p>
                   <p className="people__birth-day">
                     Born:{" "}
                     {peopleDetails.birthday
-                      ? peopleDetails.birthday + `   / ${yo} years old`
+                      ? peopleDetails.deathday
+                        ? peopleDetails.birthday
+                        : peopleDetails.birthday + `   / ${yo} years old`
                       : "No info"}
                   </p>
                   <p className="people__birth">
@@ -121,7 +126,10 @@ class PeopleDetails extends Component {
                   </p>
                   {peopleDetails.deathday ? (
                     <p className="people__death">
-                      Died: {peopleDetails.deathday}
+                      Died: {peopleDetails.deathday} /{" "}
+                      {peopleDetails.deathday.substr(0, 4) -
+                        yearsy +
+                        " years old"}
                     </p>
                   ) : null}
                   <p className="people__popularity">
