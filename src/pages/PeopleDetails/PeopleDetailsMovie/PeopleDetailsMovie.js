@@ -14,10 +14,12 @@ const PeopleDetailsMovie = props => {
               <img
                 className="people__item-img"
                 src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
-                alt=""
+                alt={item.title}
               />
             ) : (
-              "NO IMAGE FOUND"
+              <p style={{ textAlign: "center", color: "var(--color-white-2)" }}>
+                No image found
+              </p>
             )}
 
             <h2 className="people__item-heading">

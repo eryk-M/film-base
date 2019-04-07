@@ -128,7 +128,7 @@ class Profile extends Component {
                             }`
                           : noImage
                       }
-                      alt=""
+                      alt={result.title}
                     />
 
                     <h3 className="profile__movies-item-heading">
@@ -181,7 +181,7 @@ class Profile extends Component {
                             }`
                           : noImage
                       }
-                      alt=""
+                      alt={result.original_name}
                     />
 
                     <h3 className="profile__movies-item-heading">

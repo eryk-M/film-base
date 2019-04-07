@@ -47,7 +47,11 @@ class MainItemDetails extends Component {
                       ? `https://image.tmdb.org/t/p/w342${item.poster_path}`
                       : noImage
                   }
-                  alt=""
+                  alt={
+                    this.props.link === "movies"
+                      ? item.title
+                      : item.original_name
+                  }
                 />
 
                 <h2 className="main__heading-tertiary">
@@ -76,7 +80,7 @@ class MainItemDetails extends Component {
                 <img
                   className="main__img"
                   src={`https://image.tmdb.org/t/p/w185${item.profile_path}`}
-                  alt=""
+                  alt={item.name}
                 />
 
                 <h2 className="main__heading-tertiary-people">{item.name}</h2>

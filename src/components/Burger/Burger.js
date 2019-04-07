@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 import "./Burger.scss";
 import { slide as Menu } from "react-burger-menu";
 import { NavLink } from "react-router-dom";
@@ -36,34 +35,6 @@ class Burger extends Component {
         pageWrapId={"page-wrap"}
         outerContainerId={"outer-container"}
       >
-        {/* <NavLink onClick={this.handleClick} to="/" exact className="menu-item">
-          Upcoming movies
-        </NavLink>
-        <NavLink
-          onClick={this.handleClick}
-          to="/movies/top"
-          className="menu-item"
-        >
-          Top rated movies
-        </NavLink>
-        <NavLink
-          onClick={this.handleClick}
-          to="/discover"
-          className="menu-item"
-        >
-          Discover movies
-        </NavLink>
-
-        <NavLink
-          onClick={this.handleClick}
-          to="/people/top"
-          className="menu-item"
-        >
-          Top rated people
-        </NavLink>
-        <NavLink onClick={this.handleClick} to="/tv/top" className="menu-item">
-          Top rated TV shows
-        </NavLink> */}
         {burgerMenu}
       </Menu>
     );

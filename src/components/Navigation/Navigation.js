@@ -23,6 +23,17 @@ const Navigation = () => {
     <>
       <nav className="navigation">
         <ul className="navigation__list">{menu}</ul>
+
+        <div className="navigation__made">
+          <a
+            href="https://github.com/eryk-M"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i className="fab fa-github" />
+          </a>
+          <span>Made by eryk-M</span>
+        </div>
       </nav>
     </>
   );

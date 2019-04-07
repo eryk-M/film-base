@@ -88,20 +88,24 @@
     }
   }
 
-  &__greeting {
-    display: none;
-    text-align: center;
-    width: 100%;
-    position: absolute;
-    top: 82%;
-    background-color: rgba(0, 0, 0, 0.5);
-    height: 100%;
-    font-size: 1.4rem;
+  &__made {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.6rem;
     color: var(--color-white-2);
-    &-image {
-      margin-top: 2rem;
-      height: 10rem;
-      width: auto;
+    position: absolute;
+    top: 87%;
+    left: 25%;
+    & i,
+    & i:active {
+      font-size: 4rem;
+      color: var(--color-white-2);
+      margin-bottom: 1rem;
+      &:hover {
+        color: var(--color-arrow-1);
+      }
     }
   }
   @media only screen and (max-width: 1025px) {
