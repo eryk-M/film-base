@@ -1,4 +1,4 @@
-import { PEOPLE_MOVIE_CREDITS } from "../actions/peopleMovieCredits.actions";
+import { PEOPLE_MOVIE_CREDITS } from "../../actions/peopleActions/peopleMovieCredits.actions";
 
 let initialState = {
   cast: []

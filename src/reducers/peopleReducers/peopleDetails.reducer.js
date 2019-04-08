@@ -2,7 +2,7 @@ import {
   FETCH_PEOPLE_DETAILS_BEGIN,
   FETCH_PEOPLE_DETAILS_SUCCESS,
   FETCH_PEOPLE_DETAILS_FAILURE
-} from "../actions/peopleDetails.actions";
+} from "../../actions/peopleActions/peopleDetails.actions";
 
 let initialState = {
   results: [],

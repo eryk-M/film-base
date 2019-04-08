@@ -6,12 +6,12 @@ import "./PeopleDetails.scss";
 
 import { connect } from "react-redux";
 
-import { getPeopleDetails } from "../../actions/peopleDetails.actions";
-import { getPeopleCredits } from "../../actions/peopleMovieCredits.actions";
+import { getPeopleDetails } from "../../actions/peopleActions/peopleDetails.actions";
+import { getPeopleCredits } from "../../actions/peopleActions/peopleMovieCredits.actions";
 import { withRouter } from "react-router-dom";
 
 import Loader from "../../components/Loader/Loader";
-import PeopleDetailsMovie from "../../pages/PeopleDetails/PeopleDetailsMovie/PeopleDetailsMovie";
+import PeopleDetailsMovie from "./PeopleDetailsMovie/PeopleDetailsMovie";
 import Swiper from "react-id-swiper";
 import icons from "../../assets/icons.svg";
 import { Navigation } from "swiper/dist/js/swiper.esm";
@@ -86,7 +86,6 @@ class PeopleDetails extends Component {
     const grayDied = {
       filter: "grayscale(1)"
     };
-
     return (
       <>
         {this.props.peopleDetails.isLoading ? (

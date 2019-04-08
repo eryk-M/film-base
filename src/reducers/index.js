@@ -11,8 +11,8 @@ import topMovies from "./topMovies.reducer";
 import topPeople from "./topPeople.reducer";
 import topTV from "./topTV.reducer";
 //PEOPLE DETAILS
-import peopleDetails from "./peopleDetails.reducer";
-import peopleCredits from "./peopleMovieCredits.reducer";
+import peopleDetails from "./peopleReducers/peopleDetails.reducer";
+import peopleCredits from "./peopleReducers/peopleMovieCredits.reducer";
 //AUTHENTICATION
 import requestToken from "./auth/getRequestToken.reducer";
 import sessionID from "./auth/postSessionId.reducer";
