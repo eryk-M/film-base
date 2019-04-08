@@ -9,10 +9,12 @@ import "./MovieDetails.scss";
 import { getMovieDetails } from "../../actions/MovieActions/moviesDetails.actions";
 import { getVideos } from "../../actions/MovieActions/videos.actions";
 import { getMovieCredits } from "../../actions/MovieActions/movieCredits.actions";
+import { getMovieReviews } from "../../actions/MovieActions/movieReviews.actions";
 
 import { getTVDetails } from "../../actions/TVactions/TVDetails.actions";
 import { getTVVideos } from "../../actions/TVactions/TVVideos.actions";
 import { getTVCredits } from "../../actions/TVactions/TVCredits.actions";
+import { getTVReviews } from "../../actions/TVactions/TVReviews.actions";
 
 import { getMovieAccountState } from "../../actions/userFavorites/movieAccountState.actions";
 import { getTVAccountState } from "../../actions/userFavorites/TVAccountState.actions";
@@ -60,10 +62,12 @@ class MovieDetails extends Component {
       this.props.getMovieDetails(id, this.props.api);
       this.props.getVideos(id, this.props.api);
       this.props.getMovieCredits(id, this.props.api);
+      this.props.getMovieReviews(id, this.props.api);
     } else if (type === "tv") {
       this.props.getTVDetails(id, this.props.api);
       this.props.getTVVideos(id, this.props.api);
       this.props.getTVCredits(id, this.props.api);
+      this.props.getTVReviews(id, this.props.api);
     }
   };
   handleBack = () => {
@@ -300,6 +304,38 @@ class MovieDetails extends Component {
                     {just.length === 0 ? "No info about trailers..." : null}
                   </p>
                 </div>
+                <div className="movie__reviews">
+                  <p className="movie__reviews-heading">Reviews</p>
+                  <div className="movie__reviews-wrapper">
+                    {this.props.movieReviews.results.length !== 0 ? (
+                      this.props.movieReviews.results.map(review => (
+                        <div key={review.id} className="movie__reviews-item">
+                          <strong>
+                            <p className="movie__reviews-author">
+                              {review.author}
+                            </p>
+                          </strong>
+                          <p className="movie__reviews-content">
+                            "{review.content.substr(0, 255)}..."
+                          </p>
+                          <a
+                            href={review.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <p className="movie__reviews-check">
+                              Check full review <span>&rarr;</span>
+                            </p>
+                          </a>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="movie__trailer-paragraph">
+                        No reviews here...
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
           </>
@@ -434,6 +470,38 @@ class MovieDetails extends Component {
                     {just.length === 0 ? "No info about trailers..." : null}
                   </p>
                 </div>
+                <div className="movie__reviews">
+                  <p className="movie__reviews-heading">Reviews</p>
+                  <div className="movie__reviews-wrapper">
+                    {this.props.TVReviews.results.length !== 0 ? (
+                      this.props.TVReviews.results.map(review => (
+                        <div key={review.id} className="movie__reviews-item">
+                          <strong>
+                            <p className="movie__reviews-author">
+                              {review.author}
+                            </p>
+                          </strong>
+                          <p className="movie__reviews-content">
+                            "{review.content.substr(0, 255)}..."
+                          </p>
+                          <a
+                            href={review.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <p className="movie__reviews-check">
+                              Check full review <span>&rarr;</span>
+                            </p>
+                          </a>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="movie__trailer-paragraph">
+                        No reviews here...
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
             )}
           </>
@@ -457,10 +525,12 @@ function mapStateToProps(state) {
     moviesDetails: state.moviesDetails,
     videos: state.videos,
     movieCredits: state.movieCredits,
+    movieReviews: state.movieReviews,
 
     TVDetails: state.TVDetails,
     TVVideos: state.TVVideos,
     TVCredits: state.TVCredits,
+    TVReviews: state.TVReviews,
 
     accountDetails: state.accountDetails,
     sessionID: state.sessionID,
@@ -476,10 +546,12 @@ function mapDispatchToProps(dispatch) {
     getMovieDetails: bindActionCreators(getMovieDetails, dispatch),
     getVideos: bindActionCreators(getVideos, dispatch),
     getMovieCredits: bindActionCreators(getMovieCredits, dispatch),
+    getMovieReviews: bindActionCreators(getMovieReviews, dispatch),
 
     getTVDetails: bindActionCreators(getTVDetails, dispatch),
     getTVVideos: bindActionCreators(getTVVideos, dispatch),
     getTVCredits: bindActionCreators(getTVCredits, dispatch),
+    getTVReviews: bindActionCreators(getTVReviews, dispatch),
 
     getMovieAccountState: bindActionCreators(getMovieAccountState, dispatch),
     getTVAccountState: bindActionCreators(getTVAccountState, dispatch)
