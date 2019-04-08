@@ -20,6 +20,7 @@ import { getTVAccountState } from "../../actions/userFavorites/TVAccountState.ac
 import MovieDetailsPeople from "./MovieDetailsPeople/MovieDetailsPeople";
 import Loader from "../../components/Loader/Loader";
 import Swiper from "react-id-swiper";
+import icons from "../../assets/icons.svg";
 import { Navigation } from "swiper/dist/js/swiper.esm";
 
 class MovieDetails extends Component {
@@ -82,7 +83,7 @@ class MovieDetails extends Component {
             media_type: type,
             media_id: id,
             favorite: !e.target
-              .closest(".fa-heart")
+              .closest(".icon-heart")
               .classList.value.includes("--active")
           }),
           headers: {
@@ -92,7 +93,7 @@ class MovieDetails extends Component {
       )
         .then(res => res.json())
         .then(
-          e.target.closest(".fa-heart").classList.toggle("fa-heart--active")
+          e.target.closest(".icon-heart").classList.toggle("icon-heart--active")
         )
         .catch(error => alert(error));
     } else {
@@ -142,7 +143,7 @@ class MovieDetails extends Component {
     const date = new Date().toISOString().substr(0, 10);
     //SUPERFILM COLOR
     const superFilm = {
-      color: "rgba(46, 204, 113, 1)"
+      fill: "rgba(46, 204, 113, 1)"
     };
     let just,
       actors,
@@ -180,8 +181,14 @@ class MovieDetails extends Component {
                     backgroundImage: `url(${backdrop})`
                   }}
                 >
-                  <i onClick={this.handleBack} className="fas fa-undo" />{" "}
-                  <i
+                  <svg
+                    onClick={this.handleBack}
+                    className="icon icon-arrow-left"
+                  >
+                    <use xlinkHref={`${icons}#icon-arrow-left`} />
+                  </svg>
+
+                  <svg
                     onClick={e =>
                       this.handleFavorite(
                         e,
@@ -192,10 +199,13 @@ class MovieDetails extends Component {
                     }
                     className={
                       this.props.movieState.favorite
-                        ? "fas fa-heart fa-heart--active"
-                        : "fas fa-heart"
+                        ? "icon icon-heart icon-heart--active"
+                        : "icon icon-heart"
                     }
-                  />
+                  >
+                    <use xlinkHref={`${icons}#icon-heart`} />
+                  </svg>
+
                   <div
                     className="movie__favorite-warning"
                     style={{ display: "none" }}
@@ -234,12 +244,14 @@ class MovieDetails extends Component {
                     <p className="movie__rating">
                       Rating
                       <span>
-                        <i
+                        <svg
                           style={
                             moviesDetails.vote_average >= 7.5 ? superFilm : null
                           }
-                          className="fas fa-star"
-                        />
+                          className="icon icon-star-full"
+                        >
+                          <use xlinkHref={`${icons}#icon-star-full`} />
+                        </svg>
                         {moviesDetails.vote_average}{" "}
                       </span>
                     </p>
@@ -306,8 +318,14 @@ class MovieDetails extends Component {
                     backgroundImage: `url(${backdrop})`
                   }}
                 >
-                  <i onClick={this.handleBack} className="fas fa-undo" />{" "}
-                  <i
+                  <svg
+                    onClick={this.handleBack}
+                    className="icon icon-arrow-left"
+                  >
+                    <use xlinkHref={`${icons}#icon-arrow-left`} />
+                  </svg>
+
+                  <svg
                     onClick={e =>
                       this.handleFavorite(
                         e,
@@ -318,10 +336,12 @@ class MovieDetails extends Component {
                     }
                     className={
                       this.props.TVState.favorite
-                        ? "fas fa-heart fa-heart--active"
-                        : "fas fa-heart"
+                        ? "icon icon-heart icon-heart--active"
+                        : "icon icon-heart"
                     }
-                  />
+                  >
+                    <use xlinkHref={`${icons}#icon-heart`} />
+                  </svg>
                   <div
                     className="movie__favorite-warning"
                     style={{ display: "none" }}
@@ -358,12 +378,14 @@ class MovieDetails extends Component {
                     <p className="movie__rating">
                       Rating
                       <span>
-                        <i
+                        <svg
                           style={
                             TVDetails.vote_average >= 7.5 ? superFilm : null
                           }
-                          className="fas fa-star"
-                        />
+                          className="icon icon-star-full"
+                        >
+                          <use xlinkHref={`${icons}#icon-star-full`} />
+                        </svg>
                         {TVDetails.vote_average}{" "}
                       </span>
                     </p>

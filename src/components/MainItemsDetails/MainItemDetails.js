@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import noImage from "../../assets/images/no_image1.png";
+
 class MainItemDetails extends Component {
   genresHandler = genres => {
     //sprawdzam id gatunku, porownuje je do listy id gatunkow i zwracam nazwe gatunku

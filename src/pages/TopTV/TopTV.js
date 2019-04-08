@@ -22,7 +22,6 @@ class TopTV extends Component {
   }
 
   componentDidUpdate() {
-    // {this.props.topTV.isLoading ? }
     if (
       this.props.topTV.total_pages !== this.state.totalPages &&
       this.props.topTV.isLoading === false

@@ -3,8 +3,6 @@ import r2d2 from "../../assets/images/404.png";
 
 import "./NotFound.scss";
 
-// import '../../assets/images/'
-
 const NotFound = () => {
   return (
     <div className="notFound">

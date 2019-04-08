@@ -1,0 +1,14 @@
+.icon {
+  height: 2rem;
+  width: 2rem;
+  fill: var(--color-white-2);
+}
+.icon-github {
+  fill: var(--color-white-2);
+  height: 3rem;
+  width: 3rem;
+  transition: 0.4s fill;
+  &:hover {
+    fill: var(--color-arrow-1);
+  }
+}

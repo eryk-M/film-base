@@ -13,6 +13,7 @@ import { withRouter } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import PeopleDetailsMovie from "../../pages/PeopleDetails/PeopleDetailsMovie/PeopleDetailsMovie";
 import Swiper from "react-id-swiper";
+import icons from "../../assets/icons.svg";
 import { Navigation } from "swiper/dist/js/swiper.esm";
 
 class PeopleDetails extends Component {
@@ -108,7 +109,15 @@ class PeopleDetails extends Component {
 
               <div className="people__text-box">
                 {peopleDetails.deathday ? (
-                  <i className="fas fa-ribbon" />
+                  <svg
+                    className="icon icon-awareness-ribbon
+                          "
+                  >
+                    <use
+                      xlinkHref={`${icons}#icon-awareness-ribbon
+`}
+                    />
+                  </svg>
                 ) : null}
                 <h3 className="people__name">{peopleDetails.name}</h3>
                 <div className="people__info">

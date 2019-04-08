@@ -4,6 +4,7 @@ import ScrollUp from "../ScrollUp/ScrollUp";
 import Search from "../Search/Search";
 import Logo from "../Logo/Logo";
 import "./SearchBar.scss";
+import icons from "../../assets/icons.svg";
 import Login from "../Login/Login";
 import LoginButton from "../LoginButton/LoginButton";
 import { bindActionCreators } from "redux";
@@ -84,13 +85,17 @@ class NavBar extends Component {
                 className="searchbar__profile-user"
                 to={`/profile/${this.props.status}`}
               >
-                <i className="fas fa-user" />
+                <svg className="icon icon-user">
+                  <use xlinkHref={`${icons}#icon-user`} />
+                </svg>
               </Link>
               <button
                 className="searchbar__profile-logout"
                 onClick={this.handleLogout}
               >
-                <i className="fas fa-sign-out-alt" />
+                <svg className="icon icon-exit">
+                  <use xlinkHref={`${icons}#icon-exit`} />
+                </svg>
               </button>
             </div>
           ) : (

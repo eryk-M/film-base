@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Search.scss";
 import { withRouter } from "react-router-dom";
-
+import icons from "../../assets/icons.svg";
 class Search extends Component {
   state = {
     film: "",
@@ -10,7 +10,7 @@ class Search extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.refs.input.blur()
+    this.refs.input.blur();
     this.setState({
       redirect: true,
       film: ""
@@ -35,13 +35,15 @@ class Search extends Component {
       <div className="search">
         <form onSubmit={this.handleSubmit}>
           <input
-          ref="input"
+            ref="input"
             type="text"
             placeholder="Search movies..."
             value={this.state.film}
             onChange={this.handleChange}
           />
-          <i className="fas fa-search" />
+          <svg className="icon icon-search">
+            <use xlinkHref={`${icons}#icon-search`} />
+          </svg>
           <span />
         </form>
       </div>

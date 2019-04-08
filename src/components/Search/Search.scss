@@ -27,21 +27,22 @@
         opacity: 0;
       }
     }
-    &:focus + .fa-search {
-      color: var(--color-arrow-1);
+    &:focus + .icon-search {
+      fill: var(--color-arrow-1);
     }
     &:focus ~ span {
       transform: scale(1);
     }
   }
-  & i {
+  & .icon-search {
     position: absolute;
     left: 0;
     top: 1.5rem;
     margin-left: 2rem;
-    font-size: 1.6rem;
+    width: 1.6rem;
+    height: 1.6rem;
     vertical-align: -3px;
-    color: rgba(255, 255, 255, 0.5);
+    fill: rgba(255, 255, 255, 0.5);
   }
 
   & span {

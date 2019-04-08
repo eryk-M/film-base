@@ -78,13 +78,11 @@
 
     z-index: 10;
 
-    & i {
+    & .icon {
       margin-right: 0.8rem;
       margin-left: 1.2rem;
       font-size: 1.4rem;
-    }
-    & .fa-compass {
-      font-size: 1.8rem;
+      vertical-align: -0.3rem;
     }
   }
 

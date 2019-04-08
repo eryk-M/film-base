@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import icons from "../../assets/icons.svg";
 import "./Login.scss";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -17,7 +17,9 @@ class Login extends Component {
         }}
       >
         <div className="login__blob">
-          <i className="fas fa-user-circle" />
+          <svg className="icon icon-user-circle">
+            <use xlinkHref={`${icons}#icon-user-circle`} />
+          </svg>
         </div>
         <a
           href={`https://www.themoviedb.org/authenticate/${

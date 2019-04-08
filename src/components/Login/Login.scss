@@ -21,19 +21,14 @@
     );
     animation: blob 5s linear infinite;
     position: relative;
-    & .fa-user-circle {
+    & .icon-user-circle {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 5.5rem;
-      // color: linear-gradient(45deg, var(--color-arrow-1), var(--color-arrow-2));
-      // -webkit-background-clip: text;
-      // -webkit-text-fill-color: transparent;
-      background: linear-gradient(to right, #1c1c1c 0%, #171717 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      height: 5.5rem;
+      width: 5.5rem;
+      fill: #171717;
     }
   }
   &__btn,

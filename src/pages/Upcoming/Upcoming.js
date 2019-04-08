@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-// import UpcomingItem from "./UpcomingItem/UpcomingItem";
-// import TopMoviesItem from '../TopMovies/TopMoviesItem/TopMoviesItem'
 import MainItemDetails from "../../components/MainItemsDetails/MainItemDetails";
 import "../MainStyling.scss";
 import { bindActionCreators } from "redux";

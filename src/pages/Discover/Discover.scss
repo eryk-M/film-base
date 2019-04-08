@@ -176,7 +176,6 @@
     transition: 0.4s all;
     z-index: 5;
     @media only screen and (max-width: 415px) {
-      // margin-top: 10rem;
       top: 10rem;
       height: 4.8rem;
     }
@@ -251,20 +250,16 @@
     padding: 1rem 1rem;
     color: var(--color-white-2);
     width: 34rem;
-    // display: block;
-    // left: -8rem;
     font-size: 1.4rem;
     transition: 0.4s all;
   }
   @media only screen and (max-width: 415px) {
-    // margin-top: 10rem;
     box-sizing: content-box;
     margin-top: 10rem;
   }
 }
 
 .main__sort-buttons {
-  //   margin: 0 auto;
   display: flex;
   max-width: 136rem;
   justify-content: center;

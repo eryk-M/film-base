@@ -117,8 +117,6 @@
     top: 40%;
     left: 25%;
     @media only screen and (max-width: 769px) {
-      // left: 30%;
-      // top: 30%;
       top: 15rem;
       left: 30rem;
     }
@@ -149,15 +147,16 @@
       font-size: 2.7rem;
     }
   }
-  & .fa-heart {
+  & .icon-heart {
     position: absolute;
     bottom: 3rem;
     right: 3rem;
-    font-size: 5rem;
-    color: var(--color-white-2);
+    width: 5rem;
+    height: 5rem;
+    fill: var(--color-white-2);
     cursor: pointer;
     &--active {
-      color: var(--color-arrow-1);
+      fill: var(--color-arrow-1);
     }
     @media only screen and (max-width: 415px) {
       bottom: 1rem;
@@ -180,11 +179,10 @@
       font-size: 1.6rem;
       display: block;
       margin-top: 1rem;
-      & i {
-        font-size: 1.4rem;
-        vertical-align: 0.2rem;
+      & .icon-star-full {
+        vertical-align: -0.2rem;
         margin-right: 1rem;
-        color: rgba(252, 185, 65, 1);
+        fill: rgba(252, 185, 65, 1);
       }
     }
   }
@@ -278,7 +276,6 @@
       }
       @media only screen and (max-width: 415px) {
         width: 90%;
-        // height: 75%;
       }
     }
     &-heading {
@@ -359,20 +356,17 @@
     color: var(--color-white-2);
   }
 }
-.fa-undo {
-  // font-size: 30px;
+.icon-arrow-left {
   cursor: pointer;
   z-index: 5;
   position: absolute;
   top: 3rem;
   right: 3rem;
-  font-size: 5rem;
-  color: var(--color-white-2);
-  // @media only screen and (min-width: 1026px) {
-  //   display: none;
-  // }
+  height: 5rem;
+  width: 5rem;
+  fill: var(--color-white-2);
+
   @media only screen and (max-width: 415px) {
-    // top: 1rem;
     right: 1rem;
     top: 4rem;
   }

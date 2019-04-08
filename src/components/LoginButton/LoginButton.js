@@ -1,9 +1,11 @@
 import React from "react";
-
+import icons from "../../assets/icons.svg";
 const LoginButton = props => {
   return (
     <button className="searchbar__button" onClick={props.click}>
-      <i className="fas fa-sign-in-alt" />
+      <svg className="icon icon-enter">
+        <use xlinkHref={`${icons}#icon-enter`} />
+      </svg>
     </button>
   );
 };

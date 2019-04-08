@@ -6,7 +6,6 @@ import "../MainStyling.scss";
 import { withRouter } from "react-router-dom";
 import { getGenres } from "../../actions/genres.actions";
 import { getSearchResults } from "../../actions/search.actions";
-// import SearchMoviesItem from "./SearchMoviesItem/SearchMoviesItem";
 import MainItemDetails from "../../components/MainItemsDetails/MainItemDetails";
 import Loader from "../../components/Loader/Loader";
 
