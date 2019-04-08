@@ -28,12 +28,14 @@ import moviesDetails from "./MovieReducers/moviesDetails.reducer";
 import movieCredits from "./MovieReducers/movieCredits.reducer";
 import movieState from "./userFavorites/movieAccountState.reducer";
 import movieReviews from "./MovieReducers/movieReviews.reducer";
+import movieExternal from "./MovieReducers/movieExternal.reducer";
 //TV DETAILS & TV STATE CHECKER
 import TVDetails from "./TVReducers/TVDetails.reducer";
 import TVVideos from "./TVReducers/TVVideos.reducer";
 import TVCredits from "./TVReducers/TVCredits.reducer";
 import TVState from "./userFavorites/TVAccountState.reducer";
 import TVReviews from "./TVReducers/TVReviews.reducer";
+import TVExternal from "./TVReducers/TVExternal.reducer";
 /*                                   */
 import { combineReducers } from "redux";
 
@@ -64,7 +66,9 @@ const rootReducer = combineReducers({
   TVCredits,
   TVState,
   movieReviews,
-  TVReviews
+  TVReviews,
+  TVExternal,
+  movieExternal
 });
 
 export default rootReducer;

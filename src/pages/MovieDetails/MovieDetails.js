@@ -10,11 +10,13 @@ import { getMovieDetails } from "../../actions/MovieActions/moviesDetails.action
 import { getVideos } from "../../actions/MovieActions/videos.actions";
 import { getMovieCredits } from "../../actions/MovieActions/movieCredits.actions";
 import { getMovieReviews } from "../../actions/MovieActions/movieReviews.actions";
+import { getMovieExternal } from "../../actions/MovieActions/movieExternal.actions";
 
 import { getTVDetails } from "../../actions/TVactions/TVDetails.actions";
 import { getTVVideos } from "../../actions/TVactions/TVVideos.actions";
 import { getTVCredits } from "../../actions/TVactions/TVCredits.actions";
 import { getTVReviews } from "../../actions/TVactions/TVReviews.actions";
+import { getTVExternal } from "../../actions/TVactions/TVExternal.actions";
 
 import { getMovieAccountState } from "../../actions/userFavorites/movieAccountState.actions";
 import { getTVAccountState } from "../../actions/userFavorites/TVAccountState.actions";
@@ -23,6 +25,8 @@ import MovieDetailsPeople from "./MovieDetailsPeople/MovieDetailsPeople";
 import Loader from "../../components/Loader/Loader";
 import Swiper from "react-id-swiper";
 import icons from "../../assets/icons.svg";
+import imdb from "../../assets/images/imdb.png";
+import fb from "../../assets/images/fb.png";
 import { Navigation } from "swiper/dist/js/swiper.esm";
 
 class MovieDetails extends Component {
@@ -63,11 +67,13 @@ class MovieDetails extends Component {
       this.props.getVideos(id, this.props.api);
       this.props.getMovieCredits(id, this.props.api);
       this.props.getMovieReviews(id, this.props.api);
+      this.props.getMovieExternal(id, this.props.api);
     } else if (type === "tv") {
       this.props.getTVDetails(id, this.props.api);
       this.props.getTVVideos(id, this.props.api);
       this.props.getTVCredits(id, this.props.api);
       this.props.getTVReviews(id, this.props.api);
+      this.props.getTVExternal(id, this.props.api);
     }
   };
   handleBack = () => {
@@ -216,11 +222,6 @@ class MovieDetails extends Component {
                   >
                     <p>You need TMDB account to use this feature</p>
                   </div>
-                  <div className="movie__favorite-accept">
-                    <p className="movie__favorite-accept-para">
-                      {/* Movie added to favorites! */}
-                    </p>
-                  </div>
                   <img className="movie__image" src={image} alt="" />
                   <p className="movie__genres">
                     {this.props.moviesDetails.genres
@@ -245,20 +246,56 @@ class MovieDetails extends Component {
                     <h3 className="movie__heading">
                       {moviesDetails.original_title}
                     </h3>
-                    <p className="movie__rating">
-                      Rating
-                      <span>
-                        <svg
-                          style={
-                            moviesDetails.vote_average >= 7.5 ? superFilm : null
-                          }
-                          className="icon icon-star-full"
-                        >
-                          <use xlinkHref={`${icons}#icon-star-full`} />
-                        </svg>
-                        {moviesDetails.vote_average}{" "}
-                      </span>
-                    </p>
+                    <div className="movie__rating-wrapper">
+                      <div className="movie__rating-wrapper-1">
+                        <p className="movie__rating">Rating</p>
+                        <span>
+                          <svg
+                            style={
+                              moviesDetails.vote_average >= 7.5
+                                ? superFilm
+                                : null
+                            }
+                            className="icon icon-star-full"
+                          >
+                            <use xlinkHref={`${icons}#icon-star-full`} />
+                          </svg>
+                          {moviesDetails.vote_average}{" "}
+                        </span>
+                      </div>
+                      <div className="movie__rating-wrapper-2">
+                        {moviesDetails.imdb_id ? (
+                          <a
+                            href={`https://www.imdb.com/title/${
+                              moviesDetails.imdb_id
+                            }/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <img
+                              className="movie__rating-imdb"
+                              src={imdb}
+                              alt="imdb logo"
+                            />
+                          </a>
+                        ) : null}
+                        {this.props.movieExternal.facebook_id ? (
+                          <a
+                            href={`https://facebook.com/${
+                              this.props.movieExternal.facebook_id
+                            }/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <img
+                              className="movie__rating-fb"
+                              src={fb}
+                              alt="facebook logo"
+                            />
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
                     <p className="movie__release">
                       Release date
                       <span>
@@ -411,20 +448,55 @@ class MovieDetails extends Component {
                     <h3 className="movie__heading">
                       {TVDetails.original_name}
                     </h3>
-                    <p className="movie__rating">
-                      Rating
-                      <span>
-                        <svg
-                          style={
-                            TVDetails.vote_average >= 7.5 ? superFilm : null
-                          }
-                          className="icon icon-star-full"
-                        >
-                          <use xlinkHref={`${icons}#icon-star-full`} />
-                        </svg>
-                        {TVDetails.vote_average}{" "}
-                      </span>
-                    </p>
+
+                    <div className="movie__rating-wrapper">
+                      <div className="movie__rating-wrapper-1">
+                        <p className="movie__rating">Rating</p>
+                        <span>
+                          <svg
+                            style={
+                              TVDetails.vote_average >= 7.5 ? superFilm : null
+                            }
+                            className="icon icon-star-full"
+                          >
+                            <use xlinkHref={`${icons}#icon-star-full`} />
+                          </svg>
+                          {TVDetails.vote_average}{" "}
+                        </span>
+                      </div>
+                      <div className="movie__rating-wrapper-2">
+                        {this.props.TVExternal.imdb_id ? (
+                          <a
+                            href={`https://www.imdb.com/title/${
+                              this.props.TVExternal.imdb_id
+                            }/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <img
+                              className="movie__rating-imdb"
+                              src={imdb}
+                              alt="imdb logo"
+                            />
+                          </a>
+                        ) : null}
+                        {this.props.TVExternal.facebook_id ? (
+                          <a
+                            href={`https://facebook.com/${
+                              this.props.TVExternal.facebook_id
+                            }/`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <img
+                              className="movie__rating-fb"
+                              src={fb}
+                              alt="facebook logo"
+                            />
+                          </a>
+                        ) : null}
+                      </div>
+                    </div>
                     <p className="movie__release">
                       Release date
                       <span>
@@ -526,11 +598,13 @@ function mapStateToProps(state) {
     videos: state.videos,
     movieCredits: state.movieCredits,
     movieReviews: state.movieReviews,
+    movieExternal: state.movieExternal,
 
     TVDetails: state.TVDetails,
     TVVideos: state.TVVideos,
     TVCredits: state.TVCredits,
     TVReviews: state.TVReviews,
+    TVExternal: state.TVExternal,
 
     accountDetails: state.accountDetails,
     sessionID: state.sessionID,
@@ -547,11 +621,13 @@ function mapDispatchToProps(dispatch) {
     getVideos: bindActionCreators(getVideos, dispatch),
     getMovieCredits: bindActionCreators(getMovieCredits, dispatch),
     getMovieReviews: bindActionCreators(getMovieReviews, dispatch),
+    getMovieExternal: bindActionCreators(getMovieExternal, dispatch),
 
     getTVDetails: bindActionCreators(getTVDetails, dispatch),
     getTVVideos: bindActionCreators(getTVVideos, dispatch),
     getTVCredits: bindActionCreators(getTVCredits, dispatch),
     getTVReviews: bindActionCreators(getTVReviews, dispatch),
+    getTVExternal: bindActionCreators(getTVExternal, dispatch),
 
     getMovieAccountState: bindActionCreators(getMovieAccountState, dispatch),
     getTVAccountState: bindActionCreators(getTVAccountState, dispatch)
