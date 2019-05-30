@@ -80,7 +80,11 @@ class MainItemDetails extends Component {
               <div className="main__item-wrapper">
                 <img
                   className="main__img"
-                  src={`https://image.tmdb.org/t/p/w185${item.profile_path}`}
+                  src={
+                    item.profile_path
+                      ? `https://image.tmdb.org/t/p/w185${item.profile_path}`
+                      : noImage
+                  }
                   alt={item.name}
                 />
 

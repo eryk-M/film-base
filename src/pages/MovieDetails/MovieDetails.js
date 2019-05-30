@@ -31,7 +31,9 @@ import { Navigation } from "swiper/dist/js/swiper.esm";
 
 class MovieDetails extends Component {
   state = {
-    cast: []
+    cast: [],
+    message: "",
+    loadingFavorite: false
   };
 
   componentDidMount() {
@@ -84,7 +86,10 @@ class MovieDetails extends Component {
     const session = localStorage.getItem("session");
     const userID = localStorage.getItem("user_id");
     if (this.props.status === "user") {
-      this.props.getMovieAccountState(api, id, session);
+      this.setState({
+        loadingFavorite: true
+      });
+
       fetch(
         `https://api.themoviedb.org/3/account/${userID}/favorite?api_key=${api}&session_id=${session}`,
         {
@@ -102,9 +107,38 @@ class MovieDetails extends Component {
         }
       )
         .then(res => res.json())
+        .then(() => {
+          if (this.props.match.params.type === "movies") {
+            this.props.getMovieAccountState(
+              this.props.api,
+              this.props.match.params.id,
+              session
+            );
+          } else if (this.props.match.params.type === "tv") {
+            this.props.getTVAccountState(
+              this.props.api,
+              this.props.match.params.id,
+              session
+            );
+          }
+        })
         .then(
           e.target.closest(".icon-heart").classList.toggle("icon-heart--active")
         )
+        .then(() => {
+          if (this.props.movieState.favorite || this.props.TVState.favorite) {
+            this.setState({
+              message: "Removed from favorites!",
+              loadingFavorite: false
+            });
+          } else {
+            this.setState({
+              message: "Added to favorites!",
+              loadingFavorite: false
+            });
+          }
+        })
+
         .catch(error => alert(error));
     } else {
       document.querySelector(".movie__favorite-warning").style.display =
@@ -197,24 +231,30 @@ class MovieDetails extends Component {
                   >
                     <use xlinkHref={`${icons}#icon-arrow-left`} />
                   </svg>
-
-                  <svg
-                    onClick={e =>
-                      this.handleFavorite(
-                        e,
-                        this.props.api,
-                        "movie",
-                        this.props.moviesDetails.id
-                      )
-                    }
-                    className={
-                      this.props.movieState.favorite
-                        ? "icon icon-heart icon-heart--active"
-                        : "icon icon-heart"
-                    }
-                  >
-                    <use xlinkHref={`${icons}#icon-heart`} />
-                  </svg>
+                  {this.state.message ? (
+                    <p className="message__favorite">{this.state.message}</p>
+                  ) : null}
+                  {this.state.loadingFavorite ? (
+                    <Loader />
+                  ) : (
+                    <svg
+                      onClick={e =>
+                        this.handleFavorite(
+                          e,
+                          this.props.api,
+                          "movie",
+                          this.props.moviesDetails.id
+                        )
+                      }
+                      className={
+                        this.props.movieState.favorite
+                          ? "icon icon-heart icon-heart--active"
+                          : "icon icon-heart"
+                      }
+                    >
+                      <use xlinkHref={`${icons}#icon-heart`} />
+                    </svg>
+                  )}
 
                   <div
                     className="movie__favorite-warning"
@@ -397,32 +437,35 @@ class MovieDetails extends Component {
                   >
                     <use xlinkHref={`${icons}#icon-arrow-left`} />
                   </svg>
-
-                  <svg
-                    onClick={e =>
-                      this.handleFavorite(
-                        e,
-                        this.props.api,
-                        "tv",
-                        this.props.TVDetails.id
-                      )
-                    }
-                    className={
-                      this.props.TVState.favorite
-                        ? "icon icon-heart icon-heart--active"
-                        : "icon icon-heart"
-                    }
-                  >
-                    <use xlinkHref={`${icons}#icon-heart`} />
-                  </svg>
+                  {this.state.message ? (
+                    <p className="message__favorite">{this.state.message}</p>
+                  ) : null}
+                  {this.state.loadingFavorite ? (
+                    <Loader />
+                  ) : (
+                    <svg
+                      onClick={e =>
+                        this.handleFavorite(
+                          e,
+                          this.props.api,
+                          "tv",
+                          this.props.TVDetails.id
+                        )
+                      }
+                      className={
+                        this.props.TVState.favorite
+                          ? "icon icon-heart icon-heart--active"
+                          : "icon icon-heart"
+                      }
+                    >
+                      <use xlinkHref={`${icons}#icon-heart`} />
+                    </svg>
+                  )}
                   <div
                     className="movie__favorite-warning"
                     style={{ display: "none" }}
                   >
                     <p>You need TMDB account to use this feature</p>
-                  </div>
-                  <div className="movie__favorite-accept">
-                    <p>Movie added to favorites!</p>
                   </div>
                   <img className="movie__image" src={image} alt="" />
                   <p className="movie__genres">

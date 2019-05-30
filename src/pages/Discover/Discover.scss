@@ -175,6 +175,9 @@
     pointer-events: none;
     transition: 0.4s all;
     z-index: 5;
+    @media only screen and (max-width: 1367px) {
+      height: 4.8rem;
+    }
     @media only screen and (max-width: 415px) {
       top: 10rem;
       height: 4.8rem;

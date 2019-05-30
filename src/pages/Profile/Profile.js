@@ -72,6 +72,10 @@ class Profile extends Component {
     )
       .then(res => res.json())
       .then((document.getElementById(`${e.target.id}`).style.display = "none"))
+      .then(() => {
+        this.props.getTVFavorites(api, userID, session);
+        this.props.getMovieFavorites(api, userID, session);
+      })
       .catch(error => console.log(error));
   };
 

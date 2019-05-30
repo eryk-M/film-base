@@ -480,3 +480,15 @@
     top: 4rem;
   }
 }
+
+.message__favorite {
+  position: absolute;
+  right: 1rem;
+  bottom: 9rem;
+  color: var(--color-arrow-1);
+  font-size: 1.4rem;
+  font-weight: 400;
+  @media only screen and (max-width: 361px) {
+    bottom: 22rem;
+  }
+}

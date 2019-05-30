@@ -63,3 +63,20 @@
     transform: rotate(0deg);
   }
 }
+
+.movie .loader-wrapper {
+  top: 83%;
+  left: 95%;
+}
+
+.movie .loader {
+  height: 30px;
+  width: 30px;
+  &:after {
+    display: none;
+  }
+
+  &:before {
+    display: none;
+  }
+}
